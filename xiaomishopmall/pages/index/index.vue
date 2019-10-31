@@ -2,7 +2,12 @@
 	<view class="content">
 		<image class="logo" src="/static/logo.png"></image>
 		<view class="text-area">
+<<<<<<< HEAD
 			<text class="title">{{title}}123</text>
+=======
+			<text class="title">{{title}}</text>
+			<text>123</text>
+>>>>>>> 05a0335ed010a09cc3797a241452394094fa500d
 		</view>
 	</view>
 </template>
