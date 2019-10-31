@@ -1,0 +1,108 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "小米商城",
+				"app-plus": {
+					"titleNView": {
+						"searchInput": {
+							"align": "left",
+							"backgroundColor": "#fff",
+							"disabled":"true",
+							"placeholder": "搜索"
+						},
+						//按钮配置
+						"buttons": [{
+								"color": "#555555",
+								"float": "left",
+								"fontSize": "20px",
+								"fontSrc": "/static/icon/iconfont.ttf",
+								"text": "\ue702"
+							},
+							{
+								"color": "#555555",
+								"float": "right",
+								"fontSize": "20px",
+								"fontSrc": "/static/icon/iconfont.ttf",
+								"text": "\ue65c"
+							}
+						]
+					}
+				}
+			}
+		}
+	    ,{
+            "path" : "pages/type/type",
+            "style": {
+				"navigationBarTitleText": "小米商城",
+            	"app-plus": {
+            		"titleNView": {
+            			"searchInput": {
+            				"align": "left",
+            				"disabled":"true",
+            				"backgroundColor": "#fff",
+            				"placeholder": "搜索"
+            			},
+            			//按钮配置
+            				"buttons": [{
+            					"color": "#555555",
+            					"float": "right",
+            					"fontSize": "20px",
+            					"fontSrc": "/static/icon/iconfont.ttf",
+            					"text": "\ue65c"
+            				}
+            			]
+            		}
+            	}
+            }
+        }
+        ,{
+            "path" : "pages/shopcar/shopcar",
+            "style": {
+            	"navigationBarTitleText": "购物车"
+            }
+        }
+        ,{
+            "path" : "pages/user/user",
+            "style": {
+            	"navigationBarTitleText": "我的"
+            }
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "小米商城",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+	    "color": "#7A7E83",
+	    "selectedColor": "#007AFF",
+	    "borderStyle": "black",
+	    "backgroundColor": "#F8F8F8",
+	    "list": [{
+	            "pagePath": "pages/index/index",
+	            "iconPath": "/static/component.png",
+	            "selectedIconPath": "static/componentHL.png",
+	            "text": "首页"
+	        },
+	        {
+	            "pagePath": "pages/type/type",
+	            "iconPath": "static/api.png",
+	            "selectedIconPath": "static/apiHL.png",
+	            "text": "分类"
+	        }, {
+	            "pagePath": "pages/shopcar/shopcar",
+	            "iconPath": "/static/extui.png",
+	            "selectedIconPath": "static/extuiHL.png",
+	            "text": "购物车"
+	        }, {
+	            "pagePath": "pages/user/user",
+	            "iconPath": "/static/template.png",
+	            "selectedIconPath": "static/templateHL.png",
+	            "text": "我的"
+	        }
+	    ]
+	}
+}
