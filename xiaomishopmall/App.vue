@@ -16,4 +16,13 @@
 	/*每个页面公共css */
 	@import url("./common/uni.css");
 	@import url("./common/iconfont.css");
+	*{
+		font-size: 20upx;
+		line-height: 1.8;
+		color: #FD6801;
+	}
+	image{
+		width: 100%;
+		height: 100%;
+	}
 </style>
