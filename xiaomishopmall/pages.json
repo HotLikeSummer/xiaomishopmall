@@ -16,16 +16,16 @@
 						"buttons": [{
 								"color": "#555555",
 								"float": "left",
-								"fontSize": "20px",
-								"fontSrc": "/static/icon/iconfont.ttf",
-								"text": "\ue702"
+								"fontSize": "18px",
+								"fontSrc": "/static/font/iconfont.ttf",
+								"text": "\ue67a"
 							},
 							{
 								"color": "#555555",
 								"float": "right",
-								"fontSize": "20px",
-								"fontSrc": "/static/icon/iconfont.ttf",
-								"text": "\ue65c"
+								"fontSize": "18px",
+								"fontSrc": "/static/font/iconfont.ttf",
+								"text": "\ue661"
 							}
 						]
 					}
@@ -48,9 +48,9 @@
             				"buttons": [{
             					"color": "#555555",
             					"float": "right",
-            					"fontSize": "20px",
-            					"fontSrc": "/static/icon/iconfont.ttf",
-            					"text": "\ue65c"
+            					"fontSize": "18px",
+            					"fontSrc": "/static/font/iconfont.ttf",
+            					"text": "\ue661"
             				}
             			]
             		}
@@ -78,29 +78,29 @@
 	},
 	"tabBar": {
 	    "color": "#7A7E83",
-	    "selectedColor": "#007AFF",
+	    "selectedColor": "#FD6801",
 	    "borderStyle": "black",
 	    "backgroundColor": "#F8F8F8",
 	    "list": [{
 	            "pagePath": "pages/index/index",
-	            "iconPath": "/static/component.png",
-	            "selectedIconPath": "static/componentHL.png",
+	            "iconPath": "/static/tabbar/index.png",
+	            "selectedIconPath": "/static/tabbar/indexSelected.png",
 	            "text": "首页"
 	        },
 	        {
 	            "pagePath": "pages/type/type",
-	            "iconPath": "static/api.png",
-	            "selectedIconPath": "static/apiHL.png",
+	            "iconPath": "/static/tabbar/class.png",
+	            "selectedIconPath": "/static/tabbar/classSelected.png",
 	            "text": "分类"
 	        }, {
 	            "pagePath": "pages/shopcar/shopcar",
-	            "iconPath": "/static/extui.png",
-	            "selectedIconPath": "static/extuiHL.png",
+	            "iconPath": "/static/tabbar/cart.png",
+	            "selectedIconPath": "/static/tabbar/cartSelected.png",
 	            "text": "购物车"
 	        }, {
 	            "pagePath": "pages/user/user",
-	            "iconPath": "/static/template.png",
-	            "selectedIconPath": "static/templateHL.png",
+	            "iconPath": "/static/tabbar/my.png",
+	            "selectedIconPath": "/static/tabbar/mySelected.png",
 	            "text": "我的"
 	        }
 	    ]
