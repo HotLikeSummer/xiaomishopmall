@@ -9,7 +9,7 @@
 						"searchInput": {
 							"align": "left",
 							"backgroundColor": "#f0f0f0",
-							"disabled":"true",
+							"disabled":true,
 							"placeholder": "智能积木 越野四驱车",
 							"borderRadius":"5px"
 						},
@@ -69,6 +69,35 @@
             "style": {
             	"navigationBarTitleText": "我的"
             }
+        },{
+            "path" : "pages/shoplist/shoplist",
+            "style": {
+            	"navigationBarTitleText": "列表页"
+            }
+        },{
+            "path" : "pages/type/detail/detail",
+			"style": {
+				"navigationBarTitleText": "小米商城",
+				"app-plus": {
+					"titleNView": {
+						"searchInput": {
+							"align": "left",
+							"autoFocus": true,
+							"backgroundColor": "#f0f0f0",
+							"placeholder": "智能积木 越野四驱车"
+						},
+						//按钮配置
+							"buttons": [{
+								"color": "#555555",
+								"float": "right",
+								"fontSize": "20px",
+								"fontSrc": "/static/font/iconfont.ttf",
+								"text": "\ue661"
+							}
+						]
+					}
+				}
+			}
         }
     ],
 	"globalStyle": {

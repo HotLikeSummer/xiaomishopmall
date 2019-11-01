@@ -16,6 +16,7 @@
 	/*每个页面公共css */
 	@import url("./common/uni.css");
 	@import url("./common/iconfont.css");
+	@import url('./common/iconfont1.css');
 	*{
 		font-size: 20upx;
 		line-height: 1.8;
