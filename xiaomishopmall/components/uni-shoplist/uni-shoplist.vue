@@ -149,7 +149,6 @@
 		color: #555555;
 	}
 	.nav{
-		display: block;
 		display: flex;
 		justify-content: space-between;
 	}

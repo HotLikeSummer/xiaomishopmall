@@ -1,7 +1,7 @@
 <template>
 	<view id="index">
 		<!-- 导航栏 -->
-		<scroll-view class="scroll-h" :scroll-x="true" :show-scrollbar="true">
+		<scroll-view class="scroll-h" scroll-x>
 			<!-- 循环导航栏内容 -->
 			<view v-for="(tab, index) in tabBars" :key="tab.id" class="uni-tab-item" :id="tab.id" :data-current="index" @click="ontabtap">
 				<!-- 绑定样式 -->
@@ -30,7 +30,7 @@
 						<view>{{ item.text }}</view>
 					</view>
 					<!-- 第二行 -->
-					<view class="hotprods" v-for="(item, index) in hotprods" :key="index" v-if="index > 4" v-show="tabIndex == 0||tabIndex == 3">
+					<view class="hotprods" v-for="(item, index) in hotprods" :key="index" v-if="index > 4" v-show="tabIndex == 0 || tabIndex == 3">
 						<img :src="item.url" />
 						<view>{{ item.text }}</view>
 					</view>
@@ -38,20 +38,17 @@
 			</view>
 			<!-- 广告 -->
 			<view class="advert">
-				<img :src="advert[0]"  class="advert-one"/>
-				<img :src="advert[1]" class="advert-two"/>
-				<img :src="advert[2]" class="advert-three"/>
+				<img :src="advert[0]" class="advert-one" />
+				<img :src="advert[1]" class="advert-two" />
+				<img :src="advert[2]" class="advert-three" />
 			</view>
-			<!-- 广告 -->
-			<view class="advert">
-				<img :src="advert[0]"  class="advert-one"/>
-				<img :src="advert[1]" class="advert-two"/>
-				<img :src="advert[2]" class="advert-three"/>
-			</view>
+			<!-- 商品内容 -->
+			<Uni-ProList/>
 		</view>
 	</view>
 </template>
 <script>
+import UniProList from '../../components/uni-prolist/uni-prolist.vue';
 export default {
 	data() {
 		return {
@@ -146,6 +143,9 @@ export default {
 		};
 	},
 	onLoad() {},
+	components:{
+		UniProList
+	},
 	created() {
 		//在生命周期里面调用首页的函数
 		this.changShow();
@@ -163,7 +163,7 @@ export default {
 			});
 			console.log(res);
 		},
-		toNew(){
+		toNew() {
 			uni.navigateTo({
 				url: 'new/new'
 			});
@@ -173,12 +173,15 @@ export default {
 </script>
 
 <style scoped>
-
+* {
+	margin: 0upx;
+	padding: 0upx;
+	color: #555555;
+}
 
 .scroll-h {
 	width: 750upx;
 	height: 80upx;
-	flex-direction: row;
 	white-space: nowrap;
 }
 .swiper img {
@@ -187,7 +190,6 @@ export default {
 }
 .uni-tab-item {
 	display: inline-block;
-	flex-wrap: nowrap;
 	padding-left: 34upx;
 	padding-right: 34upx;
 }
@@ -197,14 +199,12 @@ export default {
 	font-size: 30upx;
 	height: 80upx;
 	line-height: 80upx;
-	flex-wrap: nowrap;
-	white-space: nowrap;
 	padding: 20rpx 0;
 	font-size: 25rpx;
 }
 
 .uni-tab-item-title-active {
-	color: #007aff;
+	color: #fd6801;
 	border-bottom: 5upx #fd6801 solid;
 }
 /* 商品系列 */
@@ -228,16 +228,17 @@ export default {
 	height: 80rpx;
 }
 /* 广告 */
-.advert{
+.advert {
 	width: 100%;
-	margin-top: 15px;
+	margin-top: 20rpx;
 	position: relative;
+	margin-bottom: 20rpx;
 }
-.advert-one{
+.advert-one {
 	display: block;
 	width: 49%;
 }
-.advert-two{
+.advert-two {
 	display: block;
 	width: 49%;
 	height: 255upx;
@@ -245,7 +246,7 @@ export default {
 	position: absolute;
 	right: 0rpx;
 }
-.advert-three{
+.advert-three {
 	display: block;
 	width: 49%;
 	height: 255upx;

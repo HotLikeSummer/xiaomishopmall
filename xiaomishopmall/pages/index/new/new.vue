@@ -7,10 +7,14 @@
 				<text class="uni-tab-item-title" :class="tabIndex == index ? 'uni-tab-item-title-active' : ''">{{tab}}</text>
 			</view>
 		</view>
+		
+		<!-- 引入组件 -->
+		<Uni-ShopList></Uni-ShopList>
 	</view>
 </template>
 
 <script>
+		import UniShopList from "@/components/uni-shoplist/uni-shoplist.vue"
 	export default{
 		data(){
 			return{
@@ -25,6 +29,9 @@
 			ontabtap(index) {
 				this.tabIndex = index
 			}
+		},
+		components:{
+			UniShopList
 		}
 	}
 </script>
