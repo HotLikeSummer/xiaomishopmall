@@ -98,8 +98,7 @@
 					}
 				}
 			}
-        }
-		,{
+        },{
 		    "path" : "pages/index/new/new",
 		    "style": {
 		    	"navigationBarTitleText": "新品发布",
@@ -112,6 +111,47 @@
 								"fontSrc": "/static/font/iconfont.ttf",
 								"text": "\ue64c"
 							}]
+					}
+				}
+		    }
+		},{
+		    "path" : "pages/user/userlist/set",
+		    "style": {
+		    	"navigationBarTitleText":"设置"
+		    }
+		},{
+		    "path" : "pages/user/userlist/edit-profile",
+		    "style": {
+		    	"navigationBarTitleText":"修改资料"
+		    }
+		},{
+		    "path" : "pages/user/userlist/addresslist",
+		    "style": {
+		    	"navigationBarTitleText":"地址列表",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+							"color": "#555555",
+							"float": "right",
+							"fontSize": "20px",
+							"fontSrc": "/static/font/iconfont.ttf",
+							"text": "\ue626"
+						}]
+					}
+				}
+		    }
+		},{
+		    "path" : "pages/user/userlist/edit-address",
+		    "style": {
+		    	"navigationBarTitleText":"编辑收货地址",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+							"color": "#555555",
+							"float": "right",
+							"fontSize": "17px",
+							"text": "删除"
+						}]
 					}
 				}
 		    }
