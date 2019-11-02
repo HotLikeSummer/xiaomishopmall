@@ -5,6 +5,19 @@
 	"versionName": "1.0.0",
 	"versionCode": "100",
 	"transformPx": false,
+	"h5":{
+		"devServer": {
+		            "port": 8000,
+		            "disableHostCheck": true,
+		            "proxy": {
+		                "/api": {
+		                    "target": "http://ceshi3.dishait.cn/api",
+		                    "changeOrigin": true,
+		                    "secure": false
+		                }
+		            }
+		        }
+	},
     /* 5+App特有相关 */
 	"app-plus": {
 		"usingComponents": true,
