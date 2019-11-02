@@ -99,6 +99,23 @@
 				}
 			}
         }
+		,{
+		    "path" : "pages/index/new/new",
+		    "style": {
+		    	"navigationBarTitleText": "新品发布",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+								"color": "#555555",
+								"float": "right",
+								"fontSize": "60rpx",
+								"fontSrc": "/static/font/iconfont.ttf",
+								"text": "\ue64c"
+							}]
+					}
+				}
+		    }
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
