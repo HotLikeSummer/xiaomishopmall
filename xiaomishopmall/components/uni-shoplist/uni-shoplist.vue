@@ -1,12 +1,14 @@
 <template>
 	<view>
 		<!-- 顶部导航 -->
+		<view class="nav">
 		<view class="nav-top" v-for="(item,index) in navtopList" :key="index">
 			<text class="nav-top-text"  @click="show('right',index)" >{{item}}</text>
 			<view class="nav-top-icon">
 				<text class="iconfont icon-paixu-shengxu"></text>
 				<text class="iconfont icon-paixu-jiangxu"></text>
 			</view>
+		</view>
 		</view>
 		<!-- 商品图文列表 -->
 		<view class="shop-list-box">
@@ -38,8 +40,6 @@
 				</view>
 			</uni-drawer>
 		</view>
-		
-			
 	</view>
 
 </template>
@@ -148,13 +148,16 @@
 		padding: 0upx;
 		color: #555555;
 	}
+	.nav{
+		display: block;
+		display: flex;
+		justify-content: space-between;
+	}
 	.nav-top {
-		display: inline-block;
-		flex-wrap: nowrap;
+		display:inline-block;
 		height: 80upx;
 		line-height: 80upx;
 		padding: 0upx 60upx;
-		// display: flex;
 	}
 
 	.nav-top-text {
@@ -169,7 +172,7 @@
 	}
 
 	.shop-list-box-pic {
-		margin: 15upx 40upx;
+		margin: 15upx 35upx;
 	}
 
 	.shop-list-box-pic image {
