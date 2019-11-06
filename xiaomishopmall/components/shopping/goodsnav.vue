@@ -40,7 +40,9 @@
 			}
 		},
 		methods: {
-
+			buttonClick(){
+				console.log(this.cost)
+			}
 		}
 	}
 </script>
