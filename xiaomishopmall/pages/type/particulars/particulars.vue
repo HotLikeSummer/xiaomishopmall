@@ -5,7 +5,7 @@
 </template>
 
 <script>
-	import UniParticulars from "@/components/Uni-Particulars/uni-particulars.vue"
+	import UniParticulars from "@/components/uni-particulars/uni-particulars.vue"
 	export default{
 		components:{
 			UniParticulars
