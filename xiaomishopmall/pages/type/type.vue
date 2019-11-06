@@ -18,6 +18,7 @@
 				</scroll-view>
 			</view>
 		</view>
+		<navigator url="../confimindent/confimindent">点我去订单页</navigator>
 	</view>
 	
 </template>
