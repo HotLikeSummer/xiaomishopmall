@@ -10,7 +10,7 @@
 			</view>
 		</view>
 		<view class="myOrder">
-			<view class="order-tit">
+			<view class="order-tit" @tap="toOrder">
 				<text class="lt-order">我的订单</text>
 				<view class="rt-order">
 					<text>全部订单</text>
@@ -19,7 +19,7 @@
 			</view>
 			<view class="operate">
 				<ul class="waite">
-					<li v-for="(item,index) in orders" class="waite-list">
+					<li v-for="(item,index) in orders" class="waite-list" @tap="topage(item.url)">
 						<text :class="item.icons"></text>
 						<view class="">{{item.txt}}</view>
 					</li>
@@ -49,7 +49,8 @@
 				nameImg: "/static/images/demo/demo6.jpg",
 				orders: [{
 						icons: "iconfont icon-wallet_icon",
-						txt: "待付款"
+						txt: "待付款",
+						url:""
 					}, {
 						icons: "iconfont icon-daishouhuo",
 						txt: "待收货"
@@ -59,7 +60,8 @@
 						txt: "待评价"
 					}, {
 						icons: "iconfont icon-buoumaotubiao46",
-						txt: "退换修"
+						txt: "退换修",
+						url:"userlist/sales-service"
 					}
 				],
 				atImg: "/static/images/demo/demo4.jpg",
@@ -89,6 +91,11 @@
 			topage(url) {
 				uni.navigateTo({
 					url: url
+				})
+			},
+			toOrder(){
+				uni.navigateTo({
+					url: "userlist/myOrder"
 				})
 			}
 		}

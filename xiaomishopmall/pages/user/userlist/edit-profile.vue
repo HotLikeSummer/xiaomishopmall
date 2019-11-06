@@ -14,8 +14,8 @@
 		</view>
 		<view>
 			<ul class="edit-item">
-				<li class="edit-list" v-for="(item,index) in list">
-					<text>{{item}}</text>
+				<li class="edit-list" v-for="(item,index) in list" @tap="topage(item.url)">
+					<text>{{item.txt}}</text>
 					<text class="iconfont icon-you"></text>
 				</li>
 			</ul>
@@ -26,9 +26,16 @@
 	export default {
 		data() {
 			return {
-				list:["性别","生日","修改密码","密保手机"]
+				list:[{txt:"性别",url:""},{txt:"生日",url:""},{txt:"修改密码",url:"changePsd"},{txt:"密保手机",url:""}]
 			}
 		},
+		methods:{
+			topage(url){
+				uni.navigateTo({
+					url:url
+				})
+			}
+		}
 	}
 </script>
 <style>

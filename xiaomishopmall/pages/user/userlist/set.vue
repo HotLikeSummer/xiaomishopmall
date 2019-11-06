@@ -10,8 +10,8 @@
 		<view class="about">关于</view>
 		<view class="aboutItem">
 			<ul>
-				<li v-for="(item,index) in aboutList" class="about-list">
-					<text class="abouttxt">{{item}}</text>
+				<li v-for="(item,index) in aboutList" class="about-list" @tap="topage(item.url)">
+					<text class="abouttxt">{{item.list}}</text>
 					<text class="iconfont icon-you allright"></text>
 				</li>
 			</ul>
@@ -25,7 +25,7 @@
 	export default{
 		data() {
 			return {
-				aboutList:["关于商城","意见反馈","协议规则","资质证件","用户协议","隐私政策"]
+				aboutList:[{list:"关于商城",url:"aboutMall"},{list:"意见反馈",url:"suggestion"},{list:"协议规则",url:""},{list:"资质证件",url:""},{list:"用户协议",url:""},{list:"隐私政策",url:""}]
 			}
 		},
 		methods: {
@@ -37,6 +37,11 @@
 			addresslist(){
 				uni.navigateTo({
 					url:"addresslist"
+				})
+			},
+			topage(url){
+				uni.navigateTo({
+					url:url
 				})
 			}
 		},

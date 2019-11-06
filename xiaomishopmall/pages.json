@@ -67,7 +67,7 @@
         ,{
             "path" : "pages/user/user",
             "style": {
-            	"navigationBarTitleText": "我的"
+            	"navigationStyle": "custom"
             }
         },{
             "path" : "pages/shoplist/shoplist",
@@ -154,6 +154,213 @@
 						}]
 					}
 				}
+		    }
+		},{
+		    "path" : "pages/user/userlist/changePsd",
+		    "style": {
+		    	"navigationBarTitleText":"修改密码"
+		    }
+		},{
+		    "path" : "pages/user/userlist/suggestion",
+		    "style": {
+		    	"navigationBarTitleText":"意见反馈",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+							"color": "#555555",
+							"float": "right",
+							"fontSize": "17px",
+							"text": "我的反馈"
+						}]
+					}
+				}
+		    }
+		},{
+		    "path" : "pages/user/userlist/mySuggestion",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "我的反馈"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/aboutMall",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "关于商城"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/after-sales",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "申请售后"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/sales-form",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "申请售后"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/sales-service",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "售后服务"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/sales-service",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "售后服务"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/sales-service",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "售后服务"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/sales-service",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "售后服务"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/sales-service",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "售后服务"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/sales-service",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "售后服务"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/sales-service",
+		    "style": {
+				"navigationBarTitleText":"",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "left",
+		    				"fontSize": "17px",
+		    				"text": "售后服务"
+		    			}]
+		    		}
+		    	}
+		    }
+		},{
+		    "path" : "pages/user/userlist/myOrder",
+		    "style": {
+				"navigationBarTitleText":"我的订单",
+		    	"app-plus":{
+		    		"titleNView":{
+		    			"buttons":[{
+		    				"color": "#555555",
+		    				"float": "right",
+		    				"fontSize": "40upx",
+							"fontSrc": "/static/font/iconfont.ttf",
+							"text": "\ue60c"
+		    			},{
+		    				"color": "#555555",
+		    				"float": "right",
+		    				"fontSize": "40upx",
+							"fontSrc": "/static/font/iconfont.ttf",
+							"text": "\ue6e3"
+		    			}]
+		    		}
+		    	}
 		    }
 		}
     ],
