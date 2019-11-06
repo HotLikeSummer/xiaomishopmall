@@ -179,13 +179,10 @@ export default {
 .scroll-h {
 	width: 750upx;
 	height: 80upx;
-	position: fixed;
-	z-index: 999;
+	/* position: fixed;
+	z-index: 999; */
 	white-space: nowrap;
 	background-color: white;
-}
-.scroll-y {
-	margin-top: 80upx;
 }
 .swiper img {
 	width: 100%;
@@ -268,7 +265,7 @@ export default {
 }
 .load-more {
 	text-align: center;
-	height: 160upx;
+	height: 60upx;
 	line-height: 60upx;
 }
 </style>

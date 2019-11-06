@@ -112,15 +112,10 @@ export default {
 	margin-bottom: 50rpx;
 }
 .scroll-h {
-	position: fixed;
-	z-index: 999;
 	width: 750upx;
 	height: 80upx;
 	white-space: nowrap;
 	background-color: white;
-}
-.scroll-y {
-	margin-top: 80upx;
 }
 .uni-tab-item {
 	display: inline-block;
