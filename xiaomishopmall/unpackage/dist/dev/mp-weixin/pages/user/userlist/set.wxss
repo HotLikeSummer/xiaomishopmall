@@ -1,0 +1,44 @@
+
+.iTunes,.about{
+	width: 100%;
+	height: 90rpx;
+	line-height: 90rpx;
+	background-color: #EEEEEE;
+	text-indent: 1em;
+}
+.iTunes-list,.about-list{
+	height: 90rpx;
+	line-height: 90rpx;
+	padding: 0px 20rpx;
+}
+.iTunes-list text,.allright{
+	float: right;
+	color: #C2C2C2;
+}
+.personal{
+	border-bottom: 1px solid #F0F0F0;
+}
+.about-list{
+	border-bottom: 1px solid #F0F0F0;
+}
+.about-list:last-child{
+	border-bottom:none
+}
+.quit{
+	height: 355rpx;
+	width: 100%;
+	background-color: #EEEEEE;
+	position: relative;
+}
+.logout{
+	display: block;
+	height: 90rpx;
+	width: 90%;
+	line-height: 90rpx;
+	background-color: white;
+	text-align: center;
+	position: absolute;
+	top:40rpx;
+	left: 5%;
+}
+

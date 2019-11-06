@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "列表页",
+  "usingComponents": {
+    "uni-shop-list": "/components/uni-shoplist/uni-shoplist"
+  }
+}
