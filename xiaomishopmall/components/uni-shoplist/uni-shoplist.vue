@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view id="shoplist">
 		<!-- 顶部导航 -->
 		<view class="nav">
 		<view class="nav-top" v-for="(item,index) in navtopList" :key="index">
@@ -12,7 +12,7 @@
 		</view>
 		<!-- 商品图文列表 -->
 		<view class="shop-list-box">
-			<view  v-for="(item,index) in picTextList" class="picTextLists" :key="index">
+			<view  v-for="(item,index) in picTextList" class="picTextLists" :key="index" @click="Particulars">
 				<view class="shop-list-box-pic">
 					<image :src="item.PIC"></image>
 				</view>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-	import UniDrawer from "@/components/uni-drawer/uni-drawer.vue"
+	import UniDrawer from "@/components/Uni-Drawer/uni-drawer.vue"
 	export default {
 		components:{UniDrawer},
 		name: 'UniShopList',
@@ -125,9 +125,6 @@
 					this.showRigth = false
 				}
 			},
-			// onNavigationBarButtonTap(e) {// 导航按钮监听事件
-			// 	this.showRigth = !this.showRigth
-			// },
 			// 点击筛选时显示
 			show(e,index){
 				//当index为3时代表是筛选
@@ -138,14 +135,20 @@
 				}else{
 					return false
 				}
+			},
+			// 跳转到详情页面
+			Particulars(){
+				uni.navigateTo({
+					url: '/pages/type/particulars/particulars',
+				});
 			}
 		}
 	}
 </script>
 <style scoped>
 	*{
-		margin: 0upx;
-		padding: 0upx;
+		margin: 0rpx;
+		padding: 0rpx;
 		color: #555555;
 	}
 	.nav{
@@ -154,14 +157,14 @@
 	}
 	.nav-top {
 		display:inline-block;
-		height: 80upx;
-		line-height: 80upx;
-		padding: 0upx 60upx;
+		height: 80rpx;
+		line-height: 80rpx;
+		padding: 0rpx 60rpx;
 	}
 
 	.nav-top-text {
 		justify-content: space-around;
-		font-size: 30upx;
+		font-size: 30rpx;
 		flex-wrap: nowrap;
 		white-space: nowrap;
 	}
@@ -171,22 +174,22 @@
 	}
 
 	.shop-list-box-pic {
-		margin: 15upx 35upx;
+		margin: 15rpx 35rpx;
 	}
 
 	.shop-list-box-pic image {
-		width: 200upx;
-		height: 240upx;
+		width: 200rpx;
+		height: 240rpx;
 	}
 
 	.shop-list-box-title {
 		font-weight: 800;
-		font-size: 40upx;
+		font-size: 40rpx;
 	}
 
 	.shop-list-box-price {
 		font-weight: 800;
-		font-size: 40upx;
+		font-size: 40rpx;
 		color: #FD6801;
 	}
 
@@ -197,15 +200,15 @@
 
 	.icon-paixu-shengxu {
 		position: absolute;
-		left: 0upx;
-		top: -43upx;
+		left: 0rpx;
+		top: -38rpx;
 		color: #B2B2B2;
 	}
 
 	.icon-paixu-jiangxu {
 		position: absolute;
-		left: 0upx;
-		bottom: -24upx;
+		left: 0rpx;
+		bottom: -18rpx;
 		color: #B2B2B2;
 	}
 	/* 固定定位 */
@@ -214,10 +217,10 @@
 		height: 100% !important;
 		background: white;
 		position: fixed;
-		top: 0upx;
-		right: 0upx;
+		top: 0rpx;
+		right: 0rpx;
 		z-index: 10;
-		padding: 0upx 20upx;
+		padding: 0rpx 20rpx;
 	}
 	/* 遮罩层 */
 	/* .masklayer{
@@ -226,30 +229,30 @@
 		background: #000000;
 		opacity: 0.3;
 		position: fixed;
-		top: 0upx;
-		left: 0upx;
+		top: 0rpx;
+		left: 0rpx;
 		z-index: 9;
 	} */
 	.screen-serve{
-		margin-top: 130upx;
-		margin-bottom: 30upx;
-		height: 50upx;
-		line-height: 50upx;
+		margin-top: 130rpx;
+		margin-bottom: 30rpx;
+		height: 50rpx;
+		line-height: 50rpx;
 		color: #000000;
 	}
 	.hot-search-btn{
-		margin: 0upx 5upx;
-		border: 1upx solid #EEEEEE;
+		margin: 0rpx 5rpx;
+		border: 1rpx solid #EEEEEE;
 	}
 	.hot-search-reset{
 		position: fixed;
-		bottom: 20upx;
-		left: -102upx;
+		bottom: 20rpx;
+		left: -102rpx;
 		display: flex;
 	}
 	.feature{
-		width: 260upx;
-		margin-right: 10upx;
+		width: 260rpx;
+		margin-right: 10rpx;
 		display: inline-block;
 	}
 	.acvtion{
@@ -257,7 +260,7 @@
 		color: white;
 	}
 	.acvtions{
-		border: 1upx solid #FD6801;
+		border: 1rpx solid #FD6801;
 		color: #FD6801;
 	}
 </style>

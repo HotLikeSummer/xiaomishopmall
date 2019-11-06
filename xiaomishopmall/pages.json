@@ -264,96 +264,6 @@
 		    	}
 		    }
 		},{
-		    "path" : "pages/user/userlist/sales-service",
-		    "style": {
-				"navigationBarTitleText":"",
-		    	"app-plus":{
-		    		"titleNView":{
-		    			"buttons":[{
-		    				"color": "#555555",
-		    				"float": "left",
-		    				"fontSize": "17px",
-		    				"text": "售后服务"
-		    			}]
-		    		}
-		    	}
-		    }
-		},{
-		    "path" : "pages/user/userlist/sales-service",
-		    "style": {
-				"navigationBarTitleText":"",
-		    	"app-plus":{
-		    		"titleNView":{
-		    			"buttons":[{
-		    				"color": "#555555",
-		    				"float": "left",
-		    				"fontSize": "17px",
-		    				"text": "售后服务"
-		    			}]
-		    		}
-		    	}
-		    }
-		},{
-		    "path" : "pages/user/userlist/sales-service",
-		    "style": {
-				"navigationBarTitleText":"",
-		    	"app-plus":{
-		    		"titleNView":{
-		    			"buttons":[{
-		    				"color": "#555555",
-		    				"float": "left",
-		    				"fontSize": "17px",
-		    				"text": "售后服务"
-		    			}]
-		    		}
-		    	}
-		    }
-		},{
-		    "path" : "pages/user/userlist/sales-service",
-		    "style": {
-				"navigationBarTitleText":"",
-		    	"app-plus":{
-		    		"titleNView":{
-		    			"buttons":[{
-		    				"color": "#555555",
-		    				"float": "left",
-		    				"fontSize": "17px",
-		    				"text": "售后服务"
-		    			}]
-		    		}
-		    	}
-		    }
-		},{
-		    "path" : "pages/user/userlist/sales-service",
-		    "style": {
-				"navigationBarTitleText":"",
-		    	"app-plus":{
-		    		"titleNView":{
-		    			"buttons":[{
-		    				"color": "#555555",
-		    				"float": "left",
-		    				"fontSize": "17px",
-		    				"text": "售后服务"
-		    			}]
-		    		}
-		    	}
-		    }
-		},{
-		    "path" : "pages/user/userlist/sales-service",
-		    "style": {
-				"navigationBarTitleText":"",
-		    	"app-plus":{
-		    		"titleNView":{
-		    			"buttons":[{
-		    				"color": "#555555",
-		    				"float": "left",
-		    				"fontSize": "17px",
-		    				"text": "售后服务"
-		    			}]
-		    		}
-		    	}
-		    }
-		},{
 		    "path" : "pages/user/userlist/myOrder",
 		    "style": {
 				"navigationBarTitleText":"我的订单",
@@ -375,6 +285,16 @@
 		    		}
 		    	}
 		    }
+		},{
+			"path":"pages/userlogin/userlogin"
+		},{
+			"path":"pages/codelogin/codelogin"
+		},{
+			"path":"pages/confimindent/confimindent"
+		},{
+			"path":"pages/type/detail/detail"
+		},{
+			"path":"pages/type/particulars/particulars"
 		}
     ],
 	"globalStyle": {

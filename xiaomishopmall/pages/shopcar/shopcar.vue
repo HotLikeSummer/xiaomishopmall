@@ -132,7 +132,7 @@
 	.goods-carts {
 		position: fixed;
 		width: 100%;
-		bottom: 90rpx;
+		bottom: 0rpx;
 		background-color: #FFFFFF;
 		border-bottom: #CCCCCC;
 		z-index: 99;
@@ -211,12 +211,11 @@
 		width: 200rpx;
 		height: 200rpx;
 		border: 1rpx solid #CCCCCC;
-
-		image {
+	}
+	.goodsImg image {
 			width: 100%;
 			height: 100%;
 		}
-	}
 
 	.goods_info {
 		height: 200rpx;
