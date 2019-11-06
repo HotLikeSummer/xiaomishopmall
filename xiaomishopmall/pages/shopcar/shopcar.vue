@@ -132,7 +132,7 @@
 	.goods-carts {
 		position: fixed;
 		width: 100%;
-		bottom: 90rpx;
+		bottom: 49px;
 		/* bottom: 0rpx;小程序里设为0 */
 		background-color: #FFFFFF;
 		border-bottom: #CCCCCC;
@@ -182,7 +182,7 @@
 
 	.modaiBox {
 		width: 100%;
-		bottom: 90rpx;
+		bottom: 49px;
 	}
 
 	.modaiCon {

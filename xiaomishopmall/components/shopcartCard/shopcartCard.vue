@@ -40,7 +40,7 @@
 					</view>
 					<view class="buyNumber">
 						<text>购买数量</text>
-						<amount class="choseNum"></amount>
+						<amount class="choseNum" @change="changed"></amount>
 					</view>
 				</view>
 			</view>
@@ -68,13 +68,16 @@
 		props:["arr"],//接收商品信息
 		watch:{
 			arr(newarr){//监听商品信息变化，改变模态框弹出状态
-				this.showUp()
+				this.showUp();
 			}
 		},
 		methods:{
 			showUp(){//弹出模态框
 				this.type = 'bottom'
 				this.$refs['popup'].open()
+			},
+			changed(val){
+				console.log(val)
 			}
 		}
 	}

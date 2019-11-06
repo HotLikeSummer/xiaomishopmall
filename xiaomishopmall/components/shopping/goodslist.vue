@@ -65,6 +65,9 @@
 		methods: {
 			togglePopup(obj) {//传输商品信息
 				this.sendData=[obj]
+			},
+			change(val){
+				console.log(val)
 			}
 		},
 		watch:{
