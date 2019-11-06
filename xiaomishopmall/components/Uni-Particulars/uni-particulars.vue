@@ -76,8 +76,8 @@
 						</view>
 					</view>
 				</view>
-				<view class="more-comment">更多评论 <text class="iconfont icon-you"></text> </view>
 			</scroll-view>
+			<view class="more-comment">更多评论 <text class="iconfont icon-you"></text> </view>
 		</view>
 		<!-- 懒加载图片 -->
 		<view class="lazyload">
@@ -223,6 +223,7 @@
 				Servicenote: ["小米自营", "小米发货", "七天无理由退换", "运费说明"],//服务说明数据
 				showRigth: false, //服务说明显示隐藏
 				showLeft: false,//配送显示隐藏
+				nuss:"",
 			}
 		},
 		methods: {
@@ -249,11 +250,7 @@
 			},
 			// 服务说明隐藏
 			confim() {
-				if (this.showLeft == true) {
-					this.showLeft = false;
-				} else {
-					this.showLeft == true
-				}
+				this.showLeft = false;
 			},
 			// 收货地址显示
 			DeliveryShow(){
@@ -265,14 +262,13 @@
 			},
 			// 收货说明隐藏
 			fresh(){
-				if (this.showRigth == true) {
-					this.showRigth = false;
-				} else {
-					this.showRigth == true;
-				}
+				this.showRigth = false;
 			}
 		},
-
+		onLoad(options) {
+			console.log(options);
+			
+		}
 	}
 </script>
 
@@ -291,8 +287,9 @@
 		width: 100%;
 		height: 760upx;
 		position: relative;
+		
 	}
-
+	
 	.top-imgs image {
 		width: 100%;
 		height: 100%;
@@ -509,7 +506,7 @@
 	/* 为你推荐 */
 
 	.yourecd {
-		width: 356upx;
+		width: 350upx;
 		height: 500upx;
 		float: left;
 		text-align: center;

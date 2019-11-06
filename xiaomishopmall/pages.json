@@ -85,7 +85,18 @@
         },{
             "path" : "pages/shoplist/shoplist",
             "style": {
-            	"navigationBarTitleText": "列表页"
+            	"navigationBarTitleText": "列表页",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+							"color": "#555555",
+							"float": "right",
+							"fontSize": "20px",
+							"fontSrc": "/static/font/iconfont.ttf",
+							"text": "\ue64c"
+						}]
+					}
+				}
             }
         },{
             "path" : "pages/type/detail/detail",
@@ -286,13 +297,25 @@
 		    	}
 		    }
 		},{
-			"path":"pages/userlogin/userlogin"
+			"path":"pages/userlogin/userlogin",
+			"style":{
+				"navigationStyle":"custom"
+			}
 		},{
-			"path":"pages/codelogin/codelogin"
+			"path":"pages/codelogin/codelogin",
+			"style":{
+				"navigationStyle":"custom"
+			}
 		},{
-			"path":"pages/confimindent/confimindent"
+			"path":"pages/confimindent/confimindent",
+			"style":{
+				"navigationStyle":"custom"
+			}
 		},{
-			"path":"pages/type/particulars/particulars"
+			"path":"pages/type/particulars/particulars",
+			"style":{
+				"navigationStyle":"custom"
+			}
 		}
     ],
 	"globalStyle": {
