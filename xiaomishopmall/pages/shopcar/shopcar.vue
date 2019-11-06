@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<goodslist></goodslist>
+		<goodslist :editing="editing"></goodslist>
 		<view class="goods-carts">
 			<goodsnav />
 		</view>
@@ -41,16 +41,16 @@
 				name: "我的购物车",
 				productList: [],
 				renderImage: false,
-				sendData:[]
+				editing:false
 			}
 		},
 
-		components: {
+		components: {//引入组件
 			goodslist,
 			goodsnav
 		},
 		methods: {
-			loadData(action = 'add') {
+			loadData(action = 'add') {//自定义的数据
 				const data = [{
 						image: 'https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product1.jpg',
 						title: 'Apple iPhone X 256GB 深空灰色 移动联通电信4G手机',
@@ -95,18 +95,18 @@
 					}
 				];
 
-				if (action === 'refresh') {
+				if (action === 'refresh') {//清空数据
 					this.productList = [];
 				}
 
-				data.forEach(item => {
+				data.forEach(item => {//加载数据
 					this.productList.push(item);
 				});
 			}
 		},
 		onLoad() {
 			this.loadData();
-			setTimeout(() => {
+			setTimeout(() => {//延迟加载
 				this.renderImage = true;
 			}, 300);
 		},
@@ -117,8 +117,11 @@
 				uni.stopPullDownRefresh();
 			}, 2000);
 		},
-		onReachBottom() {
+		onReachBottom() {//滑动到底部加载数据
 			this.loadData();
+		},
+		onNavigationBarButtonTap(e){//点击编辑触发方法
+			this.editing=!this.editing//改变编辑状态
 		}
 	}
 </script>

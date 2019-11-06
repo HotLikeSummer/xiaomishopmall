@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<!-- 引入弹框组件 -->
 		<uni-popup ref="popup" :type="type" :custom="true" class="modaiBox">
 			<view class="modaiCon">
 				<view class="goods">
@@ -64,14 +65,14 @@
 			uniPopup,
 			amount
 		},
-		props:["arr"],
+		props:["arr"],//接收商品信息
 		watch:{
-			arr(newarr){
+			arr(newarr){//监听商品信息变化，改变模态框弹出状态
 				this.showUp()
 			}
 		},
 		methods:{
-			showUp(){
+			showUp(){//弹出模态框
 				this.type = 'bottom'
 				this.$refs['popup'].open()
 			}
@@ -112,12 +113,11 @@
 		width: 200rpx;
 		height: 200rpx;
 		border: 1rpx solid #CCCCCC;
-
-		image {
+	}
+	.goodsImg image {
 			width: 100%;
 			height: 100%;
 		}
-	}
 
 	.goods_info {
 		height: 200rpx;

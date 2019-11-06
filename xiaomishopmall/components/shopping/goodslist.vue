@@ -14,12 +14,16 @@
 							</view>
 							<view class='good-info'>
 								<view class='name'>华为matax210</view>
-								<view class='lx'  @click="togglePopup(item)">
+								<view class='lx' v-if="!editing">
+									<view>
+										火焰红 64G 标配1
+									</view>
+								</view>
+								<view class='lx editing'  @click="togglePopup(item)" v-if="editing">
 									<view>
 										火焰红 64G 标配1
 									</view>
 									<view>
-										<!-- <icon type="#CCCCCC" class="iconfont">&#xe65d;</icon> -->
 										<span class="iconfont">&#xe65d;</span>
 									</view>
 								</view>
@@ -28,12 +32,12 @@
 									<!-- :value="numberValue" -->
 									<amount class="numbers" @change="change"></amount>
 								</view>
-
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
+			<!-- 加入购物车组件 -->
 			<shopcartCard :arr="sendData"></shopcartCard>
 			<!-- 没有商品信息 -->
 			<view v-if='1==0'>
@@ -47,9 +51,9 @@
 	import amount from "@/components/shopping/amount.vue"
 	import shopcartCard from "@/components/shopcartCard/shopcartCard.vue"
 	export default {
+		props:['editing'],//接收编辑状态信息
 		data() {
 			return {
-				// numberValue:1,
 				phoneHeight: 0,
 				sendData:[]
 			}
@@ -59,26 +63,19 @@
 			shopcartCard
 		},
 		methods: {
-			change(value) {
-				// this.numberValue = value
-				//console.log("商品数量"+value)
-			},
-			togglePopup(obj) {
-				//this.$emit("showUp",[type,open,obj]);
+			togglePopup(obj) {//传输商品信息
 				this.sendData=[obj]
 			}
 		},
-		created() {
-
+		watch:{
+			editing(){//监听编辑状态
+				console.log(this.editing)
+			}
 		}
 	}
 </script>
 
 <style scoped>
-	/* 	.car-list {
-			padding-bottom: 47px;
-		} */
-
 	.car-item {
 		position: relative;
 		overflow: hidden;
@@ -171,8 +168,10 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		box-sizing: border-box;
-		background-color: #F1F1F1;
 		color: #7C858D;
+	}
+	.editing{
+		background-color: #F1F1F1;
 	}
 
 	.price {

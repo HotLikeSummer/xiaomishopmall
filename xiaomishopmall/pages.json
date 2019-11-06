@@ -61,7 +61,20 @@
         ,{
             "path" : "pages/shopcar/shopcar",
             "style": {
-            	"navigationBarTitleText": "购物车"
+            	"navigationBarTitleText": "购物车",
+				"app-plus": {
+					"titleNView": {
+						//按钮配置
+							"buttons": [{
+								"color": "#000000",
+								"float": "right",
+								"fontSize": "25rpx",
+								"text": "编辑",
+								"marginRight":"10rpx"
+							}
+						]
+					}
+				}
             }
         }
         ,{
