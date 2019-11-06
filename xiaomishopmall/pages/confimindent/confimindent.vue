@@ -18,7 +18,7 @@
 				</view>
 				<view class="right">共三件 <text class="iconfont icon-you"></text>  </view>
 			</view>
-			<view v-for="(item,index) in listText">
+			<view v-for="(item,index) in listText" :key="index">
 				<view class="list">
 					<text class="left">{{item.tesleft}}</text>
 					<text class="right">{{item.price}}</text>

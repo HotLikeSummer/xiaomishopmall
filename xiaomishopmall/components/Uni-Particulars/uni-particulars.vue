@@ -154,7 +154,7 @@
 </template>
 
 <script>
-	import uniIcons from "@/components/uni-icons/uni-icons.vue"
+	import uniIcons from "@/components/Uni-Icons/uni-icons.vue"
 	import shopcartCard from "@/components/shopcartCard/shopcartCard.vue"
 	export default {
 		name: 'UniParticulars',
