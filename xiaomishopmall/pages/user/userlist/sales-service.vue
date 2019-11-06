@@ -26,7 +26,7 @@
 				<view class="uni-list-cell-navigate">
 					<image :src="item.image" mode=""></image>
 					<view class="">{{item.title}}</view>
-					<view class="btn">申请售后</view>
+					<view class="btn" @tap="apply">申请售后</view>
 				</view>
 			</view>
 		</view>
@@ -51,6 +51,11 @@
 				if (this.current !== index) {
 					this.current = index;
 				}
+			},
+			apply(){
+				uni.navigateTo({
+					url:"after-sales"
+				})
 			}
 		},
 	}
