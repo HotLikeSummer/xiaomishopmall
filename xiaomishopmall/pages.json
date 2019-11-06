@@ -297,6 +297,11 @@
 		    	}
 		    }
 		},{
+		    "path" : "pages/user/userlist/invoice",
+		    "style": {
+				"navigationBarTitleText":"发票"
+		    }
+		},{
 			"path":"pages/userlogin/userlogin",
 			"style":{
 				"navigationStyle":"custom"
