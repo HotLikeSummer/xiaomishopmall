@@ -45,7 +45,7 @@
 </template>
 
 <script>
-	import UniDrawer from "@/components/Uni-Drawer/uni-drawer.vue"
+	import UniDrawer from "@/components/uni-Drawer/uni-drawer.vue"
 	export default {
 		components:{UniDrawer},
 		name: 'UniShopList',

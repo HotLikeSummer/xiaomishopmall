@@ -53,7 +53,7 @@
 					for (var j = 1; j < 31; j++) {
 						subList.push({
 							"NAME": "分类" + i + ":商品" + j,
-							"LOGO": "http://placehold.it/50x50"
+							"LOGO": "/static/images/demo/list/1.jpg"
 						})
 					}
 					this.categoryList.push({
