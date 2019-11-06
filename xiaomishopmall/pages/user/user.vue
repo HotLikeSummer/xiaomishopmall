@@ -19,7 +19,7 @@
 			</view>
 			<view class="operate">
 				<ul class="waite">
-					<li v-for="(item,index) in orders" class="waite-list" @tap="topage(item.url)">
+					<li v-for="(item,index) in orders" class="waite-list" @tap="topage(item.url,index)">
 						<text :class="item.icons"></text>
 						<view class="">{{item.txt}}</view>
 					</li>
@@ -32,7 +32,7 @@
 		</view>
 		<view class="service">
 			<ul class="serviItem">
-				<li class="servilist" v-for="(item,index) in list" @tap="topage(item.url)">
+				<li class="servilist" v-for="(item,index) in list" @tap="topage(item.url,index)">
 					<text :class="item.img"></text>
 					<text class="content">{{item.content}}</text>
 					<text class="iconfont icon-you rightTo"></text>
@@ -50,14 +50,16 @@
 				orders: [{
 						icons: "iconfont icon-wallet_icon",
 						txt: "待付款",
-						url:""
+						url:"userlist/myOrder"
 					}, {
 						icons: "iconfont icon-daishouhuo",
-						txt: "待收货"
+						txt: "待收货",
+						url:"userlist/myOrder"
 					},
 					{
 						icons: "iconfont icon-pinglun1",
-						txt: "待评价"
+						txt: "待评价",
+						url:"userlist/myOrder"
 					}, {
 						icons: "iconfont icon-buoumaotubiao46",
 						txt: "退换修",
@@ -88,9 +90,9 @@
 			}
 		},
 		methods: {
-			topage(url) {
+			topage(url,index) {
 				uni.navigateTo({
-					url: url
+					url: url+"?index="+index+""
 				})
 			},
 			toOrder(){

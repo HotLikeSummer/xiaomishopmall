@@ -6,10 +6,20 @@
 				 :data-current="index" @click="tapTab(index)">{{tab.name}}</view>
 			</view>
 		</view>
-		<all></all>
+		<!-- <all></all> -->
 		<!-- <evaluate></evaluate>
 		<payment></payment>
 		<takeGoods></takeGoods> -->
+		<swiper :duration="1000" class="swiper" :current="tabIndex" @change="changeTab">
+			<swiper-item v-for="(item,index) in orderitems">
+				<view class="main" style="display:flex">
+					<view class="nothing">
+						<image :src="item.img" mode=""></image>
+						<view class="txt">{{item.txt}}</view>
+					</view>
+				</view>
+			</swiper-item>
+		</swiper>
 		<view class="like">
 			<view class="title">猜你喜欢</view>
 			<view class="real-time">
@@ -81,13 +91,34 @@
 					detail: "1.5匹支流变频",
 					nowprice: "￥2199",
 					orgprice: "￥2699"
+				}],
+				orderitems: [{
+					img: "/static/images/nothing/no_comment.png",
+					txt: "您还没有任何订单"
+				}, {
+					img: "/static/images/nothing/no_pay.png",
+					txt: "您还没有待付款订单"
+				}, {
+					img: "/static/images/nothing/no_receiving.png",
+					txt: "您还没有待收货订单"
+				}, {
+					img: "/static/images/nothing/no_comment.png",
+					txt: "您还没有待评价订单"
 				}]
 			}
 		},
 		methods: {
 			tapTab(index) {
 				this.tabIndex=index
+			},
+			changeTab(e){
+				let index=e.detail.current;
+				this.tabIndex = index;
 			}
+		},
+		onLoad(e) {
+			console.log(e)
+			this.tabIndex=e.index+1;
 		},
 	}
 </script>
@@ -160,6 +191,27 @@
 		height:50upx;
 		line-height:50upx;
 		margin-left:20upx;
+	}
+	.swiper {
+		height: 420upx;
+	}
+	.main {
+		width: 100%;
+		height: 420upx;
+		background-color: #F5F5F5;
+	}
+	.nothing {
+		margin: auto;
+		text-align: center;
+	}
+	
+	.nothing image {
+		width: 240upx;
+		height: 200upx;
+	}
+	
+	.txt {
+		color: #D6D6D6;
 	}
 	.detail{
 		color:#A7ADB2;
