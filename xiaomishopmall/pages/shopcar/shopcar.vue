@@ -7,7 +7,7 @@
 		<view class="recommend">
 			<view class="rendmain">
 				<h3 class="rend">为你推荐</h3>
-				<view class="tlt">
+				<view class="rectit">
 					<view class="reline"></view>
 					<view class="retext">买了人还买了</view>
 				</view>
@@ -132,7 +132,8 @@
 	.goods-carts {
 		position: fixed;
 		width: 100%;
-		bottom: 0rpx;
+		bottom: 90rpx;
+		/* bottom: 0rpx;小程序里设为0 */
 		background-color: #FFFFFF;
 		border-bottom: #CCCCCC;
 		z-index: 99;
@@ -151,7 +152,7 @@
 		font-size: 38rpx;
 	}
 
-	.tlt {
+	.rectit {
 		width: 100%;
 		height: 60rpx;
 		line-height: 60rpx;

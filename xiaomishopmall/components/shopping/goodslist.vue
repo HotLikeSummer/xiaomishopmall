@@ -14,12 +14,12 @@
 							</view>
 							<view class='good-info'>
 								<view class='name'>华为matax210</view>
-								<view class='lx' v-if="!editing">
+								<view class='kind' v-if="!editing">
 									<view>
 										火焰红 64G 标配1
 									</view>
 								</view>
-								<view class='lx editing'  @click="togglePopup(item)" v-if="editing">
+								<view class='kind editing'  @click="togglePopup(item)" v-if="editing">
 									<view>
 										火焰红 64G 标配1
 									</view>
@@ -158,7 +158,7 @@
 		box-sizing: border-box;
 	}
 
-	.lx {
+	.kind {
 		display: flex;
 		justify-content: space-between;
 		line-height: 60rpx;
