@@ -1,9 +1,12 @@
 <template>
+	<!-- 关于商城页 -->
 	<view id="aboutMall">
+		<!-- 商城logo -->
 		<view class="versions">
 			<!-- <image src="" mode=""></image> -->
 			<text>小米商城 4.5.3.0529.r1</text>
 		</view>
+		<!-- 关于商城列表 -->
 		<view class="about-item">
 			<view class="uni-list">
 				<view class="uni-list-cell" v-for="(item,index) in list" :key="index">
@@ -13,6 +16,7 @@
 				</view>
 			</view>
 		</view>
+		<!-- 底部 -->
 		<view class="footer">
 			<text>探索黑科技，小米为发烧而生</text>
 		</view>
@@ -44,11 +48,13 @@
 		height:400upx;
 		text-align:center;
 	}
+	/* 关于 */
 	.uni-list-cell-navigate{
 		height:105upx;
 		line-height:105upx;
 		text-indent:1em;
 	}
+	/* 底部 */
 	.footer{
 		width:100%;
 		height:150upx;

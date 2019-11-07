@@ -1,5 +1,7 @@
 <template>
+	<!-- 设置页面 -->
 	<view id="userlist">
+		<!-- 账号管理 -->
 		<view class="iTunes">账号管理</view>
 		<view class="iTunes-list personal" @tap="editprofile">
 			个人资料<text class="iconfont icon-you"></text>
@@ -8,14 +10,16 @@
 			收货地址<text class="iconfont icon-you"></text>
 		</view>
 		<view class="about">关于</view>
+		<!-- 关于商城列表 -->
 		<view class="aboutItem">
 			<ul>
-				<li v-for="(item,index) in aboutList" class="about-list" @tap="topage(item.url)">
+				<li v-for="(item,index) in aboutList" class="about-list" @tap="topage(item.url)" :key="index">
 					<text class="abouttxt">{{item.list}}</text>
 					<text class="iconfont icon-you allright"></text>
 				</li>
 			</ul>
 		</view>
+		<!-- 退出 -->
 		<view class="quit">
 			<text class="logout">退出登录</text>
 		</view>
@@ -24,17 +28,19 @@
 <script>
 	export default{
 		data() {
-			return {
+			return {//关于商城信息
 				aboutList:[{list:"关于商城",url:"aboutMall"},{list:"意见反馈",url:"suggestion"},{list:"协议规则",url:""},{list:"资质证件",url:""},{list:"用户协议",url:""},{list:"隐私政策",url:""}]
 			}
 		},
 		methods: {
 			editprofile() {
+				//跳到修改资料页
 				uni.navigateTo({
 					url:"edit-profile"
 				})
 			},
 			addresslist(){
+				//跳到地址列表页
 				uni.navigateTo({
 					url:"addresslist"
 				})
@@ -52,6 +58,7 @@
 		margin: 0upx;
 		padding: 0upx;
 	}
+	/* 账号管理 */
 	.iTunes,.about{
 		width: 100%;
 		height: 90upx;
@@ -71,6 +78,7 @@
 	.personal{
 		border-bottom: 1px solid #F0F0F0;
 	}
+	/* 关于商城列表 */
 	.about-list{
 		border-bottom: 1px solid #F0F0F0;
 	}

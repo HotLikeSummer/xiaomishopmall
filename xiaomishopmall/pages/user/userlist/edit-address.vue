@@ -1,4 +1,5 @@
 <template>
+	<!-- 编辑收货地址页 -->
 	<view id="editAddress">
 		<view class="consignee">
 			<text>收货人：</text>
@@ -20,6 +21,7 @@
 			<text>设为默认地址：</text>			
 			<switch checked />
 		</view>
+		<!-- 保存 -->
 		<view class="save">
 			<text>保存</text>
 		</view>
@@ -52,7 +54,7 @@
 		background-color: #EEEEEE;
 		font-size: 60upx;
 	}
-
+/* 地址信息 */
 	.consignee,
 	.phone,
 	.area,
@@ -79,6 +81,7 @@
 		float: right;
 		margin-right: 17upx;
 	}
+	/* 保存 */
 	.save text{
 		display: block;
 		margin: 30upx;
@@ -88,6 +91,7 @@
 		text-align: center;
 		color: white;
 	}
+	/* 输入 */
 	.input{
 		float: right;
 		margin-top:20upx;

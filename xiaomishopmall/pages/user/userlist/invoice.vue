@@ -3,12 +3,14 @@
 	<view id="invoice">
 		<view class="line"></view>
 		<view class="invoice-type">
+			<!-- 发票类型 -->
 			<view class="title">发票类型</view>
 			<view class="btn">电子发票</view>
 			<view class="txt">{{discrip}}</view>
 		</view>
 		<view class="line"></view>
 		<view class="invoice-title">
+			<!-- 发票抬头 -->
 			<view class="title">发票抬头</view>
 			<text class="btn">个人</text>
 			<text class="btn units">单位</text>
@@ -19,6 +21,7 @@
 		<view class="line"></view>
 		<view class="phone">发票人手机: 158****1215</view>
 		<view class="information">
+			<!-- 发票须知 -->
 			<text>发票须知:</text>
 			<text>1.发票为实际支付金额，不包括优惠券等;</text>
 			<text>2.电子发票可在订单完成后，在订单详情中查看;</text>
@@ -47,7 +50,7 @@
 		height: 20upx;
 		background-color: #F5F5F5;
 	}
-
+/* 发票类型 */
 	.invoice-type,.invoice-title {
 		padding: 20upx;
 	}
@@ -78,6 +81,7 @@
 	.txt {
 		color: #CACACA;
 	}
+	/* 姓名手机号 */
 	.name,.content,.phone{
 		height: 90upx;
 		line-height: 90upx;
@@ -86,6 +90,7 @@
 	.name{
 		border-bottom: 2upx solid #EBEDF0;
 	}
+	/* 发票须知 */
 	.information{
 		padding-left: 20upx;
 		background-color: #EEEEEE;

@@ -1,9 +1,10 @@
 <template>
 	<!-- 个人主页 -->
 	<view id="user">
-		<view class="top">
+		<view class="top" :style="{backgroundImage:'url('+topImg+')'}">
+			<!-- 消息 -->
 			<view><text class="iconfont icon-xiaoxi"></text></view>
-			<!-- 顶部背景图 -->
+			<!-- 昵称 -->
 			<view>
 				<image :src="nameImg" mode=""></image>
 			</view>
@@ -12,6 +13,7 @@
 			</view>
 		</view>
 		<view class="myOrder">
+			<!-- 我的订单 -->
 			<view class="order-tit" @tap="toOrder">
 				<text class="lt-order">我的订单</text>
 				<view class="rt-order">
@@ -19,7 +21,7 @@
 					<text class="iconfont icon-you"></text>
 				</view>
 			</view>
-			<!-- 我的订单部分 -->
+			<!-- 我的订单部分导航 -->
 			<view class="operate">
 				<ul class="waite">
 					<li v-for="(item,index) in orders" class="waite-list" @tap="topage(item.url,index)">
@@ -51,6 +53,7 @@
 	export default {
 		data() {
 			return {
+				topImg:"/static/images/bg.jpg"
 				nameImg: "/static/images/demo/demo6.jpg",//背景图
 				orders: [{//订单导航信息
 						icons: "iconfont icon-wallet_icon",
@@ -123,7 +126,6 @@
 	.top {
 		width: 100%;
 		height: 400upx;
-		background-image: url("/static/images/bg.jpg");
 		background-repeat: no-repeat;
 		background-size: cover;
 		position: relative;

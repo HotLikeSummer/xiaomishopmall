@@ -1,14 +1,18 @@
 <template>
+	<!-- 售后表单页 -->
 	<view id="salesForm">
 		<view class="line"></view>
 		<view class="products">
+			<!-- 申请售后的产品 -->
 			<view class="tit" style="border:none">申请售后的产品</view>
 			<view class="uni-list">
 				<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(value,key) in list" :key="key">
 					<view class="uni-media-list">
 						<view class="uni-media-list-logo">
+							<!-- 图片 -->
 							<image v-if="showImg" :src="value.img"></image>
 						</view>
+						<!-- 商品描述 -->
 						<view class="uni-media-list-body">
 							<view class="uni-media-list-text-top">{{value.title}}</view>
 							<view class="uni-media-list-text-bottom uni-ellipsis">{{value.content}}</view>
@@ -18,6 +22,7 @@
 			</view>
 		</view>
 		<view class="line"></view>
+		<!-- 服务类型 -->
 		<view class="typeService">
 			<view class="tit">服务类型</view>
 			<view class="service">
@@ -28,9 +33,11 @@
 		<view class="problem">
 			<view class="tit">问题描述</view>
 			<view class="detail">
+				<!-- 问题文字描述 -->
 				<view class="uni-textarea">
 					<textarea placeholder-style="color:#D1D1D1" placeholder="请详细描述下你遇到的问题吧" />
 				</view>
+				<!-- 问题图片描述 -->
 				<view class="photograph">
 					<text class="iconfont icon-paizhao"></text>
 					<text>0/200</text>
@@ -45,7 +52,7 @@
 		data() {
 			return {
 				showImg: false,
-				list: [{
+				list: [{//商品信息
 						title: "米加金属签字笔 金色",
 						content: "能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？",
 						img: "/static/images/demo/demo1.jpg"
@@ -72,6 +79,7 @@
 		width: 100%;
 		height: 20upx;
 	}
+	/* 申请售后的产品 */
 	.products,.typeService{
 		background-color: white;
 	}
@@ -92,6 +100,7 @@
 		height: 120upx;
 		width: 120upx;
 	}
+	/* 服务类型 */
 	.service{
 		width: 100%;
 		height: 120upx;
@@ -107,6 +116,7 @@
 		margin-left:20upx;
 		color:#FF6B01;
 	}
+	/* 问题描述 */
 	.problem{
 		background-color: white;
 		height:404upx

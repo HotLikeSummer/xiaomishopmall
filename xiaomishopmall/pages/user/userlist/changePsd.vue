@@ -1,4 +1,5 @@
 <template>
+	<!-- 修改密码页 -->
 	<view id="changePsd">
 		<view class="line"></view>
 		<view class="password">
@@ -13,6 +14,7 @@
 			<text>确认密码</text>
 			<input type="text" v-model="model" class="input" placeholder="请输入"/>
 		</view>
+		<!-- 提示 -->
 		<view class="remind">{{msg}}</view>
 		<view class="confirm"><text>确定</text></view>
 	</view>
@@ -48,6 +50,7 @@
 	.line {
 		height: 25upx;
 	}
+	/* 密码 */
 	.password,.newPsd,.affirm{
 		display: flex;
 		justify-content: space-between;
@@ -64,12 +67,14 @@
 		line-height: 80upx;
 		width: 80%;
 	}
+	/* 提示 */
 	.remind{
 		height: 100upx;
 		line-height: 100upx;
 		text-align: center;
 		color: #d6d6d6;
 	}
+	/* 确认 */
 	.confirm{
 		display: block;
 		height: 110upx;
