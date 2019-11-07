@@ -8,7 +8,11 @@
 					<!-- 商品信息-->
 					<view class='goods-info'>
 						<view class='goods-info-inner'>
-							<view class='checkbox'></view>
+							<view class='checkbox'>
+								<view class="checkIcon" :class="item.checked?'':'nocheck'" @click="check(item)">
+									<text class="iconfont checked" v-if="item.checked">&#xe6ce;</text>
+								</view>
+							</view>
 							<view class='goods-image'>
 								<image src="/static/images/demo/list/1.jpg"></image>
 							</view>
@@ -24,7 +28,6 @@
 								</view>
 								<view class="infobox">
 									<view class='price'>￥{{item.price}}</view>
-									<!-- :value="numberValue" -->
 									<amount class="numbers" @change="change"></amount>
 								</view>
 							</view>
@@ -53,27 +56,27 @@
 				sendData:[],
 				goodInfo:[{
 					name:"华为matax210",
-					kind:"火焰红 64G 标配1",
+					kind:"火焰红 64G 标配",
 					price:3541
 				},{
 					name:"华为matax210",
-					kind:"火焰红 64G 标配1",
+					kind:"火焰红 64G 标配",
 					price:3541
 				},{
 					name:"华为matax210",
-					kind:"火焰红 64G 标配1",
+					kind:"火焰红 64G 标配",
 					price:3541
 				},{
 					name:"华为matax210",
-					kind:"火焰红 64G 标配1",
+					kind:"火焰红 64G 标配",
 					price:3541
 				},{
 					name:"华为matax210",
-					kind:"火焰红 64G 标配1",
+					kind:"火焰红 64G 标配",
 					price:3541
 				},{
 					name:"华为matax210",
-					kind:"火焰红 64G 标配1",
+					kind:"火焰红 64G 标配",
 					price:3541
 				}]
 			}
@@ -89,6 +92,10 @@
 			},
 			change(val){
 				console.log(val)
+			},
+			check(obj){
+				obj.checked=!obj.checked;
+				console.log(obj)
 			}
 		},
 		watch:{
@@ -130,18 +137,13 @@
 		position: relative;
 		height: 100rpx;
 	}
-
+	
+	/* 商品卡片 */
 	.goods-info {
 		float: left;
 		width: 100%;
 		box-sizing: border-box;
 		position: relative;
-		background: url(https://cdn.it120.cc/images/weappshop/gou.png) no-repeat 30rpx center;
-		background-size: 40rpx auto;
-	}
-
-	.goods-info.active {
-		background-image: url(https://cdn.it120.cc/images/weappshop/gou-red.png);
 	}
 
 	.goods-info .goods-info-inner {
@@ -153,7 +155,27 @@
 	.goods-info-inner .checkbox {
 		width: 120rpx;
 	}
+	/* 选中按钮 */
+	.checkbox{
+		height: 220rpx;
+		display: flex;
+	}
+	.checkIcon{
+		width: 40rpx;
+		height: 40rpx;
+		line-height: 40rpx;
+		border-radius: 50%;
+		margin: auto;
+	}
+	.nocheck{
+		border: 1rpx solid #CCCCCC;
+	}
+	.checked{
+		color: #FD6801;
+		font-size: 47rpx;
+	}
 
+	/* 商品信息 */
 	.goods-info-inner .goods-image {
 		width: 220rpx;
 		height: 220rpx;
@@ -186,7 +208,7 @@
 		display: flex;
 		justify-content: space-between;
 		line-height: 60rpx;
-		padding: 10rpx 0;
+		padding: 10rpx 5rpx;
 		white-space: nowrap;
 		font-size: 30rpx;
 		overflow: hidden;
