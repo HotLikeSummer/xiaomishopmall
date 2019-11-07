@@ -1,9 +1,9 @@
 <template>
 	<view id="new" :style="{ height: swiperheight_all + 'px' }">
 		<!-- 导航栏 -->
-		<scroll-view class="scroll-h" scroll-x>
+		<scroll-view class="scroll-h" scroll-x  :show-scrollbar="false" :scroll-into-view="scrollInto">
 			<!-- 循环导航栏内容 -->
-			<view v-for="(tab, index) in title" class="uni-tab-item" :key="index" :index="index" :data-current="index" @click="tabtap(index)">
+			<view v-for="(tab, index) in title" :id="tab.name" class="uni-tab-item" :key="index" :index="index" :data-current="index" @click="tabtap(index)">
 				<!-- 绑定样式 -->
 				<text class="uni-tab-item-title" :class="tabIndex == index ? 'uni-tab-item-title-active' : ''">{{ tab.text }}</text>
 			</view>
@@ -11,7 +11,7 @@
 		<!-- 对应内容栏 -->
 		<swiper class="swiper-box" :style="{ height: swiperheight_s + 'px' }" :current="tabIndex" @change="tabChange">
 			<swiper-item v-for="(items, index) in num" :key="index">
-				<scroll-view class="scroll-y" scroll-y :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore()">
+				<scroll-view class="scroll-y" scroll-y  :show-scrollbar="false" :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore()">
 					<!-- 内容板块 -->
 					<view class="box" v-for="(item, index) in productLists" :key="index" :index="index">
 						<!-- 背景图 -->
@@ -56,7 +56,8 @@ export default {
 			// 加载更多
 			loadtext:"上拉加载更多",
 			//加载更多图片的下标
-			splnum:0
+			splnum:0,
+			scrollInto:""
 		};
 	},
 	onLoad(option) {
@@ -75,7 +76,7 @@ export default {
 			}
 		}),
 			//首页传过来的index,赋值，传过来的index对应导航栏的下标
-			(this.tabIndex = option.index);
+			this.tabIndex = option.index
 		console.log(this.tabIndex);
 	},
 	created() {
@@ -111,6 +112,7 @@ export default {
 		//导航栏绑定样式
 		tabtap(index) {
 			this.tabIndex = index;
+			 this.scrollInto = this.title[index].id;
 		},
 		//滑动切换swiper
 		tabChange(e) {

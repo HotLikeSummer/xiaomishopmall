@@ -12,7 +12,7 @@
 		<!-- 内容 -->
 		<swiper class="swiper-box" :style="{ height: swiperheight_s + 'px' }" :current="tabIndex" @change="tabChange">
 			<swiper-item v-for="(items, index) in num" :key="index" :index="index">
-				<scroll-view class="scroll-y" scroll-y :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore(index)">
+				<scroll-view class="scroll-y" scroll-y :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore(index)"  :show-scrollbar="false">
 					<!-- 第一页的轮播 -->
 					<view class="swiper">
 						<!-- 轮播样式 -->
@@ -257,6 +257,9 @@ export default {
 	float: right;
 }
 /* 加载更多 */
+.uni-product{
+	padding: 23rpx;
+}
 .image-view {
 	display: flex;
 }
