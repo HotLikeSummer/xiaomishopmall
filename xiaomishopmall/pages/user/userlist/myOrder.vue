@@ -11,7 +11,7 @@
 		<payment></payment>
 		<takeGoods></takeGoods> -->
 		<swiper :duration="1000" class="swiper" :current="tabIndex" @change="changeTab">
-			<swiper-item v-for="(item,index) in orderitems">
+			<swiper-item v-for="(item,index) in orderitems" :key="index">
 				<view class="main" style="display:flex">
 					<view class="nothing">
 						<image :src="item.img" mode=""></image>

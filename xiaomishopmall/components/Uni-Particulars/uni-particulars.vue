@@ -238,7 +238,7 @@
 			},
 			shopCart(obj) {
 				console.log(obj)
-				this.sends = obj;
+				this.sends = [obj];
 			},
 			// 服务说明显示
 			ServiceShow() {

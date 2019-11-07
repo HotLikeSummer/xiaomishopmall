@@ -3,13 +3,15 @@
 		<!-- 底部占位 -->
 		<view class="uni-tab__cart-box flex">
 			<view class="flex uni-tab__cart-sub-box">
-				<view class="icon">
+				<!-- 全选图标 -->
+				<view class="icon" @click="allCheck" :class="allChecked?'icon-active':''">
 				</view>
 				<view class="total">
 					<text>合计:</text>
-					<text class="yen">￥{{cost}}</text>
+					<text class="cost">￥{{cost}}</text>
 				</view>
 			</view>
+			<!-- 合计按钮 -->
 			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box ">
 				<view :style="{backgroundColor:buttonGroup.default().backgroundColor,color:buttonGroup.default().color}" class="flex uni-tab__cart-button-right"
 				 @click="buttonClick">{{ buttonGroup.default().text }}</view>
@@ -36,11 +38,16 @@
 					type: Boolean,
 					default: false
 				},
-				cost:0
+				allChecked:false,//全选判断
+				cost:0,
 			}
 		},
 		methods: {
-			buttonClick(){
+			allCheck(){//全选
+				this.allChecked=!this.allChecked;
+				console.log(this.allChecked)
+			},
+			buttonClick(){//计算总价
 				console.log(this.cost)
 			}
 		}
@@ -63,7 +70,7 @@
 		width: 100%;
 		box-sizing: border-box;
 	}
-	
+	/* 合计按钮 */
 	.uni-tab__right {
 		/* margin: 5px 0;
 		margin-right: 10px; */
@@ -81,7 +88,7 @@
 	.uni-tab__cart-button-right:active {
 		opacity: 0.7;
 	}
-
+	/* 勾选图标 */
 	.icon {
 		height: 100rpx;
 		width: 130rpx;
@@ -90,17 +97,17 @@
 		background-size: 40rpx auto;
 	}
 
-	.icon .active {
+	.icon-active {
 		height: 100rpx;
 		width: 130rpx;
-		background-image: url(https://cdn.it120.cc/images/weappshop/gou-red.png) no-repeat;
+		background-image: url(https://cdn.it120.cc/images/weappshop/gou-red.png) no-repeat 50% 50%;
 	}
 
 	.total {
 		line-height: 100rpx;
 	}
 
-	.yen {
+	.cost {
 		color: #FD6801;
 		margin-left: 30rpx;
 	}
