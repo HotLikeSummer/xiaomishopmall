@@ -1,9 +1,12 @@
 <template>
+	<!-- 意见反馈页面 -->
 	<view id="suggestion">
 		<view class="problem">
+			<!-- 问题文字描述 -->
 			<view class="uni-textarea">
 				<textarea placeholder-style="color:#D1D1D1" :placeholder="remind" />
 			</view>
+			<!-- 图片描述 -->
 			<view class="upload">
 				<view class="upload-pic"><text class="iconfont icon-paizhao"></text></view>
 				<text class="txt">最多三张图片 (选填) 140</text>
@@ -12,6 +15,7 @@
 		<view class="phone">
 			<input type="text" placeholder-style="color:#D1D1D1" placeholder="请留下您的手机号码 (选填)"/>
 		</view>
+		<!-- 提交按钮 -->
 		<view class="submit">提交</view>
 		<view class="consult"><text>咨询小米客服 ></text></view>
 	</view>
@@ -54,6 +58,7 @@
 		text-align: center;
 		border: 1upx #D1D1D1 solid;
 	}
+	/* 问题文字描述 */
 	.problem{
 		background-color: white;
 		color: #D1D1D1;
@@ -72,6 +77,7 @@
 	.txt{
 		margin-top: 146upx;
 	}
+	/* 图片 */
 	.phone{
 		height: 100upx;
 		line-height: 100upx;
@@ -84,6 +90,7 @@
 		line-height: 100upx;
 		padding: 0upx 40upx;
 	}
+	/* 提交 */
 	.submit{
 		height: 90upx;
 		line-height: 90upx;

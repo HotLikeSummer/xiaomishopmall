@@ -47,7 +47,7 @@
 		height: 20upx;
 		background-color: #F5F5F5;
 	}
-
+/* 发票类型 */
 	.invoice-type,.invoice-title {
 		padding: 20upx;
 	}
@@ -78,6 +78,7 @@
 	.txt {
 		color: #CACACA;
 	}
+	/* 个人姓名 */
 	.name,.content,.phone{
 		height: 90upx;
 		line-height: 90upx;
@@ -86,6 +87,7 @@
 	.name{
 		border-bottom: 2upx solid #EBEDF0;
 	}
+	/* 发票须知 */
 	.information{
 		padding-left: 20upx;
 		background-color: #EEEEEE;

@@ -1,5 +1,6 @@
 <template>
-	<view></view>
+	<!-- 地址列表页 -->
+	<view id="addresslist"></view>
 </template>
 <script>
 	export default{
@@ -9,6 +10,7 @@
 			}
 		},
 		onNavigationBarButtonTap(){
+			//跳转到编辑地址
 			uni.navigateTo({
 				url:"edit-address"
 			})

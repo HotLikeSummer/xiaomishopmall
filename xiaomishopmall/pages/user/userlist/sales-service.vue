@@ -1,11 +1,14 @@
 <template>
+	<!-- 售后服务页 -->
 	<view id="salesService">
+		<!-- 顶部导航 -->
 		<view class="tag">
 			<view class="apply" :class="current==0?'action':''" @click="onClickItem(0)">售后申请</view>
 			<view class="follow-up" :class="current==1?'action':''" @click="onClickItem(1)">进度查询</view>
 		</view>
 		<view v-show="current==0">
 		<view class="line"></view>
+		<!-- 设备号申请 -->
 		<view class="device number">
 			<text>设备号申请</text>
 			<text class="iconfont icon-gantan"></text>
@@ -20,7 +23,9 @@
 			</view>
 		</view>
 		<view class="line"></view>
+		<!-- 时间 -->
 		<view class="time">2018-09-25 11:34</view>
+		<!-- 售后商品列表 -->
 		<view class="uni-list">
 			<view class="uni-list-cell" v-for="(item,index) in list" :key="index">
 				<view class="uni-list-cell-navigate">
@@ -31,6 +36,7 @@
 			</view>
 		</view>
 		</view>
+		<!-- 进度 -->
 		<view class="inquire" v-show="current==1"><text>无进度</text></view>
 	</view>
 </template>
@@ -38,16 +44,12 @@
 	export default{
 		data() {
 			return {
-				current: 0,
-				activeColor: '#FEAB88',
-				styleType: 'text',
-				styleIndex: 0,
-				colorIndex: 0,
+				current: 0,//下标
 				list:[{image:"/static/images/demo/demo1.jpg",title:"小米8"},{image:"/static/images/demo/demo1.jpg",title:"小米8"}]
 			}
 		},
 		methods: {
-			onClickItem(index) {
+			onClickItem(index) {//点击改变下标
 				if (this.current !== index) {
 					this.current = index;
 				}
@@ -72,6 +74,7 @@
 		width: 100%;
 		height: 20upx;
 	}
+	/* 顶部导航 */
 	.tag{
 		width:100%;
 		height:100upx;
@@ -88,6 +91,7 @@
 		border-bottom: 1upx solid #FF6B01;
 		color: #FF6B01;
 	}
+	/* 设备号申请 */
 	.device,.time{
 		height:70upx;
 		line-height:70upx;
@@ -132,6 +136,7 @@
 		padding-left: 30upx;
 		color:#D1D1D1;
 	}
+	/* 售后商品列表 */
 	.uni-list-cell-navigate image{
 		width: 150upx;
 		height: 150upx;

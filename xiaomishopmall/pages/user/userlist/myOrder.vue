@@ -1,5 +1,7 @@
 <template>
+	<!-- 我的订单页面 -->
 	<view id="myOrder">
+		<!-- 顶部导航 -->
 		<view class="nav">
 			<view id="tab-bar" class="uni-swiper-tab">
 				<view v-for="(tab,index) in tabBars" :key="tab.id" :class="['swiper-tab-list',tabIndex==index ? 'active' : '']" :id="tab.id"
@@ -10,8 +12,9 @@
 		<!-- <evaluate></evaluate>
 		<payment></payment>
 		<takeGoods></takeGoods> -->
+		<!-- 视图切换 订单列表-->
 		<swiper :duration="1000" class="swiper" :current="tabIndex" @change="changeTab">
-			<swiper-item v-for="(item,index) in orderitems">
+			<swiper-item v-for="(item,index) in orderitems" :key="index">
 				<view class="main" style="display:flex">
 					<view class="nothing">
 						<image :src="item.img" mode=""></image>
@@ -20,6 +23,7 @@
 				</view>
 			</swiper-item>
 		</swiper>
+		<!-- 猜你喜欢 -->
 		<view class="like">
 			<view class="title">猜你喜欢</view>
 			<view class="real-time">
@@ -28,9 +32,10 @@
 				<view class="line1"></view>
 			</view>
 		</view>
+		<!-- 底部商品推荐 -->
 		<view>
 			<ul class="pros">
-				<li v-for="(item,index) in likeList" style="width:50%" class="likelist">
+				<li v-for="(item,index) in likeList" style="width:50%" class="likelist" :key="index">
 					<view class="proimg">
 						<image :src="item.image" mode=""></image>
 					</view>
@@ -46,7 +51,7 @@
 	</view>
 </template>
 <script>
-	import all from '@/components/user/all.vue';
+	import all from '@/components/user/all.vue';//引入全部订列表
 	import evaluate from '@/components/user/evaluate.vue';
 	import payment from '@/components/user/payment.vue';
 	import takeGoods from '@/components/user/take-goods.vue';
@@ -59,8 +64,8 @@
 		},
 		data() {
 			return {
-				tabIndex: 0,
-				tabBars: [{
+				tabIndex: 0,//导航订单列表下标
+				tabBars: [{//导航信息
 					name: '全部',
 					id: 'all'
 				}, {
@@ -73,7 +78,7 @@
 					name: '待评价',
 					id: 'pingjia'
 				}],
-				likeList: [{
+				likeList: [{//推荐信息
 					image: "/static/images/demo/demo1.jpg",
 					title: "米家空调",
 					detail:"1.5匹支流变频",
@@ -108,14 +113,17 @@
 			}
 		},
 		methods: {
+			// 改变下标切换导航样式、订单列表
 			tapTab(index) {
 				this.tabIndex=index
 			},
+			// 监听订单列表下标变化改变导航样式
 			changeTab(e){
 				let index=e.detail.current;
 				this.tabIndex = index;
 			}
 		},
+		// 页面加载时改变下标切换到对应列表
 		onLoad(e) {
 			console.log(e)
 			this.tabIndex=e.index+1;
@@ -130,6 +138,7 @@
 	li{
 		list-style: none;
 	}
+	/* 顶部导航 */
 	.uni-swiper-tab{
 		border: none;
 		/* height: 84upx; */
@@ -140,10 +149,34 @@
 		color: #C7C7C7;
 		height: 74upx;
 	}
+	/* 样式改变 */
 	.active{
 		color: #FF6B01;
 		border-bottom:1upx solid #FF6B01;
 	}
+	/* 订单列表切换 */
+	.swiper {
+		height: 420upx;
+	}
+	.main {
+		width: 100%;
+		height: 420upx;
+		background-color: #F5F5F5;
+	}
+	.nothing {
+		margin: auto;
+		text-align: center;
+	}
+	
+	.nothing image {
+		width: 240upx;
+		height: 200upx;
+	}
+	
+	.txt {
+		color: #D6D6D6;
+	}
+	/* 猜你喜欢 */
 	.like {
 		background-color: #F5F5F5;
 		width: 100%;
@@ -172,6 +205,7 @@
 		width:32%;
 		margin-top:25upx;
 	}
+	/* 底部商品推荐 */
 	.proimg{
 		width:100%;
 		height:300upx;
@@ -191,27 +225,6 @@
 		height:50upx;
 		line-height:50upx;
 		margin-left:20upx;
-	}
-	.swiper {
-		height: 420upx;
-	}
-	.main {
-		width: 100%;
-		height: 420upx;
-		background-color: #F5F5F5;
-	}
-	.nothing {
-		margin: auto;
-		text-align: center;
-	}
-	
-	.nothing image {
-		width: 240upx;
-		height: 200upx;
-	}
-	
-	.txt {
-		color: #D6D6D6;
 	}
 	.detail{
 		color:#A7ADB2;

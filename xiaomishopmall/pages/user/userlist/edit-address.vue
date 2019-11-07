@@ -1,4 +1,5 @@
 <template>
+	<!-- 编辑地址页 -->
 	<view id="editAddress">
 		<view class="consignee">
 			<text>收货人：</text>
@@ -52,7 +53,7 @@
 		background-color: #EEEEEE;
 		font-size: 60upx;
 	}
-
+	/* 输入信息 */
 	.consignee,
 	.phone,
 	.area,
@@ -79,6 +80,7 @@
 		float: right;
 		margin-right: 17upx;
 	}
+	/* 保存按钮 */
 	.save text{
 		display: block;
 		margin: 30upx;
