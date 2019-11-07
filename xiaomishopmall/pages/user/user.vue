@@ -1,7 +1,9 @@
 <template>
+	<!-- 个人主页 -->
 	<view id="user">
 		<view class="top">
 			<view><text class="iconfont icon-xiaoxi"></text></view>
+			<!-- 顶部背景图 -->
 			<view>
 				<image :src="nameImg" mode=""></image>
 			</view>
@@ -17,6 +19,7 @@
 					<text class="iconfont icon-you"></text>
 				</view>
 			</view>
+			<!-- 我的订单部分 -->
 			<view class="operate">
 				<ul class="waite">
 					<li v-for="(item,index) in orders" class="waite-list" @tap="topage(item.url,index)">
@@ -27,9 +30,11 @@
 			</view>
 		</view>
 		<view class="line"></view>
+		<!-- 广告 -->
 		<view class="advertising">
 			<image :src="atImg" mode="widthFix"></image>
 		</view>
+		<!-- 服务功能 -->
 		<view class="service">
 			<ul class="serviItem">
 				<li class="servilist" v-for="(item,index) in list" @tap="topage(item.url,index)">
@@ -46,8 +51,8 @@
 	export default {
 		data() {
 			return {
-				nameImg: "/static/images/demo/demo6.jpg",
-				orders: [{
+				nameImg: "/static/images/demo/demo6.jpg",//背景图
+				orders: [{//订单导航信息
 						icons: "iconfont icon-wallet_icon",
 						txt: "待付款",
 						url:"userlist/myOrder"
@@ -66,7 +71,7 @@
 						url:"userlist/sales-service"
 					}
 				],
-				atImg: "/static/images/demo/demo4.jpg",
+				atImg: "/static/images/demo/demo4.jpg",//广告
 				list: [{
 					content: "小米会员",
 					img: "iconfont icon-VIP"
@@ -90,6 +95,7 @@
 			}
 		},
 		methods: {
+			//跳转到我的订单页
 			topage(url,index) {
 				uni.navigateTo({
 					url: url+"?index="+index+""
@@ -122,7 +128,7 @@
 		background-size: cover;
 		position: relative;
 	}
-
+	/* 头部 */
 	.top image {
 		width: 180upx;
 		height: 180upx;
@@ -157,7 +163,7 @@
 	.icon-huangguan {
 		margin-right: 15upx;
 	}
-
+/* 我的订单部分 */
 	.order-tit {
 		height: 100upx;
 		line-height: 100upx;
@@ -197,11 +203,12 @@
 		height: 20upx;
 		background-color: #F5F5F5;
 	}
-
+/* 广告 */
 	.advertising image {
 		width: 100%;
 		height: 300upx;
 	}
+	/* 服务功能 */
 	.servilist{
 		padding: 0px 30upx;
 		height: 80upx;
