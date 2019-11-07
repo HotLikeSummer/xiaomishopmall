@@ -1,10 +1,10 @@
 <template>
 	<view class="content">
 		<!-- 商品列表组件 -->
-		<goodslist :editing="editing"></goodslist>
+		<goodslist :editing="editing" :allchecked="allchecked"></goodslist>
 		<view class="goods-carts">
 			<!-- 购物车导航组件 -->
-			<goodsnav />
+			<goodsnav @allcheck="allcheck"/>
 		</view>
 		<!-- 推荐部分 -->
 		<view class="recommend">
@@ -45,7 +45,8 @@
 				name: "我的购物车",
 				productList: [],//数据列表
 				renderImage: false,
-				editing: false //编辑状态
+				editing: false, //编辑状态
+				allchecked:false//全选状态
 			}
 		},
 
@@ -106,6 +107,9 @@
 				data.forEach(item => { //加载数据
 					this.productList.push(item);
 				});
+			},
+			allcheck(val){
+				this.allchecked=val//接收全选状态
 			}
 		},
 		onLoad() {

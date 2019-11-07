@@ -4,7 +4,10 @@
 		<view class="uni-tab__cart-box flex">
 			<view class="flex uni-tab__cart-sub-box">
 				<!-- 全选图标 -->
-				<view class="icon" @click="allCheck">
+				<view class='icon'>
+					<view class="checkIcon" :class="allChecked?'':'nocheck'"  @click="allCheck">
+						<text class="iconfont checked" v-if="allChecked">&#xe623;</text>
+					</view>
 				</view>
 				<view class="total">
 					<text>合计:</text>
@@ -44,8 +47,8 @@
 		},
 		methods: {
 			allCheck(){//全选
-				this.allChecked=!this.allChecked;
-				console.log(this.allChecked)
+				this.allChecked=!this.allChecked;//更改全选选中状态
+				this.$emit("allcheck",this.allChecked)//将全选状态传输给其他组件
 			},
 			buttonClick(){//计算总价
 				console.log(this.cost)
@@ -93,14 +96,22 @@
 		height: 100rpx;
 		width: 130rpx;
 		box-sizing: border-box;
-		background: url(https://cdn.it120.cc/images/weappshop/gou.png) no-repeat 50% 50%;
-		background-size: 40rpx auto;
+		display:flex;
 	}
 
-	.icon-active {
-		height: 100rpx;
-		width: 130rpx;
-		background-image: url(https://cdn.it120.cc/images/weappshop/gou-red.png) no-repeat 50% 50%;
+	.checkIcon{
+		width: 40rpx;
+		height: 40rpx;
+		line-height: 40rpx;
+		border-radius: 50%;
+		margin: auto;
+	}
+	.nocheck{
+		border: 1rpx solid #CCCCCC;
+	}
+	.checked{
+		color: #FD6801;
+		font-size: 47rpx;
 	}
 
 	.total {

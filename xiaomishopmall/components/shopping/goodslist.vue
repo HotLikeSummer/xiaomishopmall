@@ -49,12 +49,12 @@
 	import amount from "@/components/shopping/amount.vue"
 	import shopcartCard from "@/components/shopcartCard/shopcartCard.vue"
 	export default {
-		props:['editing'],//接收编辑状态信息
+		props:['editing','allchecked'],//接收编辑状态信息，全选状态信息
 		data() {
 			return {
 				phoneHeight: 0,
-				sendData:[],
-				goodInfo:[{
+				sendData:[],//组件传输数据
+				goodInfo:[{//商品信息
 					name:"华为matax210",
 					kind:"火焰红 64G 标配",
 					price:3541,
@@ -93,19 +93,22 @@
 		},
 		methods: {
 			toggleCard(i) {//传输商品信息
-				this.togglepop=!this.togglepop
-				this.sendData=[i,this.togglepop]
+				this.togglepop=!this.togglepop//更改模态框弹出状态
+				this.sendData=[i,this.togglepop]//传输商品信息和弹出状态
 			},
 			change(val){
 				console.log(val)
 			},
-			check(obj){
+			check(obj){//更改商品选中状态
 				obj.checked=!obj.checked;
 			}
 		},
 		watch:{
 			editing(){//监听编辑状态
 				console.log(this.editing)
+			},
+			allchecked(){//监听全选状态
+				this.goodInfo.forEach(item=>item.checked=this.allchecked)//令所有商品的选中状态与全选状态一直
 			}
 		}
 	}
