@@ -93,7 +93,7 @@ export default {
 		clearSearch() {
 			uni.showModal({
 				title: '提示',
-				content: '是否清理全部搜索历史？该操作不可逆。',
+				content: '确定要清除全部搜索历史吗？',
 				success: res => {
 					if (res.confirm) {
 						this.historyList = util.removeHistory();
