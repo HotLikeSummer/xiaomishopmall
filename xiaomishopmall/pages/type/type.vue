@@ -18,7 +18,6 @@
 				</scroll-view>
 			</view>
 		</view>
-		<navigator url="../confimindent/confimindent">点我去订单页</navigator>
 	</view>
 	
 </template>
@@ -45,11 +44,10 @@
 				this.categoryActive = index;
 				this.subCategoryList = categroy.subCategoryList;
 				this.scrollTop = -this.scrollHeight * index;
-				// console.log(this.scrollTop)
 			},
 			//获取类别
 			getCategory() {
-				for (var i = 1; i < 21; i++) {
+				for (var i = 1; i < 11; i++) {
 					var subList = [];//定义一个数组用来接收子列表的数据
 					for (var j = 1; j < 31; j++) {
 						subList.push({
@@ -76,7 +74,6 @@
 			this.height = uni.getSystemInfoSync().windowHeight;
 		},
 		onNavigationBarSearchInputClicked(e) {
-			console.log('事件执行了')
 			uni.navigateTo({
 				url: '/pages/type/detail/detail'
 			});

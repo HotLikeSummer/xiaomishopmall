@@ -127,7 +127,7 @@
 		onNavigationBarButtonTap(e) { //点击编辑触发方法
 			this.editing = !this.editing //改变编辑状态
 			let webView = this.$mp.page.$getAppWebview();
-			if (e.text == '编辑') {
+			if (this.editing) {
 				webView.setTitleNViewButtonStyle(0, {
 					text: '完成',
 				});
@@ -136,6 +136,7 @@
 					text: '编辑',
 				});
 			}
+			console.log(e.text)
 		}
 	}
 </script>

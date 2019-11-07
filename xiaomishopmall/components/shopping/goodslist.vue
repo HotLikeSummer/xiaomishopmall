@@ -4,7 +4,7 @@
 			<!-- 购物车产品 -->
 			<view class='car-item'>
 				<!--列表项-->
-				<view class='car-prod' v-for="(item,index) in 6" :key='index'>
+				<view class='car-prod' v-for="(item,index) in goodInfo" :key='index'>
 					<!-- 商品信息-->
 					<view class='goods-info'>
 						<view class='goods-info-inner'>
@@ -13,22 +13,17 @@
 								<image src="/static/images/demo/list/1.jpg"></image>
 							</view>
 							<view class='good-info'>
-								<view class='name'>华为matax210</view>
-								<view class='kind' v-if="!editing">
+								<view class='name'>{{item.name}}</view>
+								<view class='kind' @click="toggleCard(item)" :class="editing?'editing':''">
 									<view>
-										火焰红 64G 标配1
+										{{item.kind}}
 									</view>
-								</view>
-								<view class='kind editing'  @click="togglePopup(item)" v-if="editing">
-									<view>
-										火焰红 64G 标配1
-									</view>
-									<view>
+									<view v-if="editing">
 										<span class="iconfont">&#xe65d;</span>
 									</view>
 								</view>
 								<view class="infobox">
-									<view class='price'>￥3541</view>
+									<view class='price'>￥{{item.price}}</view>
 									<!-- :value="numberValue" -->
 									<amount class="numbers" @change="change"></amount>
 								</view>
@@ -55,7 +50,32 @@
 		data() {
 			return {
 				phoneHeight: 0,
-				sendData:[]
+				sendData:[],
+				goodInfo:[{
+					name:"华为matax210",
+					kind:"火焰红 64G 标配1",
+					price:3541
+				},{
+					name:"华为matax210",
+					kind:"火焰红 64G 标配1",
+					price:3541
+				},{
+					name:"华为matax210",
+					kind:"火焰红 64G 标配1",
+					price:3541
+				},{
+					name:"华为matax210",
+					kind:"火焰红 64G 标配1",
+					price:3541
+				},{
+					name:"华为matax210",
+					kind:"火焰红 64G 标配1",
+					price:3541
+				},{
+					name:"华为matax210",
+					kind:"火焰红 64G 标配1",
+					price:3541
+				}]
 			}
 		},
 		components: {
@@ -63,8 +83,9 @@
 			shopcartCard
 		},
 		methods: {
-			togglePopup(obj) {//传输商品信息
-				this.sendData=[obj]
+			toggleCard(i) {//传输商品信息
+				this.togglepop=!this.togglepop
+				this.sendData=[i,this.togglepop]
 			},
 			change(val){
 				console.log(val)

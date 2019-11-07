@@ -20,7 +20,7 @@
 				</view>
 				<view class="shopping-bottom">
 					<view class="shop-list-box-title">{{item.title}}</view>
-					<text>{{item.classify}}</text>
+					<text class="classify-text">{{item.classify}}</text>
 					<view class="shop-list-box-price">{{item.price}}</view>
 					<view>{{item.comment}}</view>
 				</view>
@@ -145,9 +145,9 @@
 			},
 			// 跳转到详情页面
 			Particulars(e) {
-				var nus = JSON.stringify(e);
+				// var nus = JSON.stringify(e);
 				uni.navigateTo({
-					url: '/pages/type/particulars/particulars?id=' + nus,
+					url: '/pages/type/particulars/particulars',
 				});
 			}
 		}
@@ -184,6 +184,7 @@
 	}
 
 	.shop-list-box-pic {
+		width: 35%;
 		margin: 4rpx 0rpx;
 	}
 
@@ -194,12 +195,20 @@
 
 	.shop-list-box-title {
 		font-weight: 800;
-		font-size: 36rpx;
-		height: 50rpx;
+		font-size: 40rpx;
+		/* height: 50rpx; */
 	}
-
+	.classify-text{
+		height: 80rpx;
+		overflow: hidden;
+		text-overflow:ellipsis;
+		/* white-space: nowrap; */
+		font-size: 20rpx;
+	}
 	.shopping-bottom {
+		width: 65%;
 		height: 240rpx;
+		padding-left: 20rpx;
 	}
 
 	.shop-list-box-price {
