@@ -1,19 +1,14 @@
 <template>
 	<view id="user">
-		<!-- 头部背景图片 -->
-		<view class="top" :style="{backgroundImage: 'url('+topImg+')'}">
-			<!-- 消息 -->
+		<view class="top">
 			<view><text class="iconfont icon-xiaoxi"></text></view>
-			<!-- 昵称 -->
 			<view>
 				<image :src="nameImg" mode=""></image>
 			</view>
-			<!-- 会员积分 -->
 			<view class="member">
 				<text class="iconfont icon-huangguan"></text>会员积分 1.99
 			</view>
 		</view>
-		<!-- 我的订单 -->
 		<view class="myOrder">
 			<view class="order-tit" @tap="toOrder">
 				<text class="lt-order">我的订单</text>
@@ -24,7 +19,7 @@
 			</view>
 			<view class="operate">
 				<ul class="waite">
-					<li v-for="(item,index) in orders" class="waite-list" @tap="topage(item.url,index)" :key="index">
+					<li v-for="(item,index) in orders" class="waite-list" @tap="topage(item.url,index)">
 						<text :class="item.icons"></text>
 						<view class="">{{item.txt}}</view>
 					</li>
@@ -32,14 +27,12 @@
 			</view>
 		</view>
 		<view class="line"></view>
-		<!-- 广告 -->
 		<view class="advertising">
 			<image :src="atImg" mode="widthFix"></image>
 		</view>
-		<!-- 功能服务扩展列表 -->
 		<view class="service">
 			<ul class="serviItem">
-				<li class="servilist" v-for="(item,index) in list" @tap="topage(item.url,index)" :key="index">
+				<li class="servilist" v-for="(item,index) in list" @tap="topage(item.url,index)">
 					<text :class="item.img"></text>
 					<text class="content">{{item.content}}</text>
 					<text class="iconfont icon-you rightTo"></text>
@@ -53,9 +46,8 @@
 	export default {
 		data() {
 			return {
-				nameImg: "/static/images/demo/demo6.jpg",//昵称图
-				topImg:"/static/images/bg.jpg",//头部背景图
-				orders: [{//我的订单
+				nameImg: "/static/images/demo/demo6.jpg",
+				orders: [{
 						icons: "iconfont icon-wallet_icon",
 						txt: "待付款",
 						url:"userlist/myOrder"
@@ -74,8 +66,8 @@
 						url:"userlist/sales-service"
 					}
 				],
-				atImg: "/static/images/demo/demo4.jpg",//广告图
-				list: [{//服务功能列表
+				atImg: "/static/images/demo/demo4.jpg",
+				list: [{
 					content: "小米会员",
 					img: "iconfont icon-VIP"
 				},{
@@ -98,13 +90,11 @@
 			}
 		},
 		methods: {
-			//跳转到我的订单页面
 			topage(url,index) {
 				uni.navigateTo({
 					url: url+"?index="+index+""
 				})
 			},
-			//跳转到我的订单页面
 			toOrder(){
 				uni.navigateTo({
 					url: "userlist/myOrder"
@@ -123,10 +113,11 @@
 	li {
 		list-style: none;
 	}
-	/* 头部 */
+
 	.top {
 		width: 100%;
 		height: 400upx;
+		background-image: url("/static/images/bg.jpg");
 		background-repeat: no-repeat;
 		background-size: cover;
 		position: relative;
@@ -166,7 +157,7 @@
 	.icon-huangguan {
 		margin-right: 15upx;
 	}
-	/* 我的订单部分 */
+
 	.order-tit {
 		height: 100upx;
 		line-height: 100upx;
@@ -206,12 +197,11 @@
 		height: 20upx;
 		background-color: #F5F5F5;
 	}
-	/* 广告 */
+
 	.advertising image {
 		width: 100%;
 		height: 300upx;
 	}
-	/* 服务功能 */
 	.servilist{
 		padding: 0px 30upx;
 		height: 80upx;

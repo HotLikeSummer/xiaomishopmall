@@ -1,11 +1,9 @@
 <template>
 	<view id="aboutMall">
-		<!-- 顶部logo -->
 		<view class="versions">
 			<!-- <image src="" mode=""></image> -->
 			<text>小米商城 4.5.3.0529.r1</text>
 		</view>
-		<!-- 中间功能内容信息 -->
 		<view class="about-item">
 			<view class="uni-list">
 				<view class="uni-list-cell" v-for="(item,index) in list" :key="index">
@@ -15,7 +13,6 @@
 				</view>
 			</view>
 		</view>
-		<!-- 底部 -->
 		<view class="footer">
 			<text>探索黑科技，小米为发烧而生</text>
 		</view>
@@ -24,7 +21,7 @@
 <script>
 	export default{
 		data() {
-			return {//信息列表
+			return {
 				list:["版本更新","了解小米","官方微博","廉洁小米","APP分享","授权直供店","清除缓存"]
 			}
 		},
@@ -35,7 +32,7 @@
 		margin: 0upx;
 		padding: 0upx;
 	}
-	/* 整体页面	 */
+		
 	#aboutMall {
 		position: fixed; 
 		width: 100%;
@@ -43,7 +40,6 @@
 		background-color: #EEEEEE;
 		font-size: 60upx;
 	}
-	/* 头部 */
 	.versions{
 		height:400upx;
 		text-align:center;
@@ -53,7 +49,6 @@
 		line-height:105upx;
 		text-indent:1em;
 	}
-	/* 底部 */
 	.footer{
 		width:100%;
 		height:150upx;
