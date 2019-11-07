@@ -1,4 +1,5 @@
 <template>
+	<!-- 商品详情页 -->
 	<view id="particulars">
 		<!-- 顶部图片 -->
 		<view class="top-imgs">
@@ -115,11 +116,11 @@
 				<view class="iconfont icon-xihuan"></view>
 				<text>收藏</text>
 			</view>
-			<view class="xihuan">
+			<view class="xihuan" @click="Toshop">
 				<view class="iconfont icon-gouwuche1"></view>
 				<text>购物车</text>
 			</view>
-			<view class="gouwuche">加入购物车</view>
+			<view class="gouwuche" @click="shopCart(1)">加入购物车</view>
 		</view>
 		<!-- 详服务说明详情页固定定位 -->
 		<view v-show="showLeft" class="animat">
@@ -264,6 +265,11 @@
 			// 收货说明隐藏
 			fresh(){
 				this.showRigth = false;
+			},
+			Toshop(){
+				uni.switchTab({
+					url:"/pages/shopcar/shopcar"
+				})
 			}
 		},
 		onLoad(options) {

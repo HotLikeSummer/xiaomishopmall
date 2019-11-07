@@ -14,17 +14,18 @@
 		</view>
 		<!-- 商品图文列表 -->
 		<view class="shop-list-box">
-			<view v-for="(item,index) in picTextList" class="picTextLists" :key="index" @click="Particulars(item)">
+			<view v-for="(item,index) in picTextList" class="picTextLists" :key="index" @click="Particulars(index)">
 				<view class="shop-list-box-pic">
-					<image :src="item.pic"></image>
+					<image :src="item.cover"></image>
 				</view>
 				<view class="shopping-bottom">
 					<view class="shop-list-box-title">{{item.title}}</view>
-					<text class="classify-text">{{item.classify}}</text>
-					<view class="shop-list-box-price">{{item.price}}</view>
-					<view>{{item.comment}}</view>
+					<view class="classify-text">{{item.desc}}</view>
+					<view class="shop-list-box-price">￥{{item.pprice}}</view>
+					<view style="color: #8C949B;">1348 条评论 98%满意度</view>
 				</view>
 			</view>
+			<!-- 引入抽屉组件 -->
 			<uni-drawer :visible="showRigth" mode="right" @close="closeDrawer('right')">
 				<!-- 固定定位 -->
 				<view class="screen">
@@ -60,37 +61,7 @@
 			return {
 				SearchReset: ["重置", "确定"],
 				navtopList: ["综合", "销量", "价格", "筛选"],
-				picTextList: [{
-					pic: "/static/images/demo/list/1.jpg",
-					title: "小米MIX3 6GB+128GB",
-					classify: "磁动力全面滑动屏/前后期间AI双摄/四曲面彩色陶瓷机身/高校10w无线充电",
-					price: "￥3299",
-					comment: "1348条评论 98%满意"
-				}, {
-					pic: "/static/images/demo/list/1.jpg",
-					title: "小米MIX3 6GB+128GB",
-					classify: "磁动力全面滑动屏/前后期间AI双摄/四曲面彩色陶瓷机身/高校10w无线充电",
-					price: "￥3299",
-					comment: "1348条评论 98%满意"
-				}, {
-					pic: "/static/images/demo/list/1.jpg",
-					title: "小米MIX3 6GB+128GB",
-					classify: "磁动力全面滑动屏/前后期间AI双摄/四曲面彩色陶瓷机身/高校10w无线充电",
-					price: "￥3299",
-					comment: "1348条评论 98%满意"
-				}, {
-					pic: "/static/images/demo/list/1.jpg",
-					title: "小米MIX3 6GB+128GB",
-					classify: "磁动力全面滑动屏/前后期间AI双摄/四曲面彩色陶瓷机身/高校10w无线充电",
-					price: "￥3299",
-					comment: "1348条评论 98%满意"
-				}, {
-					pic: "/static/images/demo/list/1.jpg",
-					title: "小米MIX3 6GB+128GB",
-					classify: "磁动力全面滑动屏/前后期间AI双摄/四曲面彩色陶瓷机身/高校10w无线充电",
-					price: "￥3299",
-					comment: "1348条评论 98%满意"
-				}],
+				picTextList: [],//接收数据
 				Btnone: ["促销", "分期", "仅看有货"],
 				Btntow: ["耳机", "户外", "配件"],
 				Num: 0, //服务按钮
@@ -102,11 +73,11 @@
 			}
 		},
 		methods: {
-			// 重置及确定按钮
+			// 重置及确定按钮功能
 			SearchResets(index) {
 				let that = this;
 				that.Reset = index;
-
+				//当index等于0表示重置按钮，否则是确定按钮
 				if (index == 0) {
 					that.Num = 0;
 					that.Confirm = 0;
@@ -126,10 +97,11 @@
 			},
 			// 组件关闭时触发的事件
 			closeDrawer(e) {
-				if (e === 'left') {
-					this.showLeft = false
-				} else {
+				if (e === 'right') {
 					this.showRigth = false
+					
+				} else {
+					this.showLeft = false
 				}
 			},
 			// 点击筛选时显示
@@ -145,11 +117,21 @@
 			},
 			// 跳转到详情页面
 			Particulars(e) {
-				// var nus = JSON.stringify(e);
 				uni.navigateTo({
-					url: '/pages/type/particulars/particulars',
+					url: '/pages/type/particulars/particulars?id='+e,
 				});
+			},
+			// 获取接口数据
+			async shopListShow(){
+				let [error,res] =await uni.request({
+					url: 'http://ceshi3.dishait.cn/api/index_category/data',
+				});
+				let that =this;
+				that.picTextList=res.data.data.data[4].data;
 			}
+		},
+		created() {
+			this.shopListShow();
 		}
 	}
 </script>
@@ -158,6 +140,8 @@
 		margin: 0rpx;
 		padding: 0rpx;
 		color: #555555;
+		width: 100%;
+		height: 100%;
 	}
 
 	.nav {
@@ -185,7 +169,7 @@
 
 	.shop-list-box-pic {
 		width: 35%;
-		margin: 4rpx 0rpx;
+		margin: 4rpx 10rpx;
 	}
 
 	.shop-list-box-pic image {
@@ -195,25 +179,29 @@
 
 	.shop-list-box-title {
 		font-weight: 800;
-		font-size: 40rpx;
-		/* height: 50rpx; */
+		font-size: 38rpx;
 	}
 	.classify-text{
-		height: 80rpx;
+		width: 100%;
+		height: 108rpx;
+		line-height: 1.4 !important;
+		padding: 0;
+		margin: 0;
+		color: #8C949B;
 		overflow: hidden;
 		text-overflow:ellipsis;
-		/* white-space: nowrap; */
-		font-size: 20rpx;
+		font-size: 26rpx;
 	}
 	.shopping-bottom {
 		width: 65%;
 		height: 240rpx;
-		padding-left: 20rpx;
+		padding-left: 10rpx;
 	}
 
 	.shop-list-box-price {
 		font-weight: 800;
 		font-size: 40rpx;
+		line-height: 1.6 !important;
 		color: #FD6801;
 	}
 
