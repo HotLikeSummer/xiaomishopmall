@@ -53,7 +53,7 @@
 	export default {
 		data() {
 			return {
-				topImg:"/static/images/bg.jpg"
+				topImg:"/static/images/bg.jpg",
 				nameImg: "/static/images/demo/demo6.jpg",//背景图
 				orders: [{//订单导航信息
 						icons: "iconfont icon-wallet_icon",
