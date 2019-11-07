@@ -8,7 +8,7 @@
 				 :data-current="index" @click="tapTab(index)">{{tab.name}}</view>
 			</view>
 		</view>
-		<!-- <all></all> -->
+		<all></all>
 		<!-- <evaluate></evaluate>
 		<payment></payment>
 		<takeGoods></takeGoods> -->
