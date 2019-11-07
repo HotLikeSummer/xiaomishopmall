@@ -1,5 +1,4 @@
 <template>
-	<!-- 我的反馈页面 -->
 	<view id="mySuggestion">
 		<view class="nothing">您还没有提交任何反馈</view>
 	</view>

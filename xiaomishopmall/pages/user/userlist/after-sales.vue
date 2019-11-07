@@ -1,13 +1,10 @@
 <template>
-	<!-- 申请售后页 -->
 	<view id="afterSales">
-		<!-- 订单信息 -->
 		<view class="information">
 			<view><text>订单号:5180925177903542</text></view>
 			<view><text>订单时间:2018年09月25日 11:34</text></view>
 		</view>
 		<view class="line"></view>
-		<!-- 申请售后商品列表 -->
 		<view class="uni-list">
 			<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(value,key) in list" :key="key" @tap="topage">
 				<view class="uni-list-cell-navigate uni-navigate-right uni-media-list ">
@@ -28,7 +25,7 @@
 		data() {
 			return {
 				showImg: false,
-				list: [{//商品信息
+				list: [{
 						title: "米加金属签字笔 金色",
 						content: "能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？",
 						img: "/static/images/demo/demo1.jpg"
@@ -46,13 +43,13 @@
 				]
 			}
 		},
-		onLoad() {//延时加载图片
+		onLoad() {
 			setTimeout(() => {
 				this.showImg = true;
 			}, 400)
 		},
 		methods: {
-			topage() {//跳转到售后表单
+			topage() {
 				uni.navigateTo({
 					url:"sales-form"
 				})
@@ -68,7 +65,6 @@
 		background-color: #EEEEEE;
 		font-size: 60upx;
 	}
-	/* 信息 */
 	.information{
 		height: 120upx;
 		width: 100%;

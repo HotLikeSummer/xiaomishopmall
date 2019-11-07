@@ -1,5 +1,4 @@
 <template>
-	<!-- 设置页 -->
 	<view id="userlist">
 		<view class="iTunes">账号管理</view>
 		<view class="iTunes-list personal" @tap="editprofile">
@@ -9,16 +8,14 @@
 			收货地址<text class="iconfont icon-you"></text>
 		</view>
 		<view class="about">关于</view>
-		<!-- 关于列表 -->
 		<view class="aboutItem">
 			<ul>
-				<li v-for="(item,index) in aboutList" class="about-list" @tap="topage(item.url)" :key="index">
+				<li v-for="(item,index) in aboutList" class="about-list" @tap="topage(item.url)">
 					<text class="abouttxt">{{item.list}}</text>
 					<text class="iconfont icon-you allright"></text>
 				</li>
 			</ul>
 		</view>
-		<!-- 退出登录按钮 -->
 		<view class="quit">
 			<text class="logout">退出登录</text>
 		</view>
@@ -32,13 +29,13 @@
 			}
 		},
 		methods: {
-			editprofile() {//跳到个人资料页面
+			editprofile() {
 				uni.navigateTo({
 					url:"edit-profile"
 				})
 			},
 			addresslist(){
-				uni.navigateTo({//跳到地址列表页面
+				uni.navigateTo({
 					url:"addresslist"
 				})
 			},
@@ -55,7 +52,6 @@
 		margin: 0upx;
 		padding: 0upx;
 	}
-	/* 账号收货地址 */
 	.iTunes,.about{
 		width: 100%;
 		height: 90upx;
@@ -75,7 +71,6 @@
 	.personal{
 		border-bottom: 1px solid #F0F0F0;
 	}
-	/* 关于 */
 	.about-list{
 		border-bottom: 1px solid #F0F0F0;
 	}

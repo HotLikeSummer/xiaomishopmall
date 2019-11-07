@@ -1,10 +1,9 @@
 <template>
-	<!-- 修改资料页面 -->
 	<view id="editProfile">
 		<view class="box"></view>		
 		<view class="head">
 			<text>头像</text>
-			<image :src="img" mode="widthFix"></image>
+			<image src="../../../static/images/demo/demo6.jpg" mode="widthFix"></image>
 		</view>
 		<view class="name">
 			<view class="content" style="margin-left: 30upx;">姓名</view>
@@ -15,7 +14,7 @@
 		</view>
 		<view>
 			<ul class="edit-item">
-				<li class="edit-list" v-for="(item,index) in list" @tap="topage(item.url)" :key="index">
+				<li class="edit-list" v-for="(item,index) in list" @tap="topage(item.url)">
 					<text>{{item.txt}}</text>
 					<text class="iconfont icon-you"></text>
 				</li>
@@ -27,7 +26,6 @@
 	export default {
 		data() {
 			return {
-				img:"/static/images/demo/demo6.jpg",
 				list:[{txt:"性别",url:""},{txt:"生日",url:""},{txt:"修改密码",url:"changePsd"},{txt:"密保手机",url:""}]
 			}
 		},
@@ -110,8 +108,6 @@
 		justify-content: space-between;
 		padding: 0upx 30upx;
 		border-bottom: 1upx solid #E0E0E0;
-		height: 120upx;
-		line-height: 120upx;
 	}
 	.edit-list .icon-you{
 		color: #D1D1D1;

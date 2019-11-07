@@ -1,10 +1,8 @@
 <template>
-	<!-- 申请售后表单页 -->
 	<view id="salesForm">
 		<view class="line"></view>
 		<view class="products">
 			<view class="tit" style="border:none">申请售后的产品</view>
-			<!-- 申请售后的产品列表 -->
 			<view class="uni-list">
 				<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(value,key) in list" :key="key">
 					<view class="uni-media-list">
@@ -20,7 +18,6 @@
 			</view>
 		</view>
 		<view class="line"></view>
-		<!-- 服务类型 -->
 		<view class="typeService">
 			<view class="tit">服务类型</view>
 			<view class="service">
@@ -28,15 +25,12 @@
 			</view>
 		</view>
 		<view class="line"></view>
-		<!-- 问题描述 -->
 		<view class="problem">
 			<view class="tit">问题描述</view>
 			<view class="detail">
-				<!-- 文字描述 -->
 				<view class="uni-textarea">
 					<textarea placeholder-style="color:#D1D1D1" placeholder="请详细描述下你遇到的问题吧" />
 				</view>
-				<!-- 上传图片 -->
 				<view class="photograph">
 					<text class="iconfont icon-paizhao"></text>
 					<text>0/200</text>
@@ -51,7 +45,7 @@
 		data() {
 			return {
 				showImg: false,
-				list: [{//商品信息
+				list: [{
 						title: "米加金属签字笔 金色",
 						content: "能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？",
 						img: "/static/images/demo/demo1.jpg"
@@ -59,7 +53,7 @@
 				]
 			}
 		},
-		onLoad() {//延时加载图片
+		onLoad() {
 			setTimeout(() => {
 				this.showImg = true;
 			}, 400)
@@ -78,7 +72,6 @@
 		width: 100%;
 		height: 20upx;
 	}
-	/* 申请售后的产品列表 */
 	.products,.typeService{
 		background-color: white;
 	}
@@ -114,7 +107,6 @@
 		margin-left:20upx;
 		color:#FF6B01;
 	}
-	/* 问题描述 */
 	.problem{
 		background-color: white;
 		height:404upx
@@ -137,7 +129,6 @@
 		font-size: 40upx;
 		color: #D6D6D6;
 	}
-	/* 下一步 */
 	.next{
 		height: 100upx;
 		line-height: 100upx;

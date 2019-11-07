@@ -1,5 +1,4 @@
 <template>
-	<!-- 修改密码页 -->
 	<view id="changePsd">
 		<view class="line"></view>
 		<view class="password">
@@ -49,7 +48,6 @@
 	.line {
 		height: 25upx;
 	}
-	/* 输入 */
 	.password,.newPsd,.affirm{
 		display: flex;
 		justify-content: space-between;
@@ -66,14 +64,12 @@
 		line-height: 80upx;
 		width: 80%;
 	}
-	/* 提示 */
 	.remind{
 		height: 100upx;
 		line-height: 100upx;
 		text-align: center;
 		color: #d6d6d6;
 	}
-	/* 确定按钮 */
 	.confirm{
 		display: block;
 		height: 110upx;
