@@ -10,7 +10,7 @@
 						<view class='goods-info-inner'>
 							<view class='checkbox'>
 								<view class="checkIcon" :class="item.checked?'':'nocheck'" @click="check(item)">
-									<text class="iconfont checked" v-if="item.checked">&#xe6ce;</text>
+									<text class="iconfont checked" v-if="item.checked">&#xe623;</text>
 								</view>
 							</view>
 							<view class='goods-image'>
@@ -57,27 +57,33 @@
 				goodInfo:[{
 					name:"华为matax210",
 					kind:"火焰红 64G 标配",
-					price:3541
+					price:3541,
+					checked:false
 				},{
 					name:"华为matax210",
 					kind:"火焰红 64G 标配",
-					price:3541
+					price:3541,
+					checked:false
 				},{
 					name:"华为matax210",
 					kind:"火焰红 64G 标配",
-					price:3541
+					price:3541,
+					checked:false
 				},{
 					name:"华为matax210",
 					kind:"火焰红 64G 标配",
-					price:3541
+					price:3541,
+					checked:false
 				},{
 					name:"华为matax210",
 					kind:"火焰红 64G 标配",
-					price:3541
+					price:3541,
+					checked:false
 				},{
 					name:"华为matax210",
 					kind:"火焰红 64G 标配",
-					price:3541
+					price:3541,
+					checked:false
 				}]
 			}
 		},
@@ -95,7 +101,6 @@
 			},
 			check(obj){
 				obj.checked=!obj.checked;
-				console.log(obj)
 			}
 		},
 		watch:{

@@ -4,7 +4,7 @@
 		<view class="uni-tab__cart-box flex">
 			<view class="flex uni-tab__cart-sub-box">
 				<!-- 全选图标 -->
-				<view class="icon" @click="allCheck" :class="allChecked?'icon-active':''">
+				<view class="icon" @click="allCheck">
 				</view>
 				<view class="total">
 					<text>合计:</text>

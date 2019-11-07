@@ -126,17 +126,10 @@
 		},
 		onNavigationBarButtonTap(e) { //点击编辑触发方法
 			this.editing = !this.editing //改变编辑状态
-			let webView = this.$mp.page.$getAppWebview();
-			if (this.editing) {
-				webView.setTitleNViewButtonStyle(0, {
-					text: '完成',
-				});
-			} else {
-				webView.setTitleNViewButtonStyle(0, {
-					text: '编辑',
-				});
-			}
-			console.log(e.text)
+			let webView = this.$mp.page.$getAppWebview();//在APP中获取顶部导航栏的信息
+			//使用setTitleNViewButtonStyle方法更改导航栏按钮的属性值
+			//用三目运算符判断editing编辑状态，更改对应的按钮文字
+			webView.setTitleNViewButtonStyle(0,{text: this.editing?'完成':'编辑'})
 		}
 	}
 </script>
@@ -148,6 +141,7 @@
 		position: fixed;
 		width: 100%;
 		bottom: 0px;
+		/* bottom: 49px; */
 		background-color: #FFFFFF;
 		border-bottom: #CCCCCC;
 		z-index: 99;
