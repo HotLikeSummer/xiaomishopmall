@@ -9,32 +9,34 @@
 							<image src="/static/images/demo/cate_01.png"></image>
 						</view>
 						<view class="goods_info">
+							<!-- 已选商品信息 -->
 							<view class="goodsPrice">￥<text>3349</text></view>
-							<view class="selectedInfo">火焰红 64GB 标配</view>
+							<view class="selectedInfo">{{goodsColor[colorIndex]}} {{goodsContain[containIndex]}} {{goodsSuit[suitIndex]}}</view>
 						</view>
 					</view>
 					<view class="midInfo">
 						<view class="clearlyInfo">
 							<view>颜色</view>
+							<!-- 颜色选择 -->
 							<view class="infoChoose">
-								<view class="infoBtn" :class="colorIndex==0?'btn-active':''">火焰红</view>
-								<view class="infoBtn" :class="colorIndex==1?'btn-active':''">炭黑</view>
-								<view class="infoBtn" :class="colorIndex==2?'btn-active':''">冰川蓝</view>
+								<view class="infoBtn" v-for="(item,index) in goodsColor" :key="index" 
+								:class="colorIndex==index?'btn-active':''" @click="colorChange(index)">{{item}}</view>
 							</view>
 						</view>
 						<view class="clearlyInfo">
 							<view>容量</view>
+							<!-- 容量选择 -->
 							<view class="infoChoose">
-								<view class="infoBtn" :class="containIndex==0?'btn-active':''">64GB</view>
-								<view class="infoBtn" :class="containIndex==1?'btn-active':''">128GB</view>
+								<view class="infoBtn" v-for="(item,index) in goodsContain" :key="index"
+								:class="containIndex==index?'btn-active':''" @click="containChange(index)">{{item}}</view>
 							</view>
 						</view>
 						<view class="clearlyInfo">
 							<view>套餐</view>
+							<!-- 套餐选择 -->
 							<view class="infoChoose">
-								<view class="infoBtn" :class="suitIndex==0?'btn-active':''">标配</view>
-								<view class="infoBtn" :class="suitIndex==1?'btn-active':''">套餐一</view>
-								<view class="infoBtn" :class="suitIndex==2?'btn-active':''">套餐二</view>
+								<view class="infoBtn" v-for="(item,index) in goodsSuit" :key="index"
+								:class="suitIndex==index?'btn-active':''" @click="suitChange(index)">{{item}}</view>
 							</view>
 						</view>
 					</view>
@@ -55,10 +57,13 @@
 	export default {
 		data() {
 			return {
-				type: '',
-				colorIndex:0,
-				containIndex:0,
-				suitIndex:0
+				type: '',//弹出框类型
+				colorIndex:0,//商品颜色下标
+				containIndex:0,//商品容量下标
+				suitIndex:0,//商品套餐下标
+				goodsColor:["火焰红","炭黑","冰川蓝"],
+				goodsContain:["64GB","128GB"],
+				goodsSuit:["标配","套餐一","套餐二"]
 			};
 		},
 		components: {
@@ -78,6 +83,15 @@
 			},
 			changed(val){
 				console.log(val)
+			},
+			colorChange(i){
+				this.colorIndex=i;
+			},
+			containChange(i){
+				this.containIndex=i;
+			},
+			suitChange(i){
+				this.suitIndex=i;
 			}
 		}
 	}

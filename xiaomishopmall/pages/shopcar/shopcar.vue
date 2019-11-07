@@ -1,9 +1,12 @@
 <template>
 	<view class="content">
+		<!-- 商品列表组件 -->
 		<goodslist :editing="editing"></goodslist>
 		<view class="goods-carts">
+			<!-- 购物车导航组件 -->
 			<goodsnav />
 		</view>
+		<!-- 推荐部分 -->
 		<view class="recommend">
 			<view class="rendmain">
 				<h3 class="rend">为你推荐</h3>
@@ -11,6 +14,7 @@
 					<view class="reline"></view>
 					<view class="retext">买了人还买了</view>
 				</view>
+				<!-- 推荐商品列表 -->
 				<view class="goodslist">
 					<view class="uni-product-list">
 						<view class="uni-product" v-for="(product,index) in productList" :key="index">
@@ -37,20 +41,20 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello',
+				title: '购物车',
 				name: "我的购物车",
-				productList: [],
+				productList: [],//数据列表
 				renderImage: false,
-				editing:false
+				editing: false //编辑状态
 			}
 		},
 
-		components: {//引入组件
+		components: { //引入组件
 			goodslist,
 			goodsnav
 		},
 		methods: {
-			loadData(action = 'add') {//自定义的数据
+			loadData(action = 'add') { //自定义的数据
 				const data = [{
 						image: 'https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product1.jpg',
 						title: 'Apple iPhone X 256GB 深空灰色 移动联通电信4G手机',
@@ -95,18 +99,18 @@
 					}
 				];
 
-				if (action === 'refresh') {//清空数据
+				if (action === 'refresh') { //清空数据
 					this.productList = [];
 				}
 
-				data.forEach(item => {//加载数据
+				data.forEach(item => { //加载数据
 					this.productList.push(item);
 				});
 			}
 		},
 		onLoad() {
-			this.loadData();
-			setTimeout(() => {//延迟加载
+			this.loadData();//创建数据
+			setTimeout(() => { //延迟加载
 				this.renderImage = true;
 			}, 300);
 		},
@@ -117,11 +121,22 @@
 				uni.stopPullDownRefresh();
 			}, 2000);
 		},
-		onReachBottom() {//滑动到底部加载数据
+		onReachBottom() { //滑动到底部加载数据
 			this.loadData();
 		},
-		onNavigationBarButtonTap(e){//点击编辑触发方法
-			this.editing=!this.editing//改变编辑状态
+		onNavigationBarButtonTap(e) { //点击编辑触发方法
+			this.editing = !this.editing //改变编辑状态
+			let webView = this.$mp.page.$getAppWebview();
+			if (this.editing) {
+				webView.setTitleNViewButtonStyle(0, {
+					text: '完成',
+				});
+			} else {
+				webView.setTitleNViewButtonStyle(0, {
+					text: '编辑',
+				});
+			}
+			console.log(e.text)
 		}
 	}
 </script>
@@ -132,8 +147,7 @@
 	.goods-carts {
 		position: fixed;
 		width: 100%;
-		bottom: 49px;
-		/* bottom: 0rpx;小程序里设为0 */
+		bottom: 0px;
 		background-color: #FFFFFF;
 		border-bottom: #CCCCCC;
 		z-index: 99;
@@ -213,10 +227,11 @@
 		height: 200rpx;
 		border: 1rpx solid #CCCCCC;
 	}
+
 	.goodsImg image {
-			width: 100%;
-			height: 100%;
-		}
+		width: 100%;
+		height: 100%;
+	}
 
 	.goods_info {
 		height: 200rpx;
@@ -233,25 +248,30 @@
 		font-size: 40rpx;
 		font-weight: 700;
 	}
-	.selectedInfo{
+
+	.selectedInfo {
 		font-weight: 700;
 	}
-	.midInfo{
+
+	.midInfo {
 		width: 100%;
 		height: 520rpx;
 		margin-top: 50rpx;
 		box-sizing: border-box;
 		border-bottom: 1rpx solid #C0C0C0;
 	}
-	.clearlyInfo{
+
+	.clearlyInfo {
 		height: 150rpx;
 		margin: 20rpx 0;
 	}
-	.infoChoose{
+
+	.infoChoose {
 		height: 100rpx;
 		margin: 10rpx 0;
 	}
-	.infoBtn{
+
+	.infoBtn {
 		width: 200rpx;
 		height: 70rpx;
 		line-height: 70rpx;
@@ -264,25 +284,30 @@
 		box-sizing: border-box;
 		float: left;
 	}
-	.infoBtn:last-child{
+
+	.infoBtn:last-child {
 		margin-right: 0;
 	}
-	.btn-active{
+
+	.btn-active {
 		color: #FD6801;
 		background-color: #FCE0D5;
 		border: 1rpx solid #FD6801;
 	}
-	.buyNumber{
+
+	.buyNumber {
 		height: 100rpx;
 		margin: 15rpx;
 		box-sizing: border-box;
 		line-height: 100rpx;
 	}
-	.choseNum{
+
+	.choseNum {
 		float: right;
 		margin-top: 15rpx;
 	}
-	.intoCart{
+
+	.intoCart {
 		width: 100%;
 		height: 100rpx;
 		line-height: 100rpx;

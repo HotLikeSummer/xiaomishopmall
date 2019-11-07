@@ -65,6 +65,7 @@
 			}
 		},
 		methods:{
+			// 返回上一级
 			fanhui(){
 				uni.navigateBack({
 					delta: 1

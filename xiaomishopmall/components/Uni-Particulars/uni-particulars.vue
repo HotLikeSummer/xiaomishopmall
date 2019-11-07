@@ -36,7 +36,6 @@
 					<text>64G</text>
 					<text>标配</text>
 					<uni-icons type="arrowright" size="22" class="listright"></uni-icons>
-					<shopcart-card :arr="sends" class="shopcarts"></shopcart-card>
 				</view>
 				<view class="delivery list"  @click="DeliveryShow">配送
 					<text>北京</text>
@@ -51,6 +50,7 @@
 					<uni-icons type="arrowright" size="22" class="listright"></uni-icons>
 				</view>
 			</view>
+			<shopcart-card :arr="sends" class="shopcarts"></shopcart-card>
 			<!-- 更多评论  @scroll="ScrollDiscuss"-->
 			<scroll-view class="uni-discuss" scroll-x="true">
 				<view class="comment" v-for="(item,index) in discussa" :key="index">
@@ -123,6 +123,8 @@
 		</view>
 		<!-- 详服务说明详情页固定定位 -->
 		<view v-show="showLeft" class="animat">
+			<!-- 遮罩层 -->
+			<view class="shadow" v-show="showLeft" @click="confim"></view>
 			<view class="fiexbox">
 				<view class="details-box">
 					<view class="details-box-top">服务说明</view>
@@ -135,8 +137,7 @@
 					</view>
 				</view>
 			</view>
-			<!-- 遮罩层 -->
-			<view class="shadow" v-show="showLeft"></view>
+			
 		</view>
 		<!-- 配送详情页 -->
 		<view v-show="showRigth">
@@ -148,7 +149,7 @@
 				<view class="qued" @click="fresh">选择新的地址</view>
 			</view>
 			<!-- 遮罩层 -->
-			<view class="shadow"></view>
+			<view class="shadow" @click="fresh"></view>
 		</view>
 	</view>
 </template>
@@ -237,8 +238,8 @@
 				});
 			},
 			shopCart(obj) {
-				console.log(obj)
-				this.sends = obj;
+				this.togglepop=!this.togglepop
+				this.sends = [obj,this.togglepop];
 			},
 			// 服务说明显示
 			ServiceShow() {
@@ -278,7 +279,7 @@
 		margin: 0;
 	}
 	
-	.selected>>>.modaiBox {
+	.bottom-text>>>.modaiBox {
 		bottom: 0rpx !important;
 		width: 100%;
 	}

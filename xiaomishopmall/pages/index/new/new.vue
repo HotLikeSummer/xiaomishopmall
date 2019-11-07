@@ -12,22 +12,23 @@
 		<swiper class="swiper-box" :style="{ height: swiperheight_s + 'px' }" :current="tabIndex" @change="tabChange">
 			<swiper-item v-for="(items, index) in num" :key="index">
 				<scroll-view class="scroll-y" scroll-y :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore()">
-					<view class="box" v-for="(item,index) in productLists" :key="index" :index="index">
+					<!-- 内容板块 -->
+					<view class="box" v-for="(item, index) in productLists" :key="index" :index="index">
 						<!-- 背景图 -->
 						<view class="box-bg"><image :src="item.cover"></image></view>
 						<!-- 去购买 -->
 						<view class="uni-media-list uni-pull-right">
-							<view class="uni-media-list-logo">
-								去购买
-							</view>
+							<view class="uni-media-list-logo">去购买</view>
 							<view class="uni-media-list-body">
-								<view class="uni-media-list-text-top">{{item.desc}}</view>
-								<view class="uni-media-list-text-bottom uni-ellipsis">{{item.title}}</view>
+								<view class="uni-media-list-text-top">{{ item.desc }}</view>
+								<view class="uni-media-list-text-bottom uni-ellipsis">{{ item.title }}</view>
 							</view>
 						</view>
 						<!-- 了解更多 -->
 						<view class="uni-media-more">了解更多</view>
 					</view>
+					<!-- 加载更多 -->
+					<view class="load-more">{{loadtext}}</view>
 				</scroll-view>
 			</swiper-item>
 		</swiper>
@@ -43,37 +44,70 @@ export default {
 			//导航栏内容
 			title: [],
 			//内容
-			num:10,
+			num: 10,
 			//父盒高度
-			swiperheight_all:500,
+			swiperheight_all: 700,
 			//滚轮高度
-			swiperheight_s:500,
+			swiperheight_s: 700,
 			//数据
 			productList: [],
 			//循环遍历拿到的数组数据
-			productLists: []
+			productLists: [],
+			// 加载更多
+			loadtext:"上拉加载更多",
+			//加载更多图片的下标
+			splnum:0
 		};
 	},
-	onLoad() {
+	onLoad(option) {
 		// 计算屏幕剩余高度  填补剩余高度
 		uni.getSystemInfo({
-			success: (res) => {
+			success: res => {
 				//屏幕总高度
-				this.swiperheight_all = res.windowHeight
+				this.swiperheight_all = res.windowHeight;
 				//console.log(this.swiperheight_all,11)
-				let info=uni.createSelectorQuery().select(".swiper-box")
-				info.boundingClientRect(data=>{
-				//显示高度
-				this.swiperheight_s = data.height
-				//console.log(this.swiperheight_s,12)
-				}).exec()
+				let info = uni.createSelectorQuery().select('.swiper-box');
+				info.boundingClientRect(data => {
+					//显示高度
+					this.swiperheight_s = data.height;
+					//console.log(this.swiperheight_s,12)
+				}).exec();
 			}
-		})
+		}),
+			//首页传过来的index,赋值，传过来的index对应导航栏的下标
+			(this.tabIndex = option.index);
+		console.log(this.tabIndex);
 	},
 	created() {
 		this.changShow();
 	},
 	methods: {
+		//加载更多
+		loadmore(index){
+			console.log(this.loadtext)
+			if(this.loadtext == "上拉加载更多"){
+				//修改状态
+				this.loadtext = "加载中..."
+				//获取数据
+				let that=this
+				setTimeout(() => {
+					 let obj =that.productLists;
+					 console.log(obj)
+					 //每次刷新加载数据，把新数据加进去
+					 that.productLists=that.productLists.concat(obj.slice(that.splnum,that.splnum+1))
+					 console.log(that.productLists)
+					that.loadtext = "上拉加载更多";
+				}, 2000)
+				//自增
+				that.splnum++;
+				// 数据里面只有6张图片,所以我们加个判断
+				if(that.splnum>5){
+					that.splnum=0
+				}
+			}else{
+				return
+			}
+		},
 		//导航栏绑定样式
 		tabtap(index) {
 			this.tabIndex = index;
@@ -90,15 +124,14 @@ export default {
 			//导航栏
 			this.title = res.data.data.data[1].data;
 			// 加载更多
-			this.productList =res.data.data.data[4].data
+			this.productList = res.data.data.data[4].data;
 			//通过循环遍历
-			for(let i in this.productList){
-				this.productLists.push(this.productList[i])
+			for (let i in this.productList) {
+				this.productLists.push(this.productList[i]);
 			}
-			console.log(this.productLists)
+			console.log(this.productLists);
 		}
-	},
-	components: {}
+	}
 };
 </script>
 
@@ -108,7 +141,13 @@ export default {
 	padding: 0upx;
 	color: #555555;
 }
-.swiper-box{
+#new {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+/* 导航栏 */
+.swiper-box {
 	margin-bottom: 50rpx;
 }
 .scroll-h {
@@ -116,6 +155,7 @@ export default {
 	height: 80upx;
 	white-space: nowrap;
 	background-color: white;
+	font-size: 25rpx;
 }
 .uni-tab-item {
 	display: inline-block;
@@ -136,40 +176,46 @@ export default {
 	color: #fd6801;
 	border-bottom: 5upx #fd6801 solid;
 }
-.box{
+.box {
 	width: 90%;
 	height: 600upx;
 	margin: 30upx auto;
 	border-radius: 5px;
-	box-shadow:2upx 2upx 2upx 2upx #BBBBBB;
+	box-shadow: 2upx 2upx 2upx 2upx #bbbbbb;
 }
-.box-bg{
+.box-bg {
 	height: 50%;
 	width: 100%;
 }
-.box-bg image{
+.box-bg image {
 	width: 100%;
 	height: 100%;
 }
-.uni-media-list{
-	border-bottom: 1rpx #B2B2B2 solid;
+.uni-media-list {
+	border-bottom: 1rpx #b2b2b2 solid;
 }
-.uni-media-list-body{
+.uni-media-list-body {
 	height: 180rpx;
 	line-height: 180rpx;
 }
-.uni-media-list-logo{
+.uni-media-list-logo {
 	height: 40rpx;
 	line-height: 40rpx;
-	background-color: #FD6801;
+	background-color: #fd6801;
 	margin-top: 70rpx;
 	padding: 15rpx;
 	border-radius: 10rpx;
 	color: white;
 }
-.uni-media-more{
+.uni-media-more {
 	height: 80rpx;
 	text-align: center;
 	line-height: 80rpx;
+}
+/* 加载更多 */
+.load-more {
+	text-align: center;
+	height: 60upx;
+	line-height: 60upx;
 }
 </style>
