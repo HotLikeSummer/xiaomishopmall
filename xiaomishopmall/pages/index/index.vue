@@ -1,9 +1,10 @@
 <template>
 	<view id="index" :style="{ height: swiperheight_all + 'px' }">
 		<!-- 导航栏 -->
-		<scroll-view class="scroll-h" scroll-x>
+		<!-- :show-scrollbar="false"隐藏滚动条 -->
+		<scroll-view class="scroll-h" scroll-x  :show-scrollbar="false">
 			<!-- 循环导航栏内容 -->
-			<view v-for="(tab, index) in tabBars" :key="tab.id" class="uni-tab-item" :id="tab.id" :data-current="index" @click="tabtap(index)">
+			<view v-for="(tab, index) in tabBars" :key="index" class="uni-tab-item" :id="tab.name" :data-current="index" @click="tabtap(index)">
 				<!-- 绑定样式 -->
 				<text class="uni-tab-item-title" :class="tabIndex == index ? 'uni-tab-item-title-active' : ''">{{ tab.name }}</text>
 			</view>
@@ -23,9 +24,9 @@
 					</view>
 					<!-- 商品分类 -->
 					<view class="hotprod">
-						<view class="scroll_hotprods" @click="toNew">
+						<view class="scroll_hotprods">
 							<!-- 第一行 -->
-							<view class="hotprods" v-for="(item, index) in hotprods" :key="index" :index="index">
+							<view class="hotprods" v-for="(item, index) in hotprods" :key="index" :index="index"  @tap="toNew(index)">
 								<img :src="item.src" />
 								<view>{{ item.text }}</view>
 							</view>
@@ -62,9 +63,9 @@ export default {
 		return {
 			num: 7,
 			//定义屏幕高度
-			swiperheight_all:500,
+			swiperheight_all:700,
 			//定义滚动高度
-			swiperheight_s:500,
+			swiperheight_s:700,
 			//导航栏下标
 			tabIndex: 0,
 			//导航栏滚动
@@ -153,9 +154,10 @@ export default {
 			}
 			console.log(this.productLists)
 		},
-		toNew() {
+		toNew(index) {
+			console.log(index)
 			uni.navigateTo({
-				url: 'new/new'
+				url: 'new/new?index='+index
 			});
 		}
 	}
@@ -173,18 +175,23 @@ export default {
 	display: flex;
 	flex-direction: column;
 }
+/* 导航栏 */
 .swiper-box{
 	flex: 1;
 }
 .scroll-h {
 	width: 750upx;
 	height: 80upx;
-	/* position: fixed;
-	z-index: 999; */
+	font-size: 25rpx;
 	white-space: nowrap;
 	background-color: white;
+	flex-direction: row;
 }
-.swiper img {
+/* 轮播 */
+.swiper-s{
+	height: 400rpx;
+	}
+.swiper-s img {
 	width: 100%;
 	height: 100%;
 }
@@ -217,7 +224,7 @@ export default {
 }
 
 .hotprods {
-	padding: 20rpx 20rpx;
+	padding: 20rpx 19rpx;
 	display: inline-block;
 }
 
@@ -248,11 +255,6 @@ export default {
 	width: 49%;
 	height: 255upx;
 	float: right;
-}
-.load-more{
-	text-align: center;
-	height: 160upx;
-	line-height: 60upx;
 }
 /* 加载更多 */
 .image-view {
