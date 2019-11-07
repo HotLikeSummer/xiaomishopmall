@@ -1,7 +1,7 @@
 <template>
 	<view id="new" :style="{ height: swiperheight_all + 'px' }">
 		<!-- 导航栏 -->
-		<scroll-view class="scroll-h" scroll-x  :show-scrollbar="false" :scroll-into-view="scrollInto">
+		<scroll-view class="scroll-h" scroll-x :show-scrollbar="false">
 			<!-- 循环导航栏内容 -->
 			<view v-for="(tab, index) in title" :id="tab.name" class="uni-tab-item" :key="index" :index="index" :data-current="index" @click="tabtap(index)">
 				<!-- 绑定样式 -->
@@ -11,14 +11,14 @@
 		<!-- 对应内容栏 -->
 		<swiper class="swiper-box" :style="{ height: swiperheight_s + 'px' }" :current="tabIndex" @change="tabChange">
 			<swiper-item v-for="(items, index) in num" :key="index">
-				<scroll-view class="scroll-y" scroll-y  :show-scrollbar="false" :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore()">
+				<scroll-view class="scroll-y" scroll-y :show-scrollbar="false" :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore()">
 					<!-- 内容板块 -->
 					<view class="box" v-for="(item, index) in productLists" :key="index" :index="index">
 						<!-- 背景图 -->
 						<view class="box-bg"><image :src="item.cover"></image></view>
 						<!-- 去购买 -->
 						<view class="uni-media-list uni-pull-right">
-							<view class="uni-media-list-logo">去购买</view>
+							<view class="uni-media-list-logo" @tap="goShop()">去购买</view>
 							<view class="uni-media-list-body">
 								<view class="uni-media-list-text-top">{{ item.desc }}</view>
 								<view class="uni-media-list-text-bottom uni-ellipsis">{{ item.title }}</view>
@@ -28,7 +28,7 @@
 						<view class="uni-media-more">了解更多</view>
 					</view>
 					<!-- 加载更多 -->
-					<view class="load-more">{{loadtext}}</view>
+					<view class="load-more">{{ loadtext }}</view>
 				</scroll-view>
 			</swiper-item>
 		</swiper>
@@ -54,10 +54,9 @@ export default {
 			//循环遍历拿到的数组数据
 			productLists: [],
 			// 加载更多
-			loadtext:"上拉加载更多",
+			loadtext: '上拉加载更多',
 			//加载更多图片的下标
-			splnum:0,
-			scrollInto:""
+			splnum: 0
 		};
 	},
 	onLoad(option) {
@@ -76,7 +75,7 @@ export default {
 			}
 		}),
 			//首页传过来的index,赋值，传过来的index对应导航栏的下标
-			this.tabIndex = option.index
+			(this.tabIndex = option.index);
 		console.log(this.tabIndex);
 	},
 	created() {
@@ -84,39 +83,45 @@ export default {
 	},
 	methods: {
 		//加载更多
-		loadmore(index){
-			console.log(this.loadtext)
-			if(this.loadtext == "上拉加载更多"){
+		loadmore(index) {
+			console.log(this.loadtext);
+			if (this.loadtext == '上拉加载更多') {
 				//修改状态
-				this.loadtext = "加载中..."
+				this.loadtext = '加载中...';
 				//获取数据
-				let that=this
+				let that = this;
 				setTimeout(() => {
-					 let obj =that.productLists;
-					 console.log(obj)
-					 //每次刷新加载数据，把新数据加进去
-					 that.productLists=that.productLists.concat(obj.slice(that.splnum,that.splnum+1))
-					 console.log(that.productLists)
-					that.loadtext = "上拉加载更多";
-				}, 2000)
+					let obj = that.productLists;
+					console.log(obj);
+					//每次刷新加载数据，把新数据加进去
+					that.productLists = that.productLists.concat(obj.slice(that.splnum, that.splnum + 1));
+					console.log(that.productLists);
+					that.loadtext = '上拉加载更多';
+				}, 2000);
 				//自增
 				that.splnum++;
 				// 数据里面只有6张图片,所以我们加个判断
-				if(that.splnum>5){
-					that.splnum=0
+				if (that.splnum > 5) {
+					that.splnum = 0;
 				}
-			}else{
-				return
+			} else {
+				return;
 			}
 		},
 		//导航栏绑定样式
 		tabtap(index) {
 			this.tabIndex = index;
-			 this.scrollInto = this.title[index].id;
 		},
 		//滑动切换swiper
 		tabChange(e) {
 			this.tabIndex = e.detail.current;
+		},
+		//去购物车
+		goShop() {
+			uni.switchTab({
+				url: '/pages/shopcar/shopcar'
+			});
+			console.log(112)
 		},
 		//拿数据
 		async changShow() {

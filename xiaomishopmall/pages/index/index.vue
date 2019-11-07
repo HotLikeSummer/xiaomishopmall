@@ -40,7 +40,7 @@
 					</view>
 					<!-- 加载更多 -->
 					<view class="uni-product-list">
-						<view class="uni-product" v-for="(product, index) in productLists" :key="index" :index="index">
+						<view class="uni-product" v-for="(product, index) in productLists" :key="index" :index="index" @tap="goShow()">
 							<view class="image-view"><image class="uni-product-image" :src="product.cover"></image></view>
 							<view class="uni-product-title">{{ product.desc }}</view>
 							<view class="uni-product-price">
@@ -154,10 +154,24 @@ export default {
 			}
 			console.log(this.productLists)
 		},
+		//调往最新页面
 		toNew(index) {
 			console.log(index)
 			uni.navigateTo({
 				url: 'new/new?index='+index
+			});
+		},
+		//调往详情
+		goShow(){
+			uni.navigateTo({
+				url:"../type/particulars/particulars"
+			})
+			console.log(111)
+		},
+		//搜索
+		onNavigationBarSearchInputClicked(e) {
+			uni.navigateTo({
+				url: '/pages/type/detail/detail'
 			});
 		}
 	}
