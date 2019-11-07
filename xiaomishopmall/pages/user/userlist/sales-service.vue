@@ -142,6 +142,7 @@
 
 	.imei {
 		width: 38%;
+		margin-left: 20upx;
 	}
 
 	.local-imei {
@@ -156,7 +157,7 @@
 		color: #FF7200;
 		text-align: center;
 		margin-top: 10upx;
-		margin-right: 19upx;
+		margin-right: 20upx;
 	}
 
 	.time {

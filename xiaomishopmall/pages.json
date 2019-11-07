@@ -193,8 +193,9 @@
 						"buttons":[{
 							"color": "#555555",
 							"float": "right",
-							"fontSize": "30upx",
-							"text": "我的反馈"
+							"fontSize": "35upx",
+							"text": "我的反馈",
+							"width":"auto"
 						}]
 					}
 				}
