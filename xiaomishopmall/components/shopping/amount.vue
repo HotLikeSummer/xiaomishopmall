@@ -9,8 +9,7 @@
 	export default {
 		props: {
 			value: {
-				type: [Number, String],
-				default: 1
+				type: [Number, String]
 			},
 			min: {
 				type: Number,
@@ -40,7 +39,7 @@
 			},
 			inputValue(newVal, oldVal) {
 				if (+newVal !== +oldVal) {
-					this.$emit('change', newVal)
+					this.$emit('change',newVal)
 				}
 			}
 		},

@@ -11,13 +11,13 @@
 				</view>
 				<view class="total">
 					<text>合计:</text>
-					<text class="cost">￥{{cost}}</text>
+					<text class="cost">￥{{total}}</text>
 				</view>
 			</view>
 			<!-- 合计按钮 -->
 			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box ">
 				<view :style="{backgroundColor:buttonGroup.default().backgroundColor,color:buttonGroup.default().color}" class="flex uni-tab__cart-button-right"
-				 @click="buttonClick">{{ buttonGroup.default().text }}</view>
+				 @click="costTotal">{{ buttonGroup.default().text }}</view>
 			</view>
 		</view>
 	</view>
@@ -41,19 +41,20 @@
 					type: Boolean,
 					default: false
 				},
-				allChecked:false,//全选判断
-				cost:0,
+				allChecked: false,//全选判断
+				total:0
 			}
 		},
 		methods: {
 			allCheck(){//全选
-				this.allChecked=!this.allChecked;//更改全选选中状态
-				this.$emit("allcheck",this.allChecked)//将全选状态传输给其他组件
+				this.$store.dispatch('allCheck')
+				this.allChecked=this.$store.state.allChecked
 			},
-			buttonClick(){//计算总价
-				console.log(this.cost)
+			costTotal(){//计算总价
+				
 			}
-		}
+		},
+		props:['goodCost']
 	}
 </script>
 

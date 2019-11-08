@@ -1,10 +1,10 @@
 <template>
 	<view class="content">
 		<!-- 商品列表组件 -->
-		<goodslist :editing="editing" :allchecked="allchecked"></goodslist>
+		<goodslist :editing="editing" :allChecked='$store.state.allChecked'></goodslist>
 		<view class="goods-carts">
 			<!-- 购物车导航组件 -->
-			<goodsnav @allcheck="allcheck"/>
+			<goodsnav/>
 		</view>
 		<!-- 推荐部分 -->
 		<view class="recommend">
@@ -17,7 +17,7 @@
 				<!-- 推荐商品列表 -->
 				<view class="goodslist">
 					<view class="uni-product-list">
-						<view class="uni-product" v-for="(product,index) in productList" :key="index">
+						<view class="uni-product" v-for="(product,index) in productList" :key="index" @click="particulars(index)">
 							<view class="image-view">
 								<image v-if="renderImage" class="uni-product-image" :src="product.image"></image>
 							</view>
@@ -46,7 +46,6 @@
 				productList: [],//数据列表
 				renderImage: false,
 				editing: false, //编辑状态
-				allchecked:false//全选状态
 			}
 		},
 
@@ -108,8 +107,10 @@
 					this.productList.push(item);
 				});
 			},
-			allcheck(val){
-				this.allchecked=val//接收全选状态
+			particulars(e) {
+				uni.navigateTo({
+					url: '/pages/type/particulars/particulars?id='+e,
+				});
 			}
 		},
 		onLoad() {
@@ -144,8 +145,8 @@
 	.goods-carts {
 		position: fixed;
 		width: 100%;
-		bottom: 0px;
-		/* bottom: 49px; */
+		/* bottom: 0px; */
+		bottom: 49px;
 		background-color: #FFFFFF;
 		border-bottom: #CCCCCC;
 		z-index: 99;

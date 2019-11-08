@@ -14,7 +14,7 @@
 								</view>
 							</view>
 							<view class='goods-image'>
-								<image src="/static/images/demo/list/1.jpg"></image>
+								<image src="/static/images/demo/list/1.jpg"  @click="test"></image>
 							</view>
 							<view class='good-info'>
 								<view class='name'>{{item.name}}</view>
@@ -28,7 +28,7 @@
 								</view>
 								<view class="infobox">
 									<view class='price'>￥{{item.price}}</view>
-									<amount class="numbers" @change="change"></amount>
+									<amount class="numbers" @change="change($event,item)" :value="item.num"></amount>
 								</view>
 							</view>
 						</view>
@@ -49,42 +49,12 @@
 	import amount from "@/components/shopping/amount.vue"
 	import shopcartCard from "@/components/shopcartCard/shopcartCard.vue"
 	export default {
-		props:['editing','allchecked'],//接收编辑状态信息，全选状态信息
+		props:['editing','allChecked'],//接收编辑状态信息，全选状态信息
 		data() {
 			return {
 				phoneHeight: 0,
 				sendData:[],//组件传输数据
-				goodInfo:[{//商品信息
-					name:"华为matax210",
-					kind:"火焰红 64G 标配",
-					price:3541,
-					checked:false
-				},{
-					name:"华为matax210",
-					kind:"火焰红 64G 标配",
-					price:3541,
-					checked:false
-				},{
-					name:"华为matax210",
-					kind:"火焰红 64G 标配",
-					price:3541,
-					checked:false
-				},{
-					name:"华为matax210",
-					kind:"火焰红 64G 标配",
-					price:3541,
-					checked:false
-				},{
-					name:"华为matax210",
-					kind:"火焰红 64G 标配",
-					price:3541,
-					checked:false
-				},{
-					name:"华为matax210",
-					kind:"火焰红 64G 标配",
-					price:3541,
-					checked:false
-				}]
+				goodInfo:[]
 			}
 		},
 		components: {
@@ -96,8 +66,8 @@
 				this.togglepop=!this.togglepop//更改模态框弹出状态
 				this.sendData=[i,this.togglepop]//传输商品信息和弹出状态
 			},
-			change(val){
-				console.log(val)
+			change(event,obj){//改变商品数量
+				obj.num=event
 			},
 			check(obj){//更改商品选中状态
 				obj.checked=!obj.checked;
@@ -107,9 +77,12 @@
 			editing(){//监听编辑状态
 				console.log(this.editing)
 			},
-			allchecked(){//监听全选状态
-				this.goodInfo.forEach(item=>item.checked=this.allchecked)//令所有商品的选中状态与全选状态一直
+			allChecked(){//监听全选状态
+				this.goodInfo.forEach(item=>item.checked=this.$store.state.allChecked)//令所有商品的选中状态与全选状态一致
 			}
+		},
+		created() {
+			this.goodInfo=this.$store.state.goodInfo
 		}
 	}
 </script>

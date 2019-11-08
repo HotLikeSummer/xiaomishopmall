@@ -42,7 +42,7 @@
 					</view>
 					<view class="buyNumber">
 						<text>购买数量</text>
-						<amount class="choseNum" @change="changed"></amount>
+						<amount class="choseNum" :value="1" @change="changed"></amount>
 					</view>
 				</view>
 			</view>
@@ -63,7 +63,8 @@
 				suitIndex:0,//商品套餐下标
 				goodsColor:["火焰红","炭黑","冰川蓝"],
 				goodsContain:["64GB","128GB"],
-				goodsSuit:["标配","套餐一","套餐二"]
+				goodsSuit:["标配","套餐一","套餐二"],
+				goodinfo:"",
 			};
 		},
 		components: {
@@ -93,6 +94,10 @@
 			suitChange(i){
 				this.suitIndex=i;
 			}
+		},
+		created() {
+			console.log(this.arr)
+			this.goodinfo=this.arr[0]
 		}
 	}
 </script>
