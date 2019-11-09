@@ -11,7 +11,7 @@
 				</view>
 				<view class="total">
 					<text>合计:</text>
-					<text class="cost">￥{{total}}</text>
+					<text class="cost">￥{{this.$store.getters.total}}</text>
 				</view>
 			</view>
 			<!-- 合计按钮 -->
@@ -42,16 +42,12 @@
 					default: false
 				},
 				allChecked: false,//全选判断
-				total:0
 			}
 		},
 		methods: {
 			allCheck(){//全选
 				this.$store.dispatch('allCheck')
 				this.allChecked=this.$store.state.allChecked
-			},
-			costTotal(){//计算总价
-				
 			}
 		},
 		props:['goodCost']

@@ -67,7 +67,7 @@
 				this.sendData=[i,this.togglepop]//传输商品信息和弹出状态
 			},
 			change(event,obj){//改变商品数量
-				obj.num=event
+				obj.num=event;
 			},
 			check(obj){//更改商品选中状态
 				obj.checked=!obj.checked;

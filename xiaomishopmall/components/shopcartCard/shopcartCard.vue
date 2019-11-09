@@ -42,7 +42,7 @@
 					</view>
 					<view class="buyNumber">
 						<text>购买数量</text>
-						<amount class="choseNum" :value="1" @change="changed"></amount>
+						<amount class="choseNum" :value="goodinfo.num" @change="changed"></amount>
 					</view>
 				</view>
 			</view>
@@ -64,7 +64,7 @@
 				goodsColor:["火焰红","炭黑","冰川蓝"],
 				goodsContain:["64GB","128GB"],
 				goodsSuit:["标配","套餐一","套餐二"],
-				goodinfo:"",
+				goodinfo:{},
 			};
 		},
 		components: {
@@ -74,16 +74,17 @@
 		props:["arr"],//接收商品信息
 		watch:{
 			arr(newarr){//监听商品信息变化，改变模态框弹出状态
+				this.goodinfo=this.arr[0]
 				this.showUp();
 			}
 		},
 		methods:{
 			showUp(){//弹出模态框
 				this.type = 'bottom'
-				this.$refs['popup'].open()
+				this.$refs['popup'].open();
 			},
 			changed(val){
-				console.log(val)
+				this.goodinfo.num=val;
 			},
 			colorChange(i){
 				this.colorIndex=i;
@@ -94,10 +95,6 @@
 			suitChange(i){
 				this.suitIndex=i;
 			}
-		},
-		created() {
-			console.log(this.arr)
-			this.goodinfo=this.arr[0]
 		}
 	}
 </script>

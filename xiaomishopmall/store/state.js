@@ -3,9 +3,9 @@ export default {
 	loginProvider: "",
 	openid: null,
 	testvuex: false,
-	editing:false,//编辑状态
-	allChecked:false,//全选状态,
-	goodInfo:[{//商品信息
+	editing:false, //编辑状态
+	allChecked:false, //全选状态,
+	goodInfo:[{ //商品信息
 		id:0,
 		name:"华为matax210",
 		kind:"火焰红 64G 标配",
@@ -47,5 +47,6 @@ export default {
 		price:3541,
 		num:1,
 		checked:false
-	}]
+	}],
+	total:0
 }
