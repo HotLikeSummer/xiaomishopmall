@@ -20,7 +20,7 @@
 								<view class='name'>{{item.name}}</view>
 								<view class='kind' @click="toggleCard(item)" :class="editing?'editing':''">
 									<view>
-										{{item.kind}}
+										{{item.kind.color}} {{item.kind.capacity}} {{item.kind.suit}}
 									</view>
 									<view v-if="editing">
 										<span class="iconfont">&#xe65d;</span>
