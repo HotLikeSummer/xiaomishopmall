@@ -5,7 +5,7 @@
 			<view class="flex uni-tab__cart-sub-box">
 				<!-- 全选图标 -->
 				<view class='icon'>
-					<view class="checkIcon" :class="allChecked?'':'nocheck'"  @click="allCheck">
+					<view class="checkIcon" :class="allChecked?'':'nocheck'" @click="allCheck">
 						<text class="iconfont checked" v-if="allChecked">&#xe623;</text>
 					</view>
 				</view>
@@ -16,39 +16,55 @@
 			</view>
 			<!-- 合计按钮 -->
 			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box ">
-				<view :style="{backgroundColor:buttonGroup.default().backgroundColor,color:buttonGroup.default().color}" 
-				class="flex uni-tab__cart-button-right">{{ buttonGroup.default().text }}</view>
+				<view :style="{backgroundColor:buttonGroup.default().backgroundColor,color:buttonGroup.default().color}" class="flex uni-tab__cart-button-right">{{ buttonGroup.default().text }}</view>
 			</view>
 		</view>
 		<view class="uni-tab__cart-box flex" v-if="editing">
 			<view class="flex uni-tab__cart-sub-box">
 				<!-- 全选图标 -->
 				<view class='icon'>
-					<view class="checkIcon" :class="allChecked?'':'nocheck'"  @click="allCheck">
+					<view class="checkIcon" :class="allChecked?'':'nocheck'" @click="allCheck">
 						<text class="iconfont checked" v-if="allChecked">&#xe623;</text>
 					</view>
+					<view class="total">
+						<text>全选</text>
+					</view>
 				</view>
-				<view class="total">
-					<text>收藏:</text>
-					<text class="cost">￥{{total}}</text>
-				</view>
+			</view>
+			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box ">
+				<view :style="{backgroundColor:editButtons.default().backgroundColor,color:editButtons.default().color}" class="flex uni-tab__cart-button-right"
+				 @click="delGoods">{{ editButtons.default().text }}</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import {mapState} from 'vuex'
-	import {mapGetters} from 'vuex'
+	import {
+		mapState
+	} from 'vuex'
+	import {
+		mapGetters
+	} from 'vuex'
 	export default {
 		data() {
 			return {
-				buttonGroup: {
+				buttonGroup: {//结算按钮信息
 					type: Array,
 					default () {
 						return {
 							text: '结算',
 							backgroundColor: '#ffa200',
+							color: '#fff'
+						}
+					}
+				},
+				editButtons: {//删除按钮信息
+					type: Array,
+					default () {
+						return {
+							text: '删除',
+							backgroundColor: '#ff0000',
 							color: '#fff'
 						}
 					}
@@ -60,13 +76,15 @@
 			}
 		},
 		methods: {
-			allCheck(){//全选
+			allCheck() { //全选
 				this.$store.dispatch('allCheck')
+			},
+			delGoods() { //删除
+				this.$store.dispatch("delGoods")
 			}
 		},
-		props:['goodCost'],
-		computed: {
-			...mapState(['editing','allChecked']),
+		computed: {//展开对象，获取相应的值
+			...mapState(['editing', 'allChecked']),
 			...mapGetters(["total"])
 		}
 	}
@@ -76,25 +94,26 @@
 	.flex {
 		display: flex;
 	}
-	
+
 	.uni-tab__cart-box {
 		width: 100%;
 		height: 100rpx;
 		background: #fff;
 		z-index: 900;
 	}
-	
+
 	.uni-tab__cart-sub-box {
 		width: 100%;
 		box-sizing: border-box;
 	}
+
 	/* 合计按钮 */
 	.uni-tab__right {
 		/* margin: 5px 0;
 		margin-right: 10px; */
 		overflow: hidden;
 	}
-	
+
 	.uni-tab__cart-button-right {
 		justify-content: center;
 		align-items: center;
@@ -102,29 +121,32 @@
 		font-size: 24rpx;
 		color: #fff;
 	}
-	
+
 	.uni-tab__cart-button-right:active {
 		opacity: 0.7;
 	}
+
 	/* 勾选图标 */
 	.icon {
 		height: 100rpx;
 		width: 130rpx;
 		box-sizing: border-box;
-		display:flex;
+		display: flex;
 	}
 
-	.checkIcon{
+	.checkIcon {
 		width: 40rpx;
 		height: 40rpx;
 		line-height: 40rpx;
 		border-radius: 50%;
 		margin: auto;
 	}
-	.nocheck{
+	
+	.nocheck {
 		border: 1rpx solid #CCCCCC;
 	}
-	.checked{
+	/* 选中样式 */
+	.checked {
 		color: #FD6801;
 		font-size: 47rpx;
 	}

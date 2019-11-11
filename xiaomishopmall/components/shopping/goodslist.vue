@@ -1,49 +1,58 @@
 <template>
 	<view id="content">
-		<view class='car-list'>
-			<!-- 购物车产品 -->
-			<view class='car-item'>
-				<!--列表项-->
-				<view class='car-prod' v-for="(item,index) in goodInfo" :key='index'>
-					<!-- 商品信息-->
-					<view class='goods-info'>
-						<view class='goods-info-inner'>
-							<view class='checkbox'>
-								<view class="checkIcon" :class="item.checked?'':'nocheck'" @click="check(item)">
-									<text class="iconfont checked" v-if="item.checked">&#xe623;</text>
-								</view>
-							</view>
-							<view class='goods-image'>
-								<image src="/static/images/demo/list/1.jpg" ></image>
-							</view>
-							<view class='good-info'>
-								<view class='name'>{{item.name}}</view>
-								<view class='kind' @click="toggleCard(item)" :class="editing?'editing':''">
-									<view>
-										{{item.kind.color}} {{item.kind.capacity}} {{item.kind.suit}}
-									</view>
-									<view v-if="editing">
-										<span class="iconfont">&#xe65d;</span>
+		<view v-if="logined">
+			<view class='car-list'>
+				<!-- 购物车产品 -->
+				<view class='car-item'>
+					<!--列表项-->
+					<view class='car-prod' v-for="(item,index) in goodInfo" :key='index'>
+						<!-- 商品信息-->
+						<view class='goods-info'>
+							<view class='goods-info-inner'>
+								<view class='checkbox'>
+									<view class="checkIcon" :class="item.checked?'':'nocheck'" @click="check(item)">
+										<text class="iconfont checked" v-if="item.checked">&#xe623;</text>
 									</view>
 								</view>
-								<view class="infobox">
-									<view class='price'>￥{{item.price}}</view>
-									<amount class="numbers" @change="change($event,item)" :value="item.num"></amount>
+								<view class='goods-image'>
+									<image src="/static/images/demo/list/1.jpg" ></image>
+								</view>
+								<view class='good-info'>
+									<view class='name'>{{item.name}}</view>
+									<view class='kind' @click="toggleCard(item)" :class="editing?'editing':''">
+										<view>
+											{{item.kind.color}} {{item.kind.capacity}} {{item.kind.suit}}
+										</view>
+										<view v-if="editing">
+											<span class="iconfont">&#xe65d;</span>
+										</view>
+									</view>
+									<view class="infobox">
+										<view class='price'>￥{{item.price}}</view>
+										<amount class="numbers" @change="change($event,item)" :value="item.num"></amount>
+									</view>
 								</view>
 							</view>
 						</view>
 					</view>
 				</view>
-			</view>
-			<!-- 加入购物车组件 -->
-			<shopcartCard :arr="sendData"></shopcartCard>
-			<!-- 没有商品信息 -->
-			<view v-if='goodInfo.length<=0' class="noGoods">
-				<view class="noGoodscon">
-					<view class="iconfont shopcarIcon">&#xe64c;</view>
-					<view class="shopcarTxt">购物车还是空的</view>
-					<view class="toShopping" @click="goShopping">去逛逛</view>
+				<!-- 加入购物车组件 -->
+				<shopcartCard :arr="sendData"></shopcartCard>
+				<!-- 没有商品信息 -->
+				<view v-if='goodInfo.length<=0' class="noGoods">
+					<view class="noGoodscon">
+						<view class="iconfont shopcarIcon">&#xe64c;</view>
+						<view class="shopcarTxt">购物车还是空的</view>
+						<view class="toShopping" @click="goShopping">去逛逛</view>
+					</view>
 				</view>
+			</view>
+		</view>
+		<view v-if='!logined' class="noGoods">
+			<view class="noGoodscon">
+				<view class="iconfont shopcarIcon">&#xe64c;</view>
+				<view class="shopcarTxt">您还没有登录哦</view>
+				<view class="toShopping" @click="goLogin">去登录</view>
 			</view>
 		</view>
 	</view>
@@ -75,16 +84,21 @@
 				obj.checked=!obj.checked;
 			},
 			goShopping(){
-				uni.switchTab({
+				uni.switchTab({//跳转到首页
 					url:'/pages/index/index'
 				})
+			},
+			goLogin(){
+				uni.navigateTo({ //跳转登录页面
+					//url: '/pages/type/particulars/particulars?',
+				});
 			}
 		},
-		computed:{
-			...mapState(['goodInfo','editing','allChecked'])
+		computed:{//展开state对象，获取相关属性
+			...mapState(['goodInfo','editing','allChecked','logined'])
 		},
 		watch:{
-			allChecked(newval){
+			allChecked(newval){//监听全选状态，使所有商品的选择状态与全选状态一致
 				this.goodInfo.forEach(i=>i.checked=newval)
 			}
 		}
@@ -104,8 +118,9 @@
 		box-sizing: border-box;
 		overflow: hidden;
 	}
+	
 
-	.car-prod .btn-delete {
+	.car-prod {
 		float: left;
 		border-radius: 0;
 		font-size: 30rpx;

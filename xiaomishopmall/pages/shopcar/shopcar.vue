@@ -108,7 +108,7 @@
 				});
 			},
 			particulars(e) {
-				uni.navigateTo({
+				uni.navigateTo({ //跳转商品页面
 					url: '/pages/type/particulars/particulars?id='+e,
 				});
 			}
@@ -136,7 +136,7 @@
 			//用三目运算符判断editing编辑状态，更改对应的按钮文字
 			webView.setTitleNViewButtonStyle(0,{text: this.editing?'完成':'编辑'})
 		},
-		computed:{
+		computed:{//展开对象
 			...mapState(['editing','allChecked'])
 		}
 	}

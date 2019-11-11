@@ -11,7 +11,7 @@
 						<view class="goods_info">
 							<!-- 已选商品信息 -->
 							<view class="goodsPrice">￥<text>3349</text></view>
-							<view class="selectedInfo">{{goodsColor[colorIndex]}} {{goodsContain[containIndex]}} {{goodsSuit[suitIndex]}}</view>
+							<view class="selectedInfo">{{goodinfo.color}} {{goodinfo.capacity}} {{goodinfo.suit}}</view>
 						</view>
 					</view>
 					<view class="midInfo">
@@ -46,7 +46,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="intoCart">加入购物车</view>
+			<view class="intoCart" @click="jointoCart(goodinfo)">加入购物车</view>
 		</uni-popup>
 	</view>
 </template>
@@ -74,40 +74,52 @@
 		props:["arr"],//接收商品信息
 		watch:{
 			arr(newarr){//监听商品信息变化，改变模态框弹出状态
-				this.goodinfo=this.arr[0]
+				this.goodinfo=this.arr[0] //接收商品信息
 				this.showUp();
 			}
 		},
 		methods:{
 			showUp(){//弹出模态框
+				this.resetIndex() //使弹出框按钮与商品配置一致
 				this.type = 'bottom'
-				this.$refs['popup'].open();
+				this.$refs['popup'].open(); //弹出弹框
 			},
-			changed(val){
+			resetIndex(){ //更改商品配置
+				this.colorIndex=this.goodsColor.indexOf(this.goodinfo.kind.color)
+				this.containIndex=this.goodsContain.indexOf(this.goodinfo.kind.capacity)
+				this.suitIndex=this.goodsSuit.indexOf(this.goodinfo.kind.suit)
+			},
+			changed(val){ //变更商品数量
 				this.goodinfo.num=val;
 			},
-			colorChange(i){
+			colorChange(i){ //改变颜色选择按钮样式，并改变选中商品配置
 				this.colorIndex=i;
 				this.goodinfo.kind.color=this.goodsColor[i]
 			},
-			containChange(i){
+			containChange(i){ //改变容量选择按钮样式，并改变选中商品配置
 				this.containIndex=i;
 				this.goodinfo.kind.capacity=this.goodsContain[i]
 			},
-			suitChange(i){
+			suitChange(i){ //改变套餐选择按钮样式，并改变选中商品配置
 				this.suitIndex=i;
 				this.goodinfo.kind.suit=this.goodsSuit[i]
+			},
+			jointoCart(obj){ //加入购物车
+				this.$store.dispatch('jointoCart',obj) //调用加入购物车方法，将商品信息以对象方式传输
+				this.type = 'bottom'
+				this.$refs['popup'].close(); //关闭弹框
 			}
 		}
 	}
 </script>
 
 <style>
+	/* 弹框框体 */
 	.modaiBox {
 		width: 100%;
 		bottom: 90rpx;
 	}
-
+	/* 弹框内容 */
 	.modaiCon {
 		width: 100%;
 		/* height:50%; */
@@ -190,6 +202,7 @@
 	.infoBtn:last-child{
 		margin-right: 0;
 	}
+	/* 高亮按钮样式 */
 	.btn-active{
 		color: #FD6801;
 		background-color: #FCE0D5;

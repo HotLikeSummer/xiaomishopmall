@@ -1,76 +1,18 @@
 export default {
-	hasLogin: false,
-	loginProvider: "",
-	openid: null,
-	testvuex: false,
 	editing:false, //编辑状态
 	allChecked:false, //全选状态,
 	goodInfo:[{ //商品信息
 		id:0,
-		name:"华为matax210",
-		kind:{
+		name:"华为matax210",//商品名
+		kind:{//商品配置
 			color:"火焰红",
 			capacity:"64GB",
 			suit:"标配"
 		},
-		price:3541,
-		num:1,
-		checked:false
-	},{
-		id:1,
-		name:"华为matax210",
-		kind:{
-			color:"火焰红",
-			capacity:"64GB",
-			suit:"标配"
-		},
-		price:3541,
-		num:1,
-		checked:false
-	},{
-		id:2,
-		name:"华为matax210",
-		kind:{
-			color:"火焰红",
-			capacity:"64GB",
-			suit:"标配"
-		},
-		price:3541,
-		num:1,
-		checked:false
-	},{
-		id:3,
-		name:"华为matax210",
-		kind:{
-			color:"火焰红",
-			capacity:"64GB",
-			suit:"标配"
-		},
-		price:3541,
-		num:1,
-		checked:false
-	},{
-		id:4,
-		name:"华为matax210",
-		kind:{
-			color:"火焰红",
-			capacity:"64GB",
-			suit:"标配"
-		},
-		price:3541,
-		num:1,
-		checked:false
-	},{
-		id:5,
-		name:"华为matax210",
-		kind:{
-			color:"火焰红",
-			capacity:"64GB",
-			suit:"标配"
-		},
-		price:3541,
-		num:1,
-		checked:false
+		price:3541,//价格
+		num:1,//数量
+		checked:false//选中状态
 	}],
-	total:0,
+	total:0,//合计金额
+	logined:false,//登录状态
 }
