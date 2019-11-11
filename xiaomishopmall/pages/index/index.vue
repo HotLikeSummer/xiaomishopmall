@@ -1,12 +1,11 @@
 <template>
-	<view id="index" :style="{ height: swiperheight_all + 'px' }">
+	<view id="pgIndex" :style="{ height: swiperheight_all + 'px' }">
 		<!-- 导航栏 -->
-		<!-- :show-scrollbar="false"隐藏滚动条 -->
-		<scroll-view class="scroll-h" scroll-x  :show-scrollbar="false">
+		<scroll-view class="scroll-h" id="tab-bar" scroll-x :show-scrollbar="false" :scroll-left="scrollLeft">
 			<!-- 循环导航栏内容 -->
-			<view v-for="(tab, index) in tabBars" :key="index" class="uni-tab-item" :id="tab.name" :data-current="index" @click="tabtap(index)">
+			<view v-for="(tab, index) in tabBars" :id="tab.id" class="uni-tab-item" :key="index" :index="index" :data-current="index" @click="tabtap">
 				<!-- 绑定样式 -->
-				<text class="uni-tab-item-title" :class="tabIndex == index ? 'uni-tab-item-title-active' : ''">{{ tab.name }}</text>
+				<text class="uni-tab-item-title" :class="tabIndex == index ? 'uni-tab-item-title-active' : ''">{{ tab.text}}</text>
 			</view>
 		</scroll-view>
 		<!-- 内容 -->
@@ -69,7 +68,36 @@ export default {
 			//导航栏下标
 			tabIndex: 0,
 			//导航栏滚动
-			tabBars: [],
+			tabBars: [
+				{
+				id: 'index',
+				text: "推荐"
+				}
+				,{
+				id: 'index',
+				text: "手机"
+				},
+				 {
+				id: 'index',
+				text: "智能"
+				},
+				 {
+				id: 'index',
+				text: "电视"
+				},
+				{
+				id: 'index',
+				text: "笔记本"
+				},
+				{
+				id: 'index',
+				text: "家电"
+				},
+				 {
+				id: 'index',
+				text: "生活周边"
+				}
+			],
 			//轮播
 			img: [],
 			//商品分类
@@ -81,7 +109,9 @@ export default {
 			//数据
 			productList: [],
 			//循环遍历拿到的数组数据
-			productLists: []
+			productLists: [],
+			//设置导航栏左边距离
+			scrollLeft:0
 		};
 	},
 	onLoad() {
@@ -125,13 +155,59 @@ export default {
 				return
 			}
 		},
-		//导航栏绑定样式
-		tabtap(index) {
-			this.tabIndex = index;
+		//滑动事件
+		async tabChange(e) {
+			 //取到下标
+			 let index = e.target.current;
+			 let tabBar =await this.getElSize('tab-bar'),
+			 	tabBarScrollLeft = tabBar.scrollLeft;
+			 //元素宽度
+			 let width = 0;
+			 
+			 for (let i = 0; i < index; i++) {
+			 	let result =await this.getElSize(this.tabBars[i].id);
+			 	width += result.width;
+			 }
+			 //宽度计算
+			 //屏幕总宽度
+			 let winWidth = uni.getSystemInfoSync().windowWidth,
+			 	nowElement =await this.getElSize(this.tabBars[index].id),
+			 	nowWidth = nowElement.width;
+			 if (width + nowWidth - tabBarScrollLeft > winWidth) {
+			 	this.scrollLeft = width + nowWidth - winWidth;
+			 }
+			 if (width < tabBarScrollLeft) {
+			 	this.scrollLeft = width;
+			 }
+			 //index赋值
+			 this.tabIndex = index;
 		},
-		//滑动切换swiper
-		tabChange(e) {
-			this.tabIndex = e.detail.current;
+		//得到元素的size
+		getElSize(id) {
+			return new Promise((res, rej) => {
+				//获取到绑定的id
+				uni.createSelectorQuery().select('#' + id).fields(
+						{
+							size: true,
+							scrollOffset: true
+						},
+						data => {
+							//拿到数据
+							res(data);
+							//console.log(data,13)
+						}
+					).exec();
+			});
+		},
+		//点击事件
+		async tabtap(e) {
+			//绑定index
+			this.tabIndex = e.currentTarget.dataset.current;
+				let tabBar = await this.getElSize("tab-bar"),
+				//点击的时候记录并设置scrollLeft
+				tabBarScrollLeft = tabBar.scrollLeft; 
+				//console.log(tabBarScrollLeft)
+				this.scrollLeft = tabBarScrollLeft;
 		},
 		//拿到首页的数据，用data数据来接收
 		async changShow() {
@@ -139,7 +215,7 @@ export default {
 				url: 'http://ceshi3.dishait.cn/api/index_category/data'
 			});
 			// 导航栏
-			this.tabBars = res.data.data.category;
+			//this.tabBars = res.data.data.category;
 			// 轮播
 			this.img = res.data.data.data[0].data;
 			//商品分类
@@ -162,11 +238,10 @@ export default {
 			});
 		},
 		//调往详情
-		goShow(){
+		goShow(e){
 			uni.navigateTo({
-				url:"../type/particulars/particulars"
+				url:"../type/particulars/particulars?id="+e
 			})
-			console.log(111)
 		},
 		//搜索
 		onNavigationBarSearchInputClicked(e) {
@@ -184,14 +259,14 @@ export default {
 	padding: 0upx;
 	color: #555555;
 }
-#index {
+#pgIndex {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
 /* 导航栏 */
 .swiper-box{
-	flex: 1;
+	margin-bottom: 50rpx;
 }
 .scroll-h {
 	width: 750upx;
@@ -199,7 +274,6 @@ export default {
 	font-size: 25rpx;
 	white-space: nowrap;
 	background-color: white;
-	flex-direction: row;
 }
 /* 轮播 */
 .swiper-s{
@@ -210,9 +284,10 @@ export default {
 	height: 100%;
 }
 .uni-tab-item {
+	height: 80upx;
 	display: inline-block;
-	padding-left: 34upx;
-	padding-right: 34upx;
+	width: 125rpx;
+	text-align: center;
 }
 .uni-tab-item-title {
 	color: #555;

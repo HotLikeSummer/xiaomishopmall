@@ -1,9 +1,9 @@
 <template>
 	<view id="new" :style="{ height: swiperheight_all + 'px' }">
 		<!-- 导航栏 -->
-		<scroll-view class="scroll-h" scroll-x :show-scrollbar="false">
+		<scroll-view class="scroll-h" id="tab-bar" scroll-x :show-scrollbar="false" :scroll-left="scrollLeft">
 			<!-- 循环导航栏内容 -->
-			<view v-for="(tab, index) in title" :id="tab.name" class="uni-tab-item" :key="index" :index="index" :data-current="index" @click="tabtap(index)">
+			<view v-for="(tab, index) in tabBars" :id="tab.id" class="uni-tab-item" :key="index" :index="index" :data-current="index" @click="tabtap">
 				<!-- 绑定样式 -->
 				<text class="uni-tab-item-title" :class="tabIndex == index ? 'uni-tab-item-title-active' : ''">{{ tab.text }}</text>
 			</view>
@@ -27,8 +27,6 @@
 						<!-- 了解更多 -->
 						<view class="uni-media-more">了解更多</view>
 					</view>
-					<!-- 加载更多 -->
-					<view class="load-more">{{ loadtext }}</view>
 				</scroll-view>
 			</swiper-item>
 		</swiper>
@@ -42,7 +40,48 @@ export default {
 			//导航下标
 			tabIndex: 0,
 			//导航栏内容
-			title: [],
+			tabBars: [
+				{
+				id: 'index',
+				text: "新品发布"
+				},
+				 {
+				id: 'index',
+				text: "小米众筹"
+				},
+				 {
+				id: 'index',
+				text: "以旧换新"
+				},
+				{
+				id: 'index',
+				text: "一分换团"
+				},
+				{
+				id: 'index',
+				text: "超值特卖"
+				},
+				 {
+				id: 'index',
+				text: "小米秒杀"
+				},
+				{
+				id: 'index',
+				text: "真心想要"
+				},
+				 {
+				id: 'index',
+				text: "电视热卖"
+				},
+				{
+				id: 'index',
+				text: "家电热卖"
+				},
+				 {
+				id: 'index',
+				text: "米粉卡"
+				}
+			],
 			//内容
 			num: 10,
 			//父盒高度
@@ -53,10 +92,12 @@ export default {
 			productList: [],
 			//循环遍历拿到的数组数据
 			productLists: [],
-			// 加载更多
-			loadtext: '上拉加载更多',
 			//加载更多图片的下标
-			splnum: 0
+			splnum: 0,
+			//判断加载
+			wans: true,
+			//设置导航栏左边距离
+			scrollLeft: 0
 		};
 	},
 	onLoad(option) {
@@ -65,9 +106,11 @@ export default {
 			success: res => {
 				//屏幕总高度
 				this.swiperheight_all = res.windowHeight;
+				//console.log(res)
 				//console.log(this.swiperheight_all,11)
 				let info = uni.createSelectorQuery().select('.swiper-box');
 				info.boundingClientRect(data => {
+					//console.log(data,111)
 					//显示高度
 					this.swiperheight_s = data.height;
 					//console.log(this.swiperheight_s,12)
@@ -76,7 +119,8 @@ export default {
 		}),
 			//首页传过来的index,赋值，传过来的index对应导航栏的下标
 			(this.tabIndex = option.index);
-		console.log(this.tabIndex);
+		//this.onMove(option)
+		//console.log(option)
 	},
 	created() {
 		this.changShow();
@@ -84,20 +128,21 @@ export default {
 	methods: {
 		//加载更多
 		loadmore(index) {
-			console.log(this.loadtext);
-			if (this.loadtext == '上拉加载更多') {
-				//修改状态
-				this.loadtext = '加载中...';
-				//获取数据
+			// 判断当true的时候加载一个
+			if (this.wans) {
 				let that = this;
+				// 然后更改状态
+				that.wans = false;
+				//获取数据
 				setTimeout(() => {
 					let obj = that.productLists;
-					console.log(obj);
+					//console.log(obj);
 					//每次刷新加载数据，把新数据加进去
 					that.productLists = that.productLists.concat(obj.slice(that.splnum, that.splnum + 1));
-					console.log(that.productLists);
-					that.loadtext = '上拉加载更多';
-				}, 2000);
+					//console.log(that.productLists);
+					// 加载之后重新true
+					that.wans = true;
+				}, 1000);
 				//自增
 				that.splnum++;
 				// 数据里面只有6张图片,所以我们加个判断
@@ -108,20 +153,65 @@ export default {
 				return;
 			}
 		},
-		//导航栏绑定样式
-		tabtap(index) {
-			this.tabIndex = index;
+		//滑动事件
+		async tabChange(e) {
+			//取到下标
+			let index = e.target.current;
+			let tabBar = await this.getElSize('tab-bar'),
+				tabBarScrollLeft = tabBar.scrollLeft;
+				//元素宽度
+			let width = 0;
+
+			for (let i = 0; i < index; i++) {
+				let result = await this.getElSize(this.tabBars[i].id);
+				width += result.width;
+			}
+			//宽度计算
+			//屏幕总宽度
+			let winWidth = uni.getSystemInfoSync().windowWidth,
+				nowElement = await this.getElSize(this.tabBars[index].id),
+				nowWidth = nowElement.width;
+			if (width + nowWidth - tabBarScrollLeft > winWidth) {
+				this.scrollLeft = width + nowWidth - winWidth;
+			}
+			if (width < tabBarScrollLeft) {
+				this.scrollLeft = width;
+			}
+			//index赋值
+			this.tabIndex = index; 
 		},
-		//滑动切换swiper
-		tabChange(e) {
-			this.tabIndex = e.detail.current;
+		//得到元素的size
+		getElSize(id) {
+			return new Promise((res, rej) => {
+				//获取到绑定的id
+				uni.createSelectorQuery().select('#' + id).fields(
+						{
+							size: true,
+							scrollOffset: true
+						},
+						data => {
+							//拿到数据
+							res(data);
+							//console.log(data,11)
+						}
+					).exec();
+			});
+		},
+		//点击事件
+		async tabtap(e) {
+			//绑定index
+			this.tabIndex = e.currentTarget.dataset.current;
+				let tabBar = await this.getElSize("tab-bar"),
+				//点击的时候记录并设置scrollLeft
+				tabBarScrollLeft = tabBar.scrollLeft; 
+				//console.log(tabBarScrollLeft)
+				this.scrollLeft = tabBarScrollLeft;
 		},
 		//去购物车
-		goShop() {
-			uni.switchTab({
-				url: '/pages/shopcar/shopcar'
+		goShop(e) {
+			uni.navigateTo({
+				url: '/components/Uni-Particulars/uni-particulars?id='+e
 			});
-			console.log(112)
 		},
 		//拿数据
 		async changShow() {
@@ -129,14 +219,14 @@ export default {
 				url: 'http://ceshi3.dishait.cn/api/index_category/data'
 			});
 			//导航栏
-			this.title = res.data.data.data[1].data;
+			//this.tabBars = res.data.data.data[1].data;
 			// 加载更多
 			this.productList = res.data.data.data[4].data;
 			//通过循环遍历
 			for (let i in this.productList) {
 				this.productLists.push(this.productList[i]);
 			}
-			console.log(this.productLists);
+			//console.log(this.productLists);
 		}
 	}
 };
@@ -166,13 +256,13 @@ export default {
 }
 .uni-tab-item {
 	display: inline-block;
-	padding-left: 34upx;
-	padding-right: 34upx;
+	text-align: center;
+	width: 185rpx;
 }
 
 .uni-tab-item-title {
+	text-align: center;
 	color: #555;
-	font-size: 30upx;
 	height: 80upx;
 	line-height: 80upx;
 	padding: 10rpx 0;
