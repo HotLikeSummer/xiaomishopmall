@@ -15,7 +15,7 @@
 									</view>
 								</view>
 								<view class='goods-image'>
-									<image src="/static/images/demo/list/1.jpg" ></image>
+									<image src="/static/images/demo/list/1.jpg"></image>
 								</view>
 								<view class='good-info'>
 									<view class='name'>{{item.name}}</view>
@@ -36,15 +36,15 @@
 						</view>
 					</view>
 				</view>
-				<!-- 加入购物车组件 -->
-				<shopcartCard :arr="sendData"></shopcartCard>
-				<!-- 没有商品信息 -->
-				<view v-if='goodInfo.length<=0' class="noGoods">
-					<view class="noGoodscon">
-						<view class="iconfont shopcarIcon">&#xe64c;</view>
-						<view class="shopcarTxt">购物车还是空的</view>
-						<view class="toShopping" @click="goShopping">去逛逛</view>
-					</view>
+			</view>
+			<!-- 加入购物车组件 -->
+			<shopcartCard :arr="sendData"></shopcartCard>
+			<!-- 没有商品信息 -->
+			<view v-if='goodInfo.length<=0' class="noGoods">
+				<view class="noGoodscon">
+					<view class="iconfont shopcarIcon">&#xe64c;</view>
+					<view class="shopcarTxt">购物车还是空的</view>
+					<view class="toShopping" @click="goShopping">去逛逛</view>
 				</view>
 			</view>
 		</view>
@@ -61,11 +61,13 @@
 <script>
 	import amount from "@/components/shopping/amount.vue"
 	import shopcartCard from "@/components/shopcartCard/shopcartCard.vue"
-	import {mapState} from 'vuex'
+	import {
+		mapState
+	} from 'vuex'
 	export default {
 		data() {
 			return {
-				sendData:[],//组件传输数据
+				sendData: [], //组件传输数据
 			}
 		},
 		components: {
@@ -73,33 +75,33 @@
 			shopcartCard
 		},
 		methods: {
-			toggleCard(i) {//传输商品信息
-				this.togglepop=!this.togglepop//更改模态框弹出状态
-				this.sendData=[i,this.togglepop]//传输商品信息和弹出状态
+			toggleCard(i) { //传输商品信息
+				this.togglepop = !this.togglepop //更改模态框弹出状态
+				this.sendData = [i, this.togglepop] //传输商品信息和弹出状态
 			},
-			change(event,obj){//改变商品数量
-				obj.num=event;
+			change(event, obj) { //改变商品数量
+				obj.num = event;
 			},
-			check(obj){//更改商品选中状态
-				obj.checked=!obj.checked;
+			check(obj) { //更改商品选中状态
+				obj.checked = !obj.checked;
 			},
-			goShopping(){
-				uni.switchTab({//跳转到首页
-					url:'/pages/index/index'
+			goShopping() {
+				uni.switchTab({ //跳转到首页
+					url: '/pages/index/index'
 				})
 			},
-			goLogin(){
+			goLogin() {
 				uni.navigateTo({ //跳转登录页面
 					//url: '/pages/type/particulars/particulars?',
 				});
 			}
 		},
-		computed:{//展开state对象，获取相关属性
-			...mapState(['goodInfo','editing','allChecked','logined'])
+		computed: { //展开state对象，获取相关属性
+			...mapState(['goodInfo', 'editing', 'allChecked', 'logined'])
 		},
-		watch:{
-			allChecked(newval){//监听全选状态，使所有商品的选择状态与全选状态一致
-				this.goodInfo.forEach(i=>i.checked=newval)
+		watch: {
+			allChecked(newval) { //监听全选状态，使所有商品的选择状态与全选状态一致
+				this.goodInfo.forEach(i => i.checked = newval)
 			}
 		}
 	}
@@ -118,26 +120,12 @@
 		box-sizing: border-box;
 		overflow: hidden;
 	}
-	
-
-	.car-prod {
-		float: left;
-		border-radius: 0;
-		font-size: 30rpx;
-		box-sizing: border-box;
-		width: 50px;
-		background-color: #e64340;
-		color: #fff;
-		text-align: center;
-		height: 260rpx;
-		line-height: 260rpx;
-	}
 
 	.infobox {
 		position: relative;
 		height: 100rpx;
 	}
-	
+
 	/* 商品卡片 */
 	.goods-info {
 		float: left;
@@ -155,22 +143,26 @@
 	.goods-info-inner .checkbox {
 		width: 120rpx;
 	}
+
 	/* 选中按钮 */
-	.checkbox{
+	.checkbox {
 		height: 220rpx;
 		display: flex;
 	}
-	.checkIcon{
+
+	.checkIcon {
 		width: 40rpx;
 		height: 40rpx;
 		line-height: 40rpx;
 		border-radius: 50%;
 		margin: auto;
 	}
-	.nocheck{
+
+	.nocheck {
 		border: 1rpx solid #CCCCCC;
 	}
-	.checked{
+
+	.checked {
 		color: #FD6801;
 		font-size: 47rpx;
 	}
@@ -180,7 +172,7 @@
 		width: 220rpx;
 		height: 220rpx;
 		border: 1px solid #CCC;
-		border-radius:5px;
+		border-radius: 5px;
 		display: flex;
 	}
 
@@ -216,7 +208,8 @@
 		box-sizing: border-box;
 		color: #7C858D;
 	}
-	.editing{
+
+	.editing {
 		background-color: #F1F1F1;
 	}
 
@@ -236,30 +229,35 @@
 		height: 90rpx;
 		line-height: 90rpx;
 	}
-	.noGoods{
+
+	.noGoods {
 		width: 100%;
 		height: 200rpx;
 		color: #c9c9c9;
 		font-size: 30rpx;
 		text-align: center;
-		display:flex;
+		display: flex;
 		justify-content: center;
 	}
-	.noGoodscon{
+
+	.noGoodscon {
 		height: 60rpx;
 		margin: auto;
 		display: table;
 	}
-	.noGoodscon view{
+
+	.noGoodscon view {
 		display: table-cell;
 		vertical-align: middle;
 		padding: 0 20rpx;
 	}
-	.shopcarIcon{
+
+	.shopcarIcon {
 		font-size: 50rpx;
 	}
-	.toShopping{
-		color:#000000;
+
+	.toShopping {
+		color: #000000;
 		border: 1rpx solid #CCCCCC;
 		border-radius: 5rpx;
 	}
