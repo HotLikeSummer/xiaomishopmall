@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<!-- 底部占位 -->
-		<view class="uni-tab__cart-box flex">
+		<view class="uni-tab__cart-box flex" v-if="!editing">
 			<view class="flex uni-tab__cart-sub-box">
 				<!-- 全选图标 -->
 				<view class='icon'>
@@ -20,10 +20,25 @@
 				class="flex uni-tab__cart-button-right">{{ buttonGroup.default().text }}</view>
 			</view>
 		</view>
+		<view class="uni-tab__cart-box flex" v-if="editing">
+			<view class="flex uni-tab__cart-sub-box">
+				<!-- 全选图标 -->
+				<view class='icon'>
+					<view class="checkIcon" :class="allChecked?'':'nocheck'"  @click="allCheck">
+						<text class="iconfont checked" v-if="allChecked">&#xe623;</text>
+					</view>
+				</view>
+				<view class="total">
+					<text>收藏:</text>
+					<text class="cost">￥{{total}}</text>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import {mapState} from 'vuex'
 	import {mapGetters} from 'vuex'
 	export default {
 		data() {
@@ -42,17 +57,16 @@
 					type: Boolean,
 					default: false
 				},
-				allChecked: false,//全选判断
 			}
 		},
 		methods: {
 			allCheck(){//全选
 				this.$store.dispatch('allCheck')
-				this.allChecked=this.$store.state.allChecked
 			}
 		},
 		props:['goodCost'],
 		computed: {
+			...mapState(['editing','allChecked']),
 			...mapGetters(["total"])
 		}
 	}

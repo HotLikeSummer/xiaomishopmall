@@ -72,5 +72,5 @@ export default {
 		num:1,
 		checked:false
 	}],
-	total:0
+	total:0,
 }

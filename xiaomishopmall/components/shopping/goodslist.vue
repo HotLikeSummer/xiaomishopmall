@@ -52,12 +52,11 @@
 <script>
 	import amount from "@/components/shopping/amount.vue"
 	import shopcartCard from "@/components/shopcartCard/shopcartCard.vue"
+	import {mapState} from 'vuex'
 	export default {
-		props:['editing','allChecked'],//接收编辑状态信息，全选状态信息
 		data() {
 			return {
 				sendData:[],//组件传输数据
-				goodInfo:this.$store.state.goodInfo
 			}
 		},
 		components: {
@@ -81,12 +80,12 @@
 				})
 			}
 		},
+		computed:{
+			...mapState(['goodInfo','editing','allChecked'])
+		},
 		watch:{
-			editing(){//监听编辑状态
-				console.log(this.editing)
-			},
-			allChecked(){//监听全选状态
-				this.goodInfo.forEach(item=>item.checked=this.$store.state.allChecked)//令所有商品的选中状态与全选状态一致
+			allChecked(newval){
+				this.goodInfo.forEach(i=>i.checked=newval)
 			}
 		}
 	}

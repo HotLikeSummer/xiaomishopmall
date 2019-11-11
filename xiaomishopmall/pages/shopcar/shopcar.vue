@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<!-- 商品列表组件 -->
-		<goodslist :editing="editing" :allChecked='$store.state.allChecked'></goodslist>
+		<goodslist></goodslist>
 		<view class="goods-carts">
 			<!-- 购物车导航组件 -->
 			<goodsnav/>
@@ -38,6 +38,7 @@
 <script>
 	import goodslist from "@/components/shopping/goodslist.vue"
 	import goodsnav from "@/components/shopping/goodsnav.vue"
+	import {mapState} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -45,7 +46,6 @@
 				name: "我的购物车",
 				productList: [],//数据列表
 				renderImage: false,
-				editing: false, //编辑状态
 			}
 		},
 
@@ -130,11 +130,14 @@
 			this.loadData();
 		},
 		onNavigationBarButtonTap(e) { //点击编辑触发方法
-			this.editing = !this.editing //改变编辑状态
+			this.$store.state.editing = !this.$store.state.editing //改变编辑状态
 			let webView = this.$mp.page.$getAppWebview();//在APP中获取顶部导航栏的信息
 			//使用setTitleNViewButtonStyle方法更改导航栏按钮的属性值
 			//用三目运算符判断editing编辑状态，更改对应的按钮文字
 			webView.setTitleNViewButtonStyle(0,{text: this.editing?'完成':'编辑'})
+		},
+		computed:{
+			...mapState(['editing','allChecked'])
 		}
 	}
 </script>
@@ -145,8 +148,8 @@
 	.goods-carts {
 		position: fixed;
 		width: 100%;
-		/* bottom: 0px;*/
-		bottom: 49px;
+		bottom: 0px;
+		/* bottom: 49px; */
 		background-color: #FFFFFF;
 		border-bottom: #CCCCCC;
 		z-index: 99;
