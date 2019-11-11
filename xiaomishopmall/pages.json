@@ -167,17 +167,7 @@
 		},{
 		    "path" : "pages/user/userlist/edit-address",
 		    "style": {
-		    	"navigationBarTitleText":"编辑收货地址",
-				"app-plus":{
-					"titleNView":{
-						"buttons":[{
-							"color": "#555555",
-							"float": "right",
-							"fontSize": "17px",
-							"text": "删除"
-						}]
-					}
-				}
+		    	"navigationBarTitleText":"编辑收货地址"
 		    }
 		},{
 		    "path" : "pages/user/userlist/changePsd",

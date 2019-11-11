@@ -3,27 +3,27 @@
 	<view id="editAddress">
 		<view class="consignee">
 			<text>收货人：</text>
-			<input type="text" @input="onKeyInput" class="input"/>
+			<input type="text" v-model="info.name" class="input" />
 		</view>
 		<view class="phone">
 			<text>手机号码：</text>
-			<input type="text" @input="onKeyInput" class="input"/>
+			<input type="text" v-model="info.phone" class="input" />
 		</view>
 		<view class="area">
 			<text>所在地区：</text>
-			<input type="text" @input="onKeyInput" class="input"/>
+			<input type="text" v-model="info.area" class="input" />
 		</view>
 		<view class="address">
 			<text>详细地址：</text>
-			<input type="text" @input="onKeyInput" class="input"/>
+			<input type="text" v-model="info.address" class="input" />
 		</view>
 		<view class="default-ars">
-			<text>设为默认地址：</text>			
-			<switch checked />
+			<text>设为默认地址：</text>
+			<switch color="#FE6901" @change="check" :checked="info.change"/>
 		</view>
 		<!-- 保存 -->
-		<view class="save">
-			<text>保存</text>
+		<view class="save" >
+			<text @tap="save">保存</text>
 		</view>
 	</view>
 </template>
@@ -31,13 +31,29 @@
 	export default {
 		data() {
 			return {
-				inputValue: ''
+				info:{
+					name:"",
+					phone:"",
+					area:"",
+					address:"",
+					change:false
+				},
 			}
 		},
 		methods: {
-			onKeyInput: function(event) {
-				this.inputValue = event.target.value
+			save(){
+				// uni.setStorageSync('info', JSON.stringify(this.info));
+				uni.navigateTo({
+					url:"addresslist?msg="+JSON.stringify(this.info)+""
+				})
+			},
+			check(e){
+				this.info.change=e.detail.value
 			}
+		},
+		onLoad(e) {
+			this.info=JSON.parse(e.newmsg)
+			console.log(this.info)
 		}
 	}
 </script>
@@ -54,7 +70,8 @@
 		background-color: #EEEEEE;
 		font-size: 60upx;
 	}
-/* 地址信息 */
+
+	/* 地址信息 */
 	.consignee,
 	.phone,
 	.area,
@@ -66,6 +83,8 @@
 		border-bottom: 1upx solid #E0E0E0;
 		text-indent: 1em;
 		background-color: white;
+		display: flex;
+		justify-content: space-between;
 	}
 
 	.phone,
@@ -73,16 +92,19 @@
 		border-bottom: none;
 		margin-bottom: 20upx;
 	}
+
 	.default-ars {
 		height: 120upx;
 		line-height: 120upx;
 	}
-	.default-ars switch{
+
+	.default-ars switch {
 		float: right;
 		margin-right: 17upx;
 	}
+
 	/* 保存 */
-	.save text{
+	.save text {
 		display: block;
 		margin: 30upx;
 		height: 80upx;
@@ -91,15 +113,17 @@
 		text-align: center;
 		color: white;
 	}
+
 	/* 输入 */
-	.input{
-		float: right;
-		margin-top:20upx;
-		height:60upx;
-		width:78%;
-		text-indent:0em;
+	.input {
+		margin-top: 20upx;
+		height: 60upx;
+		width: 75%;
+		text-indent: 0em;
+		margin-right: 10upx;
 	}
-	.consignee .input{
-		width:81%;
+
+	.consignee .input {
+		width: 77%;
 	}
 </style>

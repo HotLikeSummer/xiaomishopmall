@@ -14,7 +14,7 @@
 		</view>
 		<view class="myOrder">
 			<!-- 我的订单 -->
-			<view class="order-tit" @tap="toOrder">
+			<view class="order-tit" @tap="toOrder(0)">
 				<text class="lt-order">我的订单</text>
 				<view class="rt-order">
 					<text>全部订单</text>
@@ -106,7 +106,7 @@
 			},
 			toOrder(){
 				uni.navigateTo({
-					url: "userlist/myOrder"
+					url: "userlist/myOrder?current=0"
 				})
 			}
 		}

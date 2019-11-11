@@ -63,18 +63,19 @@
 	}
 	.problem{
 		background-color: white;
-		color: #D1D1D1;
 		margin: 20upx;
 		border-radius: 15upx;
 	}
 	.icon-paizhao{
 		font-size: 55upx;
-		color: #555555;
+		color: #D1D1D1;
 	}
+	/* 上传 */
 	.upload{
 		display: flex;
 		justify-content: space-between;
 		padding: 40upx;
+		color: #D1D1D1;
 	}
 	.txt{
 		margin-top: 146upx;

@@ -1,6 +1,6 @@
 <template>
 	<view id="evaluate">
-		<view class="main" style="display:flex">
+		<view class="main" style="display:flex" v-show="datas.length==0">
 			<view class="nothing">
 				<image :src="img" mode=""></image>
 				<view class="txt">您还没有待评价订单</view>
@@ -15,12 +15,13 @@
 				img: "/static/images/nothing/no_comment.png"
 			}
 		},
+		props: ["datas"],
 	}
 </script>
 <style>
 	.main{
 		width:100%;
-		height:420upx;
+		height:600upx;
 		background-color: #F5F5F5;
 	}
 	.nothing {
