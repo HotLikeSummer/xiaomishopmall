@@ -11,19 +11,20 @@
 				</view>
 				<view class="total">
 					<text>合计:</text>
-					<text class="cost">￥{{this.$store.getters.total}}</text>
+					<text class="cost">￥{{total}}</text>
 				</view>
 			</view>
 			<!-- 合计按钮 -->
 			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box ">
-				<view :style="{backgroundColor:buttonGroup.default().backgroundColor,color:buttonGroup.default().color}" class="flex uni-tab__cart-button-right"
-				 @click="costTotal">{{ buttonGroup.default().text }}</view>
+				<view :style="{backgroundColor:buttonGroup.default().backgroundColor,color:buttonGroup.default().color}" 
+				class="flex uni-tab__cart-button-right">{{ buttonGroup.default().text }}</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {mapGetters} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -50,7 +51,10 @@
 				this.allChecked=this.$store.state.allChecked
 			}
 		},
-		props:['goodCost']
+		props:['goodCost'],
+		computed: {
+			...mapGetters(["total"])
+		}
 	}
 </script>
 

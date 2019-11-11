@@ -88,15 +88,15 @@
 			},
 			colorChange(i){
 				this.colorIndex=i;
-				this.goodinfo.kind.color=i
+				this.goodinfo.kind.color=this.goodsColor[i]
 			},
 			containChange(i){
 				this.containIndex=i;
-				this.goodinfo.kind.capacity=i
+				this.goodinfo.kind.capacity=this.goodsContain[i]
 			},
 			suitChange(i){
 				this.suitIndex=i;
-				this.goodinfo.kind.suit=i
+				this.goodinfo.kind.suit=this.goodsSuit[i]
 			}
 		}
 	}

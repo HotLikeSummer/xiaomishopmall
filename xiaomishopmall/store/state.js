@@ -3,70 +3,70 @@ export default {
 	loginProvider: "",
 	openid: null,
 	testvuex: false,
-	editing:false, //±à¼­×´Ì¬
-	allChecked:false, //È«Ñ¡×´Ì¬,
-	goodInfo:[{ //ÉÌÆ·ĞÅÏ¢
+	editing:false, //ç¼–è¾‘çŠ¶æ€
+	allChecked:false, //å…¨é€‰çŠ¶æ€,
+	goodInfo:[{ //å•†å“ä¿¡æ¯
 		id:0,
-		name:"»ªÎªmatax210",
+		name:"åä¸ºmatax210",
 		kind:{
-			color:"»ğÑæºì",
+			color:"ç«ç„°çº¢",
 			capacity:"64GB",
-			suit:"±êÅä"
+			suit:"æ ‡é…"
 		},
 		price:3541,
 		num:1,
 		checked:false
 	},{
 		id:1,
-		name:"»ªÎªmatax210",
+		name:"åä¸ºmatax210",
 		kind:{
-			color:"»ğÑæºì",
+			color:"ç«ç„°çº¢",
 			capacity:"64GB",
-			suit:"±êÅä"
+			suit:"æ ‡é…"
 		},
 		price:3541,
 		num:1,
 		checked:false
 	},{
 		id:2,
-		name:"»ªÎªmatax210",
+		name:"åä¸ºmatax210",
 		kind:{
-			color:"»ğÑæºì",
+			color:"ç«ç„°çº¢",
 			capacity:"64GB",
-			suit:"±êÅä"
+			suit:"æ ‡é…"
 		},
 		price:3541,
 		num:1,
 		checked:false
 	},{
 		id:3,
-		name:"»ªÎªmatax210",
+		name:"åä¸ºmatax210",
 		kind:{
-			color:"»ğÑæºì",
+			color:"ç«ç„°çº¢",
 			capacity:"64GB",
-			suit:"±êÅä"
+			suit:"æ ‡é…"
 		},
 		price:3541,
 		num:1,
 		checked:false
 	},{
 		id:4,
-		name:"»ªÎªmatax210",
+		name:"åä¸ºmatax210",
 		kind:{
-			color:"»ğÑæºì",
+			color:"ç«ç„°çº¢",
 			capacity:"64GB",
-			suit:"±êÅä"
+			suit:"æ ‡é…"
 		},
 		price:3541,
 		num:1,
 		checked:false
 	},{
 		id:5,
-		name:"»ªÎªmatax210",
+		name:"åä¸ºmatax210",
 		kind:{
-			color:"»ğÑæºì",
+			color:"ç«ç„°çº¢",
 			capacity:"64GB",
-			suit:"±êÅä"
+			suit:"æ ‡é…"
 		},
 		price:3541,
 		num:1,

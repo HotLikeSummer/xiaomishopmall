@@ -14,7 +14,7 @@
 								</view>
 							</view>
 							<view class='goods-image'>
-								<image src="/static/images/demo/list/1.jpg"  @click="test"></image>
+								<image src="/static/images/demo/list/1.jpg" ></image>
 							</view>
 							<view class='good-info'>
 								<view class='name'>{{item.name}}</view>
@@ -38,8 +38,12 @@
 			<!-- 加入购物车组件 -->
 			<shopcartCard :arr="sendData"></shopcartCard>
 			<!-- 没有商品信息 -->
-			<view v-if='1==0'>
-				购物车空空如也，赶紧去挑选你心意的产品吧~~~~~
+			<view v-if='goodInfo.length<=0' class="noGoods">
+				<view class="noGoodscon">
+					<view class="iconfont shopcarIcon">&#xe64c;</view>
+					<view class="shopcarTxt">购物车还是空的</view>
+					<view class="toShopping" @click="goShopping">去逛逛</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -52,9 +56,8 @@
 		props:['editing','allChecked'],//接收编辑状态信息，全选状态信息
 		data() {
 			return {
-				phoneHeight: 0,
 				sendData:[],//组件传输数据
-				goodInfo:[]
+				goodInfo:this.$store.state.goodInfo
 			}
 		},
 		components: {
@@ -71,6 +74,11 @@
 			},
 			check(obj){//更改商品选中状态
 				obj.checked=!obj.checked;
+			},
+			goShopping(){
+				uni.switchTab({
+					url:'/pages/index/index'
+				})
 			}
 		},
 		watch:{
@@ -80,9 +88,6 @@
 			allChecked(){//监听全选状态
 				this.goodInfo.forEach(item=>item.checked=this.$store.state.allChecked)//令所有商品的选中状态与全选状态一致
 			}
-		},
-		created() {
-			this.goodInfo=this.$store.state.goodInfo
 		}
 	}
 </script>
@@ -216,5 +221,32 @@
 	.goods-info-inner .good-info {
 		height: 90rpx;
 		line-height: 90rpx;
+	}
+	.noGoods{
+		width: 100%;
+		height: 200rpx;
+		color: #c9c9c9;
+		font-size: 30rpx;
+		text-align: center;
+		display:flex;
+		justify-content: center;
+	}
+	.noGoodscon{
+		height: 60rpx;
+		margin: auto;
+		display: table;
+	}
+	.noGoodscon view{
+		display: table-cell;
+		vertical-align: middle;
+		padding: 0 20rpx;
+	}
+	.shopcarIcon{
+		font-size: 50rpx;
+	}
+	.toShopping{
+		color:#000000;
+		border: 1rpx solid #CCCCCC;
+		border-radius: 5rpx;
 	}
 </style>
