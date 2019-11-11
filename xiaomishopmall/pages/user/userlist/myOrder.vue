@@ -57,7 +57,6 @@
 	import evaluate from '@/components/user/evaluate.vue';
 	import payment from '@/components/user/payment.vue';
 	import takeGoods from '@/components/user/take-goods.vue';
-	import nothing from '@/components/user/nothing.vue';
 	export default {
 		components: {
 			all,
