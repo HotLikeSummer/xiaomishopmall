@@ -27,5 +27,8 @@ export default {
 	},
 	getinfo(state,e){
 		state.accountInfo.push(e)
+	},
+	getgood(state,good){
+		state.good=good;
 	}
 }

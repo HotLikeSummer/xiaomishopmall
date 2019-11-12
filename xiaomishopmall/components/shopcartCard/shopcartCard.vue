@@ -6,12 +6,12 @@
 				<view class="goods">
 					<view class="topInfo">
 						<view class="goodsImg">
-							<image src="/static/images/demo/cate_01.png"></image>
+							<image :src="good.cover"></image>
 						</view>
 						<view class="goods_info">
 							<!-- 已选商品信息 -->
-							<view class="goodsPrice">￥<text>3349</text></view>
-							<view class="selectedInfo">{{goodinfo.color}} {{goodinfo.capacity}} {{goodinfo.suit}}</view>
+							<view class="goodsPrice">￥<text>{{good.min_price}}</text></view>
+							<view class="selectedInfo">{{goodsColor[colorIndex]}} {{goodsContain[containIndex]}} {{goodsSuit[suitIndex]}}</view>
 						</view>
 					</view>
 					<view class="midInfo">
@@ -46,12 +46,13 @@
 					</view>
 				</view>
 			</view>
-			<view class="intoCart" @click="jointoCart(goodinfo)">加入购物车</view>
+			<view class="intoCart" @click="addshopCard">加入购物车</view>
 		</uni-popup>
 	</view>
 </template>
 
 <script>
+	import {mapState} from "vuex"
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import amount from "@/components/shopping/amount.vue"
 	export default {
@@ -64,62 +65,70 @@
 				goodsColor:["火焰红","炭黑","冰川蓝"],
 				goodsContain:["64GB","128GB"],
 				goodsSuit:["标配","套餐一","套餐二"],
-				goodinfo:{},
+				goodinfo:{},//商品信息
 			};
 		},
 		components: {
 			uniPopup,
 			amount
 		},
+		computed:{
+			...mapState(["goodInfo","good"])
+		},
 		props:["arr"],//接收商品信息
 		watch:{
 			arr(newarr){//监听商品信息变化，改变模态框弹出状态
-				this.goodinfo=this.arr[0] //接收商品信息
+				this.goodinfo=this.arr[0]
 				this.showUp();
 			}
 		},
 		methods:{
 			showUp(){//弹出模态框
-				this.resetIndex() //使弹出框按钮与商品配置一致
 				this.type = 'bottom'
-				this.$refs['popup'].open(); //弹出弹框
+				this.$refs['popup'].open();
 			},
-			resetIndex(){ //更改商品配置
-				this.colorIndex=this.goodsColor.indexOf(this.goodinfo.kind.color)
-				this.containIndex=this.goodsContain.indexOf(this.goodinfo.kind.capacity)
-				this.suitIndex=this.goodsSuit.indexOf(this.goodinfo.kind.suit)
-			},
-			changed(val){ //变更商品数量
+			changed(val){
 				this.goodinfo.num=val;
 			},
-			colorChange(i){ //改变颜色选择按钮样式，并改变选中商品配置
+			colorChange(i){
 				this.colorIndex=i;
 				this.goodinfo.kind.color=this.goodsColor[i]
 			},
-			containChange(i){ //改变容量选择按钮样式，并改变选中商品配置
+			containChange(i){
 				this.containIndex=i;
 				this.goodinfo.kind.capacity=this.goodsContain[i]
 			},
-			suitChange(i){ //改变套餐选择按钮样式，并改变选中商品配置
+			suitChange(i){
 				this.suitIndex=i;
 				this.goodinfo.kind.suit=this.goodsSuit[i]
 			},
-			jointoCart(obj){ //加入购物车
-				this.$store.dispatch('jointoCart',obj) //调用加入购物车方法，将商品信息以对象方式传输
+			addshopCard(){
+				this.good.kind=this.goodInfo[0].kind;
+				this.good.checked=this.goodInfo[0].checked;
+				this.good.num=this.goodInfo[0].num;
+				this.goodInfo.push(this.good);
+				if(this.goodInfo.indexOf(this.good)==-1){
+					this.goodInfo.push(this.good);
+					
+				}else{
+					this.goodInfo.num++
+				}
+				console.log(this.good);
+				console.log(this.goodInfo);
 				this.type = 'bottom'
-				this.$refs['popup'].close(); //关闭弹框
+				this.$refs['popup'].close();
 			}
-		}
+		},
+		
 	}
 </script>
 
 <style>
-	/* 弹框框体 */
 	.modaiBox {
 		width: 100%;
 		bottom: 90rpx;
 	}
-	/* 弹框内容 */
+
 	.modaiCon {
 		width: 100%;
 		/* height:50%; */
@@ -202,7 +211,6 @@
 	.infoBtn:last-child{
 		margin-right: 0;
 	}
-	/* 高亮按钮样式 */
 	.btn-active{
 		color: #FD6801;
 		background-color: #FCE0D5;

@@ -1,44 +1,28 @@
 <template>
 	<!-- 商品详情页 -->
 	<view id="particulars">
-		<!-- 顶部图片 -->
-		<view class="top-imgs">
-			<image src="/static/images/demo/list/1.jpg"></image>
-			<view class="arrowicons">
-				<uni-icons type="arrowleft" size="22" class="iconsleft" color="white" @click="GoBack"></uni-icons>
-				<uni-icons type="more-filled" size="22" class="iconsright" color="white"></uni-icons>
-			</view>
-		</view>
 		<!-- 商品文字详情 -->
 		<view class="bottom-text">
-			<view>
-				<text class="title">小米MIX3 6GB+128GB</text>
-			</view>
-			<view>
-				<text class="describe">磁动力全面滑动屏/前后期间AI双摄/四曲面彩色陶瓷机身/高校10w无线充电</text>
-			</view>
-			<view style="margin-top: 30upx;">
-				<text class="price">￥3299</text>
-			</view>
+
 			<!-- cpu横向滚动 @scroll="Scroll"-->
 			<view class="processor">
-				<scroll-view class="scroll-h" scroll-x="true" >
-					<view v-for="(item,index) in iconscpu" class="scroll-box " :key="index">
+				<scroll-view class="scroll-h" scroll-x="true">
+					<view v-for="(item,index) in 6" class="scroll-box " :key="index">
 						<view class="iconfont icon-cpu scroll-cpu"></view>
-						<view class="scroll-cpu">{{item}}</view>
+						<view class="scroll-cpu">CPU</view>
 						<view class="scroll-cpu">绞龙845八核</view>
 					</view>
 				</scroll-view>
 			</view>
 			<!-- 列表 -->
 			<view class="uni-list">
-				<view class="selected list" @click="shopCart(1)">已选
+				<view class="selected list" @click="shopCart(good)">已选
 					<text>火焰红</text>
 					<text>64G</text>
 					<text>标配</text>
 					<uni-icons type="arrowright" size="22" class="listright"></uni-icons>
 				</view>
-				<view class="delivery list"  @click="DeliveryShow">配送
+				<view class="delivery list" @click="DeliveryShow">配送
 					<text>北京</text>
 					<text>东城区</text>
 					<text style="color: #FD6801;">有现货</text>
@@ -63,7 +47,7 @@
 								<view class="commentdata">{{item.date}}</view>
 							</view>
 						</view>
-						<view class="comment-right">
+						<view class="comment-right" @click="fabulous(index)" :class="item.index==index && increasenum?'actions':''">
 							<text class="iconfont icon-dianzan"></text>
 							<text>{{item.num}}</text>
 						</view>
@@ -85,7 +69,6 @@
 			<view class="lazyimg">
 				<image v-for="(item,index) in Lazyimages" :key="index" :src="item" class="pics"></image>
 			</view>
-
 		</view>
 		<!-- 为你推荐 -->
 		<view class="recommend">
@@ -112,20 +95,20 @@
 		</view>
 		<!-- 固定定位 -->
 		<view class="fiex">
-			<view class="xihuan">
-				<view class="iconfont icon-xihuan"></view>
-				<text>收藏</text>
+			<view class="xihuan" @click="collected">
+				<view class="iconfont icon-xihuan" :class="fiexcolor?'active':''"></view>
+				<text :class="fiexcolor?'active':''">{{collecteds}}</text>
 			</view>
-			<view class="xihuan" @click="Toshop">
+			<view class="xihuan" @click="toShop">
 				<view class="iconfont icon-gouwuche1"></view>
 				<text>购物车</text>
 			</view>
-			<view class="gouwuche" @click="shopCart(1)">加入购物车</view>
+			<view class="gouwuche" @click="shopCart(good)">加入购物车</view>
 		</view>
 		<!-- 详服务说明详情页固定定位 -->
 		<view v-show="showLeft" class="animat">
 			<!-- 遮罩层 -->
-			<view class="shadow" v-show="showLeft" @click="confim"></view>
+			<view class="shadow" @click="confim"></view>
 			<view class="fiexbox">
 				<view class="details-box">
 					<view class="details-box-top">服务说明</view>
@@ -138,7 +121,7 @@
 					</view>
 				</view>
 			</view>
-			
+
 		</view>
 		<!-- 配送详情页 -->
 		<view v-show="showRigth">
@@ -150,24 +133,25 @@
 				<view class="qued" @click="fresh">选择新的地址</view>
 			</view>
 			<!-- 遮罩层 -->
-			<view class="shadow" @click="fresh"></view>
+			<view class="shadow" @click="site"></view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import uniIcons from "@/components/Uni-Icons/uni-icons.vue"
+	import UniIcons from "@/components/Uni-Icons/uni-icons.vue"
 	import shopcartCard from "@/components/shopcartCard/shopcartCard.vue"
+	import {mapState} from "vuex"
 	export default {
 		name: 'UniParticulars',
 		components: {
-			uniIcons,
-			shopcartCard
+			shopcartCard,
+			UniIcons
 		},
 		data() {
 			return {
-				sends: [],//接收子组件数据
-				iconscpu: ["CPU", "CPU", "CPU", "CPU", "CPU", "CPU", "CPU"], //cpu横向滚动
+				shopdata:[],
+				sends: [], //接收子组件数据
 				scrollTop: 0, //窗口顶部距离
 				discussa: [
 					//更多评论部分
@@ -179,7 +163,8 @@
 						tst: "支持帝莎IT学院继续出uni-app实战教程",
 						imgsone: "/static/images/demo/list/2.jpg",
 						imgstow: "/static/images/demo/list/4.jpg",
-						imgsthree: "/static/images/demo/list/2.jpg"
+						imgsthree: "/static/images/demo/list/2.jpg",
+						index:0
 					},
 					{
 						pic: "/static/images/demo/demo6.jpg",
@@ -189,7 +174,8 @@
 						tst: "支持帝莎IT学院继续出uni-app实战教程",
 						imgsone: "/static/images/demo/list/2.jpg",
 						imgstow: "/static/images/demo/list/4.jpg",
-						imgsthree: "/static/images/demo/list/2.jpg"
+						imgsthree: "/static/images/demo/list/2.jpg",
+						index:0
 					}
 				],
 				//懒加载的图片
@@ -222,25 +208,26 @@
 					price: 2199,
 					original: 2699
 				}],
-				Servicenote: ["小米自营", "小米发货", "七天无理由退换", "运费说明"],//服务说明数据
-				showRigth: false, //服务说明显示隐藏
-				showLeft: false,//配送显示隐藏
-				nuss:"",
+				Servicenote: ["小米自营", "小米发货", "七天无理由退换", "运费说明"], //服务说明数据
+				showRigth: false, //配送显示隐藏
+				showLeft: false, //服务说明显示隐藏
+				fiexcolor: false,
+				collecteds: "收藏",
+				increasenum: false,
 			}
 		},
 		methods: {
-// 			Scroll(e) {
-// 				this.scrollTop = e.mp.detail.scrollTop
-// 			},
-			// 跳转到列表页
-			GoBack() {
-				uni.navigateBack({
-					delta: 1
-				});
-			},
 			shopCart(obj) {
-				this.togglepop=!this.togglepop
-				this.sends = [obj,this.togglepop];
+				this.togglepop = !this.togglepop
+				obj.name=obj.title;
+				obj.num=1;
+				obj.kind={
+					color:"火焰红",
+					capacity:"64GB",
+					suit:"标配"
+				}
+				obj.checked=false
+				this.sends = [obj, this.togglepop];
 			},
 			// 服务说明显示
 			ServiceShow() {
@@ -255,26 +242,57 @@
 				this.showLeft = false;
 			},
 			// 收货地址显示
-			DeliveryShow(){
+			DeliveryShow() {
 				if (this.showRigth == false) {
 					this.showRigth = true;
 				} else {
 					this.showRigth == false;
 				}
 			},
-			// 收货说明隐藏
-			fresh(){
+			// 去地址页
+			fresh() {
+				uni.navigateTo({
+					url: '/pages/user/userlist/addresslist',
+				});
+			},
+			//去购物车
+			toShop() {
+				uni.switchTab({
+					url: "/pages/shopcar/shopcar"
+				})
+			},
+			//服务说明隐藏
+			site() {
 				this.showRigth = false;
 			},
-			Toshop(){
-				uni.switchTab({
-					url:"/pages/shopcar/shopcar"
-				})
+			//收藏部分
+			collected() {
+				if (this.fiexcolor == false) {
+					this.fiexcolor = true;
+					this.collecteds = "已收藏"
+				} else {
+					this.fiexcolor = false;
+					this.collecteds = "收藏"
+				}
+			},
+			// 点赞
+			fabulous(index) {
+				if (index == 0) {
+					if (this.increasenum == false) {
+						this.increasenum = true;
+						this.discussa[index].num++;
+						this.discussa.index=0;
+					} else {
+						this.increasenum = false;
+						this.discussa[index].num--;
+					}
+				}else{
+					this.discussa.index=1;
+				}
 			}
 		},
-		onLoad(options) {
-			console.log(options);
-			
+		computed:{
+			...mapState(["good"])
 		}
 	}
 </script>
@@ -284,66 +302,15 @@
 		padding: 0;
 		margin: 0;
 	}
-	
+
 	.bottom-text>>>.modaiBox {
 		bottom: 0rpx !important;
 		width: 100%;
 	}
-
-	.top-imgs {
-		width: 100%;
-		height: 760upx;
-		position: relative;
-		
-	}
-	
-	.top-imgs image {
-		width: 100%;
-		height: 100%;
-	}
-
-	.iconsleft,
-	.iconsright {
-		width: 50upx;
-		height: 50upx;
-		line-height: 50upx;
-		text-align: center;
-		background: black;
-		opacity: 0.4;
-		border-radius: 25upx;
-	}
-
-	.iconsleft {
-		position: absolute;
-		top: 20upx;
-		left: 5upx;
-	}
-
-	.iconsright {
-		position: absolute;
-		top: 20upx;
-		right: 5upx;
-	}
-
 	.bottom-text {
 		padding: 0upx 10upx;
 	}
 
-	.bottom-text .title {
-		font-weight: 500;
-		font-size: 40upx;
-		padding: 10upx 0upx;
-	}
-
-	.bottom-text .describe {
-		color: #929292;
-	}
-
-	.bottom-text .price {
-		font-weight: 500;
-		font-size: 40upx;
-		color: #FD6801;
-	}
 
 	.scroll-box {
 		width: 200upx;
@@ -362,7 +329,7 @@
 		width: 100%;
 		white-space: nowrap;
 	}
-
+	
 	.uni-list {
 		width: 99%;
 		height: 300upx;
@@ -392,7 +359,8 @@
 		float: right;
 		padding-right: 20upx;
 	}
-/* 更多评论 */
+
+	/* 更多评论 */
 	.comment {
 		width: 560upx;
 		height: 420upx;
@@ -406,7 +374,7 @@
 		width: 100%;
 		white-space: nowrap;
 	}
-	
+
 	.comment-top {
 		height: 100upx;
 		line-height: 100upx;
@@ -420,6 +388,10 @@
 	.comment-right {
 		float: right;
 		color: #BEBEBE;
+	}
+
+	.actions {
+		color: #FD6801;
 	}
 
 	.commentpic {
@@ -460,6 +432,7 @@
 		color: #6AA0C0;
 		text-align: center;
 	}
+
 	/* 懒加载 */
 	.lazyimg {
 		width: 100%;
@@ -469,6 +442,7 @@
 		width: 100%;
 		height: 720upx;
 	}
+
 	/* 购物车固定定位 */
 	.fiex {
 		width: 100%;
@@ -480,6 +454,10 @@
 		left: 0;
 		z-index: 10;
 		display: flex;
+	}
+
+	.fiex .active {
+		color: #FD6801;
 	}
 
 	.xihuan {
@@ -540,7 +518,7 @@
 		color: #929292;
 		padding-left: 8upx;
 	}
-	
+
 	.fiexbox {
 		width: 100%;
 		height: 70%;
@@ -552,7 +530,11 @@
 		border-top-left-radius: 5%;
 		border-top-right-radius: 5%;
 	}
-    /* 遮罩层 */
+	.animat{
+		transition: all .3s;
+		transform: translateY(100%);
+	}
+	/* 遮罩层 */
 	.shadow {
 		position: fixed;
 		top: 0;
@@ -593,5 +575,4 @@
 		position: absolute;
 		bottom: 0;
 	}
-	
 </style>

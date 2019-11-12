@@ -1,5 +1,7 @@
 <template>
+	<!-- 当showDrawer为false时隐藏 -->
 	<view v-if="visibleSync" :class="{ 'uni-drawer--visible': showDrawer, 'uni-drawer--right': rightMode }" class="uni-drawer" @touchmove.stop.prevent="moveHandle">
+		<!-- 蒙层部分 -->
 		<view class="uni-drawer__mask" @tap="close" />
 		<view class="uni-drawer__content">
 			<slot />
@@ -35,7 +37,7 @@
 		},
 		data() {
 			return {
-				visibleSync: false,
+				visibleSync: false,//抽屉显示隐藏
 				showDrawer: false,
 				rightMode: false,
 				closeTimer: null,

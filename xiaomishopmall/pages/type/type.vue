@@ -67,9 +67,11 @@
 				uni.navigateTo({
 					url: '../shoplist/shoplist'
 				});
-			}
+			},
+			
 		},
 		onLoad: function () {
+			// this.getdata()
 			this.getCategory();
 			this.height = uni.getSystemInfoSync().windowHeight;
 		},

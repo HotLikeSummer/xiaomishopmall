@@ -18,7 +18,7 @@
 									<image src="/static/images/demo/list/1.jpg"></image>
 								</view>
 								<view class='good-info'>
-									<view class='name'>{{item.name}}</view>
+									<view class='name'>{{item.title}}</view>
 									<view class='kind' @click="toggleCard(item)" :class="editing?'editing':''">
 										<view>
 											{{item.kind.color}} {{item.kind.capacity}} {{item.kind.suit}}
@@ -28,7 +28,7 @@
 										</view>
 									</view>
 									<view class="infobox">
-										<view class='price'>￥{{item.price}}</view>
+										<view class='price'>￥{{item.min_price}}</view>
 										<amount class="numbers" @change="change($event,item)" :value="item.num"></amount>
 									</view>
 								</view>

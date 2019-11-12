@@ -1,28 +1,33 @@
 <template>
+	<!-- 列表页 -->
 	<view id="shoplist">
 		<!-- 顶部导航 -->
 		<view class="nav">
-			<view class="nav-top" v-for="(item,index) in navtopList" :key="index">
-				<text class="nav-top-text" @click="show('right',index)">{{item}}</text>
+			<view class="nav-top" v-for="(item,index) in navtopList" :key="index" @click="sort(index)">
+				<!-- 判断textColor是否等于当前点击下标，等于则文字高亮 -->
+				<text class="nav-top-text" :class="textColor==index?'iconcolor':''">{{item.text}}</text>
 				<view class="iconTesx">
 					<view class="nav-top-icon">
-						<text class="iconfont icon-paixu-shengxu"></text>
-						<text class="iconfont icon-paixu-jiangxu"></text>
+						<!-- 此处item.num==1则升序图标高亮并判断textColor是否等于当前点击下标，等于则当前点击图标高亮 -->
+						<text class="iconfont icon-paixu-shengxu" :class="item.num==1 && textColor==index?'iconcolor':''"></text>
+						<text class="iconfont icon-paixu-jiangxu" :class="item.num==0 && textColor==index?'iconcolor':''"></text>
 					</view>
 				</view>
 			</view>
+			<view class="nav-top-text" @click="show('right',index)">筛选</view>
 		</view>
 		<!-- 商品图文列表 -->
 		<view class="shop-list-box">
-			<view v-for="(item,index) in picTextList" class="picTextLists" :key="index" @click="Particulars(index)">
+			<view v-for="(item,index) in picTextList" class="picTextLists" :key="index" @click="Particulars(item.id)">
 				<view class="shop-list-box-pic">
-					<image :src="item.cover"></image>
+					<image :src="item.pic"></image>
 				</view>
 				<view class="shopping-bottom">
 					<view class="shop-list-box-title">{{item.title}}</view>
-					<view class="classify-text">{{item.desc}}</view>
-					<view class="shop-list-box-price">￥{{item.pprice}}</view>
-					<view style="color: #8C949B;">1348 条评论 98%满意度</view>
+					<view class="classify-text">{{item.text}}</view>
+					<view class="sales">销量:{{item.sales}}</view>
+					<view class="shop-list-box-price">￥{{item.price}}</view>
+					<view>共1599条评论 满意度{{item.review}}%</view>
 				</view>
 			</view>
 			<!-- 引入抽屉组件 -->
@@ -52,24 +57,27 @@
 
 <script>
 	import UniDrawer from "@/components/uni-drawer/uni-drawer.vue"
+	import {mapState} from 'vuex'
 	export default {
 		components: {
 			UniDrawer
 		},
+		 computed:{
+			...mapState(['picTextList'])
+		 },
 		name: 'UniShopList',
 		data() {
 			return {
 				SearchReset: ["重置", "确定"],
-				navtopList: ["综合", "销量", "价格", "筛选"],
-				picTextList: [],//接收数据
+				navtopList: [{text:"综合",num:0},{text:"销量",num:0},{text:"价格",num:0}],
 				Btnone: ["促销", "分期", "仅看有货"],
 				Btntow: ["耳机", "户外", "配件"],
 				Num: 0, //服务按钮
 				Confirm: 0, //分类按钮
 				Reset: 0, // 重置及确定按钮
-				// ShopFixeds:0,
+			    textColor:0,//字体颜色
 				showRigth: false, //抽屉显示隐藏
-				showLeft: false
+				rank:["review","sales","price"],//排序
 			}
 		},
 		methods: {
@@ -99,40 +107,60 @@
 			closeDrawer(e) {
 				if (e === 'right') {
 					this.showRigth = false
-					
-				} else {
-					this.showLeft = false
 				}
 			},
-			// 点击筛选时显示
-			show(e, index) {
-				//当index为3时代表是筛选
-				if (index == 3) {
-					if (e === "right") {
-						this.showRigth = true;
-					}
-				} else {
-					return false
-				}
-			},
+
 			// 跳转到详情页面
 			Particulars(e) {
+				console.log(e);
 				uni.navigateTo({
-					url: '/pages/type/particulars/particulars?id='+e,
+					url: '/pages/type/particulars/particulars?id=' + e,
 				});
 			},
-			// 获取接口数据
-			async shopListShow(){
-				let [error,res] =await uni.request({
-					url: 'http://ceshi3.dishait.cn/api/index_category/data',
-				});
-				let that =this;
-				that.picTextList=res.data.data.data[4].data;
+			show(e, index) {
+				if (e === "right") {
+					this.showRigth = true;
+				}
+			},
+			sort(e){
+				let _this = this;
+				_this.textColor = e;
+				for (let i = 0; i < _this.navtopList.length; i++) {
+					if (e == i) {//当前字体图标
+						if (_this.navtopList[i].num == 0) {
+							this.picTextList=this.picTextList.sort(this.ascending(this.rank[e]))//小到大
+							console.log(this.picTextList)
+							_this.navtopList[i].num = 1;//向上字体图标的颜色变色
+						} else {
+							this.picTextList=this.picTextList.sort(this.descendding(this.rank[e]))//大到小
+							console.log(this.picTextList)
+							_this.navtopList[i].num = 0;//向下字体图标的颜色变色
+						}
+					} else {//其他字体图标
+						_this.navtopList[i].num = 1;
+					}
+				}
+				
+			},
+			// 升序
+			ascending(property){
+				return function(a,b){
+				    var value1 = a[property];
+				    var value2 = b[property];
+				    return value1 - value2;
+				}
+				
+			},
+			// 降序
+			descendding(property){
+				return function(a,b){
+				    var value1 = b[property];
+				    var value2 = a[property];
+				    return value1 - value2;
+				}
 			}
 		},
-		created() {
-			this.shopListShow();
-		}
+		
 	}
 </script>
 <style scoped>
@@ -140,27 +168,46 @@
 		margin: 0rpx;
 		padding: 0rpx;
 		color: #555555;
-		width: 100%;
-		height: 100%;
 	}
 
 	.nav {
 		display: flex;
 		justify-content: space-between;
-	}
-
-	.nav-top {
-		display: inline-block;
 		height: 80rpx;
 		line-height: 80rpx;
 		padding: 0rpx 42rpx;
 	}
 
+	.nav-top {
+		position: relative;
+	}
+
+	.iconfont {
+		font-size: 40rpx;
+		width: 50rpx;
+		overflow: hidden;
+		text-align: center;
+	}
+
+	.icon-paixu-shengxu {
+		position: absolute;
+		top: -8rpx;
+		left: 54rpx;
+	}
+
+	.iconcolor {
+		color: #fd964f;
+	}
+
+	.icon-paixu-jiangxu {
+		position: absolute;
+		top: -8rpx;
+		left: 54rpx;
+	}
+
 	.nav-top-text {
-		justify-content: space-around;
 		font-size: 30rpx;
-		flex-wrap: nowrap;
-		white-space: nowrap;
+		float: left;
 	}
 
 	.picTextLists {
@@ -174,69 +221,46 @@
 
 	.shop-list-box-pic image {
 		width: 260rpx;
-		height: 280rpx;
+		height: 300rpx;
 	}
 
 	.shop-list-box-title {
 		font-weight: 800;
 		font-size: 38rpx;
+		height: 70rpx;
 	}
-	.classify-text{
+
+	.sales {
+		height: 44rpx;
+	}
+
+	.classify-text {
 		width: 100%;
-		height: 108rpx;
+		height: 76rpx;
 		line-height: 1.4 !important;
 		padding: 0;
 		margin: 0;
 		color: #8C949B;
 		overflow: hidden;
-		text-overflow:ellipsis;
+		text-overflow: ellipsis;
 		font-size: 26rpx;
 	}
+
 	.shopping-bottom {
 		width: 65%;
 		height: 240rpx;
 		padding-left: 10rpx;
+		padding-right: 15rpx;
 	}
 
 	.shop-list-box-price {
 		font-weight: 800;
 		font-size: 40rpx;
-		line-height: 1.6 !important;
+		height: 56rpx;
+		line-height: 1.5 !important;
 		color: #FD6801;
 	}
 
-	.iconTesx {
-		position: relative;
-		height: 100rpx;
-		float: left;
-	}
-
-	.nav-top-icon {
-		position: relative;
-		height: 100rpx;
-	}
-
-	.iconfont {
-		font-size: 40rpx;
-		width: 50rpx;
-		float: left;
-		overflow: hidden;
-		line-height: 40rpx;
-		text-align: center;
-	}
-
-	.icon-paixu-shengxu {
-		color: #fd964f;
-		position: absolute;
-		top: 20rpx;
-		left: 50rpx;
-	}
-
-	.icon-paixu-jiangxu {
-		position: absolute;
-		top: 20rpx;
-		left: 50rpx;
-	}
 
 	/* 固定定位 */
 	.screen {
