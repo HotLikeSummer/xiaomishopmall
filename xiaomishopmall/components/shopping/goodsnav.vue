@@ -31,7 +31,7 @@
 					</view>
 				</view>
 			</view>
-			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box ">
+			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box" @click="goTotal">
 				<view :style="{backgroundColor:editButtons.default().backgroundColor,color:editButtons.default().color}" class="flex uni-tab__cart-button-right"
 				 @click="delGoods">{{ editButtons.default().text }}</view>
 			</view>
@@ -81,10 +81,29 @@
 			},
 			delGoods() { //删除
 				this.$store.dispatch("delGoods")
+			},
+			goTotal(){
+				if (this.logined) {
+					let data=[]
+					this.goodInfo.forEach(item=>{
+						if (item.checked) {
+							data.push(item)
+						}
+					})
+					if (data.length) {
+						uni.navigateTo({
+							url:"/pages/shopcar/totalPage?data="+JSON.stringify(data)
+						})
+					} else{
+						console.log("您还没有选择任何商品")
+					}
+				} else{
+					console.log("请先登录")
+				}
 			}
 		},
 		computed: {//展开对象，获取相应的值
-			...mapState(['editing', 'allChecked']),
+			...mapState(['editing', 'allChecked','goodInfo','logined']),
 			...mapGetters(["total"])
 		}
 	}

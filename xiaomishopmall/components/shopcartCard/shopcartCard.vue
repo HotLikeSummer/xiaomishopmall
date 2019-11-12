@@ -103,18 +103,7 @@
 				this.goodinfo.kind.suit=this.goodsSuit[i]
 			},
 			addshopCard(){
-				this.good.kind=this.goodInfo[0].kind;
-				this.good.checked=this.goodInfo[0].checked;
-				this.good.num=this.goodInfo[0].num;
-				this.goodInfo.push(this.good);
-				if(this.goodInfo.indexOf(this.good)==-1){
-					this.goodInfo.push(this.good);
-					
-				}else{
-					this.goodInfo.num++
-				}
-				console.log(this.good);
-				console.log(this.goodInfo);
+				this.$store.dispatch("jointoCart",this.goodinfo)
 				this.type = 'bottom'
 				this.$refs['popup'].close();
 			}
