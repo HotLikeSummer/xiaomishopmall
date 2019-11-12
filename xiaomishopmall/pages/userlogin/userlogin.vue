@@ -8,13 +8,13 @@
 		<view class="container-bottom">
 			<view class="container-bottom-Text">登录</view>
 			<view class="userid">
-				<input type="text" placeholder="请输入手机号/邮箱/小米账号" class="myinput"/>
+				<input type="text" placeholder="请输入手机号/邮箱/小米账号" class="myinput" v-model="account"/>
 			</view>
 			<view class="userid">
-				<input type="text" placeholder="请输入密码" class="myinput"/>
+				<input type="text" placeholder="请输入密码" class="myinput" v-model="password"/>
 			</view>
 			<navigator url="../codelogin/codelogin">跳转注册 ></navigator>
-			<button type="primary" class="login">登录</button>
+			<button type="primary" class="login" @click="login">登录</button>
 			<view class="check">
 				 <checkbox color="#FFCC33" style="transform:scale(0.5);" />
 				 <text>已阅读并同意小米</text>
@@ -33,11 +33,36 @@
 	import uniIcons from "@/components/Uni-Icons/uni-icons.vue"
 	export default{
 		components:{uniIcons},
+		data(){
+			return{
+				account:"",
+				password:""
+			}
+		},
 		methods:{
 			backTo(){
 				uni.navigateBack({
 					delta: 1
 				});
+			},
+			login(){
+				let _this=this
+				uni.request({
+					url:"http://ceshi3.dishait.cn/api/login",
+					method:"POST",
+					data:{
+						username:_this.account,
+						password:_this.password
+					},
+					success (res) {
+						console.log(res)
+						let token=res.data.data.token
+						_this.$store.commit("gettoken",token)
+						uni.switchTab({
+							url:"../user/user"
+						})
+					}
+				})
 			}
 		}
 	}

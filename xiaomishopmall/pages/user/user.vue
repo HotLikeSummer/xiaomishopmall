@@ -50,68 +50,86 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex'
 	export default {
 		data() {
 			return {
-				topImg:"/static/images/bg.jpg",
-				nameImg: "/static/images/demo/demo6.jpg",//背景图
-				orders: [{//订单导航信息
+				topImg: "/static/images/bg.jpg",
+				nameImg: "/static/images/demo/demo6.jpg", //背景图
+				orders: [{ //订单导航信息
 						icons: "iconfont icon-wallet_icon",
 						txt: "待付款",
-						url:"userlist/myOrder"
+						url: "userlist/myOrder"
 					}, {
 						icons: "iconfont icon-daishouhuo",
 						txt: "待收货",
-						url:"userlist/myOrder"
+						url: "userlist/myOrder"
 					},
 					{
 						icons: "iconfont icon-pinglun1",
 						txt: "待评价",
-						url:"userlist/myOrder"
+						url: "userlist/myOrder"
 					}, {
 						icons: "iconfont icon-buoumaotubiao46",
 						txt: "退换修",
-						url:"userlist/sales-service"
+						url: "userlist/sales-service"
 					}
 				],
-				atImg: "/static/images/demo/demo4.jpg",//广告
+				atImg: "/static/images/demo/demo4.jpg", //广告
 				list: [{
 					content: "小米会员",
 					img: "iconfont icon-VIP"
-				},{
+				}, {
 					content: "会员中心",
 					img: "iconfont icon-huangguan"
-				},{
+				}, {
 					content: "服务中心",
 					img: "iconfont icon-service"
-				},{
+				}, {
 					content: "小米之家",
 					img: "iconfont icon-home"
-				},{
+				}, {
 					content: "更多功能",
 					img: "iconfont icon-gengduo"
-				},{
+				}, {
 					content: "更多设置",
 					img: "iconfont icon-icon_set_up",
-					url:"userlist/set"
+					url: "userlist/set"
 				}]
 			}
 		},
+		computed: {
+			...mapState(['token'])
+		},
 		methods: {
 			//跳转到我的订单页
-			topage(url,index) {
-				uni.navigateTo({
-					url: url+"?index="+index+""
-				})
+			topage(url, index) {
+				if (this.token == "") {
+					uni.navigateTo({
+						url: "../userlogin/userlogin"
+					})
+				} else {
+					uni.navigateTo({
+						url: url + "?index=" + index + ""
+					})
+				}
 			},
-			toOrder(){
-				uni.navigateTo({
-					url: "userlist/myOrder?current=0"
-				})
+			toOrder() {
+				if (this.token == "") {
+					uni.navigateTo({
+						url: "../userlogin/userlogin"
+					})
+				}else{
+					uni.navigateTo({
+						url: "userlist/myOrder?current=0"
+					})
+				}				
 			},
-			tologin(){
+			tologin() {
 				uni.navigateTo({
-					url: "../codelogin/codelogin"
+					url: "../userlogin/userlogin"
 				})
 			}
 		}
@@ -135,6 +153,7 @@
 		background-size: cover;
 		position: relative;
 	}
+
 	/* 头部 */
 	.top image {
 		width: 180upx;
@@ -170,7 +189,8 @@
 	.icon-huangguan {
 		margin-right: 15upx;
 	}
-/* 我的订单部分 */
+
+	/* 我的订单部分 */
 	.order-tit {
 		height: 100upx;
 		line-height: 100upx;
@@ -210,46 +230,57 @@
 		height: 20upx;
 		background-color: #F5F5F5;
 	}
-/* 广告 */
+
+	/* 广告 */
 	.advertising image {
 		width: 100%;
 		height: 300upx;
 	}
+
 	/* 服务功能 */
-	.servilist{
+	.servilist {
 		padding: 0px 30upx;
 		height: 80upx;
 		line-height: 80upx;
 		border-bottom: 1px solid #f0f0f0;
 	}
-	.servilist:last-child{
+
+	.servilist:last-child {
 		border-top: 20upx solid #F5F5F5;
 		border-bottom: none;
 	}
-	.rightTo{
+
+	.rightTo {
 		color: #C2C2C2;
 		float: right;
 	}
-	.content{
+
+	.content {
 		margin-left: 20upx;
 	}
-	.icon-VIP{
+
+	.icon-VIP {
 		color: #FDC43E;
 	}
-	.servilist .icon-huangguan{
+
+	.servilist .icon-huangguan {
 		color: #FFD43F;
 		margin-right: 0upx;
 	}
-	.icon-service{
+
+	.icon-service {
 		color: #FA6C5E;
 	}
-	.icon-home{
+
+	.icon-home {
 		color: #FE8539;
 	}
-	.icon-gengduo{
+
+	.icon-gengduo {
 		color: #9CD458;
 	}
-	.icon-icon_set_up{
+
+	.icon-icon_set_up {
 		color: #7E8A97;
 	}
 </style>

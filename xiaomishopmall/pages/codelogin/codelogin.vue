@@ -52,18 +52,6 @@
 				});
 			},
 		    register() {
-				let _this=this
-				uni.request({
-					url:"http://ceshi3.dishait.cn/api/login",
-					method:"POST",
-					data:{
-						username:_this.account,
-						password:_this.password
-					},
-					success (res) {
-						console.log(res)
-					}
-				})
 				/**
 				 * 客户端对账号信息进行一些必要的校验。
 				 */

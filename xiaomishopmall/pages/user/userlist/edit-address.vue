@@ -64,6 +64,7 @@
 			}
 		},
 		onLoad(e) {
+			console.log(e)
 			// console.log(this.addresslist)
 			this.info = JSON.parse(e.newmsg)
 			// console.log(this.info)

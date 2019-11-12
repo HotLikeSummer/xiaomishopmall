@@ -27,7 +27,7 @@
 		},
 		data() {
 			return {
-				Info:addlist.list,
+				Info: addlist.list,
 			}
 		},
 		onNavigationBarButtonTap() {
@@ -36,10 +36,16 @@
 				url: "edit-address"
 			})
 		},
-		onLoad(e) {			
-// 			let _userInfo=uni.getStorageSync("info");
-			let userInfo=JSON.parse(e.msg);
-			if (this.Info.indexOf(userInfo)==-1) {
+		onLoad(e) {
+			// 			let _userInfo=uni.getStorageSync("info");
+			let userInfo = JSON.parse(e.msg);
+			for (let i = 0; i < this.Info.length; i++) {
+				if (userInfo.change == true) {
+					this.Info[i].change = false;
+				}
+			}
+
+			if (this.Info.indexOf(userInfo) == -1) {
 				this.Info.push(userInfo)
 			}
 			console.log(this.Info)
@@ -47,32 +53,37 @@
 		methods: {
 			del(index) {
 				//uni.removeStorageSync("info");
-				this.Info.splice(index,1)
+				this.Info.splice(index, 1)
 			},
-			update(index){
+			update(index) {
 				uni.navigateTo({
-					url: "edit-address?newmsg="+JSON.stringify(this.Info[index])+""
+					url: "edit-address?newmsg=" + JSON.stringify(this.Info[index]) +""
 				})
 			}
 		},
 	}
 </script>
 <style>
-	ul,li{
+	ul,
+	li {
 		margin: 0upx;
 		padding: 0upx;
 	}
-	li{
+
+	li {
 		list-style: none;
 	}
-	.ui-list{
+
+	.ui-list {
 		margin: 20upx;
 		border: 1upx solid #FAFAFA;
 	}
-	.ui-list-item{
+
+	.ui-list-item {
 		margin: 0upx 20upx;
 	}
-	.identity{
+
+	.identity {
 		display: flex;
 		justify-content: space-between;
 		height: 70upx;
@@ -80,34 +91,45 @@
 		border-bottom: 1upx solid #FAFAFA;
 		padding: 0upx 20upx;
 	}
-	.edit{
+
+	.edit {
 		display: flex;
 		justify-content: space-between;
 		font-size: 15upx;
 		padding: 0upx 20upx;
 	}
-	.address{
+
+	.address {
 		padding: 10upx 0upx;
-		height: 92upx;		
+		height: 92upx;
 	}
-	.icon{
+
+	.icon {
 		height: 92upx;
 		line-height: 92upx;
 		text-align: center;
 		padding: 10upx 0upx;
 	}
-	.area,.detail{
+
+	.area,
+	.detail {
 		height: 46upx;
 		line-height: 46upx;
 	}
-	.username,.phone,.btn-delete{
+
+	.username,
+	.phone,
+	.btn-delete {
 		height: 70upx;
 		line-height: 70upx;
 	}
-	.username{
+
+	.username {
 		color: #FF6600;
 	}
-	.btn-delete,.icon{
+
+	.btn-delete,
+	.icon {
 		color: #B5B5B5;
 	}
 </style>

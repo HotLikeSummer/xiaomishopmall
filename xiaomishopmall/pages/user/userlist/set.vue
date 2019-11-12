@@ -21,7 +21,7 @@
 		</view>
 		<!-- 退出 -->
 		<view class="quit">
-			<text class="logout">退出登录</text>
+			<text class="logout" @click="logout">退出登录</text>
 		</view>
 	</view>
 </template>
@@ -48,6 +48,12 @@
 			topage(url){
 				uni.navigateTo({
 					url:url
+				})
+			},
+			logout(){
+				this.$store.commit("logout")
+				uni.switchTab({
+					url:"../user"
 				})
 			}
 		},
