@@ -62,8 +62,7 @@
 			all,
 			evaluate,
 			payment,
-			takeGoods,
-			nothing
+			takeGoods
 		},
 		data() {
 			return {

@@ -24,5 +24,8 @@ export default {
 		}else{//否则请先登录
 			console.log("请先登录")
 		}
+	},
+	getinfo(state,e){
+		state.accountInfo.push(e)
 	}
 }

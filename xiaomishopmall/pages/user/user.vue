@@ -5,7 +5,7 @@
 			<!-- 消息 -->
 			<view><text class="iconfont icon-xiaoxi"></text></view>
 			<!-- 昵称 -->
-			<view>
+			<view @tap="tologin">
 				<image :src="nameImg" mode=""></image>
 			</view>
 			<view class="member">
@@ -107,6 +107,11 @@
 			toOrder(){
 				uni.navigateTo({
 					url: "userlist/myOrder?current=0"
+				})
+			},
+			tologin(){
+				uni.navigateTo({
+					url: "../codelogin/codelogin"
 				})
 			}
 		}

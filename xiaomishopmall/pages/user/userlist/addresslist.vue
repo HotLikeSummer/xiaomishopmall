@@ -20,10 +20,14 @@
 	</view>
 </template>
 <script>
+	import addlist from '../data/address.js';
 	export default {
+		components: {
+			addlist
+		},
 		data() {
 			return {
-				Info:[],
+				Info:addlist.list,
 			}
 		},
 		onNavigationBarButtonTap() {
@@ -43,7 +47,7 @@
 		methods: {
 			del(index) {
 				//uni.removeStorageSync("info");
-				this.Info.splice(index)
+				this.Info.splice(index,1)
 			},
 			update(index){
 				uni.navigateTo({

@@ -1,19 +1,19 @@
 <template>
-	<!-- 密码登录页面 -->
+	<!-- 登录页面 -->
 	<view id="userlogin">
 		<view class="container-top">
 			<text class="iconfont icon-shanchu1 leftIcon" @click="backTo"></text>
 			<text class="rightText">忘记密码</text>
 		</view>
 		<view class="container-bottom">
-			<view class="container-bottom-Text">密码登录</view>
+			<view class="container-bottom-Text">登录</view>
 			<view class="userid">
 				<input type="text" placeholder="请输入手机号/邮箱/小米账号" class="myinput"/>
 			</view>
 			<view class="userid">
 				<input type="text" placeholder="请输入密码" class="myinput"/>
 			</view>
-			<navigator url="../codelogin/codelogin">用手机短信登录 ></navigator>
+			<navigator url="../codelogin/codelogin">跳转注册 ></navigator>
 			<button type="primary" class="login">登录</button>
 			<view class="check">
 				 <checkbox color="#FFCC33" style="transform:scale(0.5);" />

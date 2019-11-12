@@ -12,6 +12,7 @@
 		<view class="area">
 			<text>所在地区：</text>
 			<input type="text" v-model="info.area" class="input" />
+			<text class="iconfont icon-dingwei"></text>
 		</view>
 		<view class="address">
 			<text>详细地址：</text>
@@ -19,10 +20,10 @@
 		</view>
 		<view class="default-ars">
 			<text>设为默认地址：</text>
-			<switch color="#FE6901" @change="check" :checked="info.change"/>
+			<switch color="#FE6901" @change="check" :checked="info.change" />
 		</view>
 		<!-- 保存 -->
-		<view class="save" >
+		<view class="save">
 			<text @tap="save">保存</text>
 		</view>
 	</view>
@@ -31,29 +32,41 @@
 	export default {
 		data() {
 			return {
-				info:{
-					name:"",
-					phone:"",
-					area:"",
-					address:"",
-					change:false
+				info: {
+					name: "",
+					phone: "",
+					area: "",
+					address: "",
+					change: false
 				},
+// 				latitude: 39.909,
+// 				longitude: 116.39742,
+// 				covers: [{
+// 					latitude: 39.909,
+// 					longitude: 116.39742,
+// 					iconPath: '../../../static/location.png'
+// 				}, {
+// 					latitude: 39.90,
+// 					longitude: 116.39,
+// 					iconPath: '../../../static/location.png'
+// 				}]
 			}
 		},
-		methods: {
-			save(){
+	methods: {
+			save() {
 				// uni.setStorageSync('info', JSON.stringify(this.info));
 				uni.navigateTo({
-					url:"addresslist?msg="+JSON.stringify(this.info)+""
+					url: "addresslist?msg=" + JSON.stringify(this.info) + ""
 				})
 			},
-			check(e){
-				this.info.change=e.detail.value
+			check(e) {
+				this.info.change = e.detail.value
 			}
 		},
 		onLoad(e) {
-			this.info=JSON.parse(e.newmsg)
-			console.log(this.info)
+			// console.log(this.addresslist)
+			this.info = JSON.parse(e.newmsg)
+			// console.log(this.info)
 		}
 	}
 </script>
@@ -125,5 +138,13 @@
 
 	.consignee .input {
 		width: 77%;
+	}
+	.area{
+		position: relative;
+	}
+	.icon-dingwei{
+		position: absolute;
+		top: 0upx;
+		right: 70upx;
 	}
 </style>
