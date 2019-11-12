@@ -314,10 +314,6 @@
 				"navigationStyle":"custom"
 			}
 		}
-        ,{
-            "path" : "pages/shopcar/totalPage/totalPage",
-            "style" : {}
-        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

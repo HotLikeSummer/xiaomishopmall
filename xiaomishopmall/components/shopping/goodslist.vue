@@ -15,7 +15,7 @@
 									</view>
 								</view>
 								<view class='goods-image'>
-									<image :src="item.imgUrl"></image>
+									<image src="/static/images/demo/list/1.jpg"></image>
 								</view>
 								<view class='good-info'>
 									<view class='name'>{{item.name}}</view>
