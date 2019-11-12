@@ -126,6 +126,19 @@ export default {
 		this.changShow();
 	},
 	methods: {
+		//点击事件
+		tabtap(e){
+			//传参，this改变指向
+			this.$func.tabtap(e,this)
+		},
+		//滑动事件
+		tabChange(e){
+			this.$func.tabChange(e,this)
+		},
+		//获取元素数据
+		getElSize(id){
+			this.$func.getElSize(id)
+		},
 		//加载更多
 		loadmore(index) {
 			// 判断当true的时候加载一个
@@ -152,60 +165,6 @@ export default {
 			} else {
 				return;
 			}
-		},
-		//滑动事件
-		async tabChange(e) {
-			//取到下标
-			let index = e.target.current;
-			let tabBar = await this.getElSize('tab-bar'),
-				tabBarScrollLeft = tabBar.scrollLeft;
-				//元素宽度
-			let width = 0;
-
-			for (let i = 0; i < index; i++) {
-				let result = await this.getElSize(this.tabBars[i].id);
-				width += result.width;
-			}
-			//宽度计算
-			//屏幕总宽度
-			let winWidth = uni.getSystemInfoSync().windowWidth,
-				nowElement = await this.getElSize(this.tabBars[index].id),
-				nowWidth = nowElement.width;
-			if (width + nowWidth - tabBarScrollLeft > winWidth) {
-				this.scrollLeft = width + nowWidth - winWidth;
-			}
-			if (width < tabBarScrollLeft) {
-				this.scrollLeft = width;
-			}
-			//index赋值
-			this.tabIndex = index; 
-		},
-		//得到元素的size
-		getElSize(id) {
-			return new Promise((res, rej) => {
-				//获取到绑定的id
-				uni.createSelectorQuery().select('#' + id).fields(
-						{
-							size: true,
-							scrollOffset: true
-						},
-						data => {
-							//拿到数据
-							res(data);
-							//console.log(data,11)
-						}
-					).exec();
-			});
-		},
-		//点击事件
-		async tabtap(e) {
-			//绑定index
-			this.tabIndex = e.currentTarget.dataset.current;
-				let tabBar = await this.getElSize("tab-bar"),
-				//点击的时候记录并设置scrollLeft
-				tabBarScrollLeft = tabBar.scrollLeft; 
-				//console.log(tabBarScrollLeft)
-				this.scrollLeft = tabBarScrollLeft;
 		},
 		//去购物车
 		goShop(e) {
@@ -244,9 +203,9 @@ export default {
 	flex-direction: column;
 }
 /* 导航栏 */
-.swiper-box {
+/* .swiper-box {
 	margin-bottom: 50rpx;
-}
+} */
 .scroll-h {
 	width: 750upx;
 	height: 80upx;
@@ -312,7 +271,7 @@ export default {
 /* 加载更多 */
 .load-more {
 	text-align: center;
-	height: 60upx;
-	line-height: 60upx;
+	height: 80upx;
+	line-height: 80upx;
 }
 </style>

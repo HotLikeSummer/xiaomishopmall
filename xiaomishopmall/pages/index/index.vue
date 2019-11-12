@@ -3,15 +3,15 @@
 		<!-- 导航栏 -->
 		<scroll-view class="scroll-h" id="tab-bar" scroll-x :show-scrollbar="false" :scroll-left="scrollLeft">
 			<!-- 循环导航栏内容 -->
-			<view v-for="(tab, index) in tabBars" :id="tab.id" class="uni-tab-item" :key="index" :index="index" :data-current="index" @click="tabtap">
+			<view v-for="(tab, index) in tabBars" :id="tab.id" class="uni-tab-item" :key="index" :index="index" :data-current="index" @click.stop="tabtap">
 				<!-- 绑定样式 -->
-				<text class="uni-tab-item-title" :class="tabIndex == index ? 'uni-tab-item-title-active' : ''">{{ tab.text}}</text>
+				<text class="uni-tab-item-title" :class="tabIndex == index ? 'uni-tab-item-title-active' : ''">{{ tab.text }}</text>
 			</view>
 		</scroll-view>
 		<!-- 内容 -->
-		<swiper class="swiper-box" :style="{ height: swiperheight_s + 'px' }" :current="tabIndex" @change="tabChange">
+		<swiper class="swiper-box" :style="{ height: swiperheight_s + 'px' }" :current="tabIndex" @change.stop="tabChange">
 			<swiper-item v-for="(items, index) in num" :key="index" :index="index">
-				<scroll-view class="scroll-y" scroll-y :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore(index)"  :show-scrollbar="false">
+				<scroll-view class="scroll-y" scroll-y :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore(index)" :show-scrollbar="false">
 					<!-- 第一页的轮播 -->
 					<view class="swiper">
 						<!-- 轮播样式 -->
@@ -25,7 +25,7 @@
 					<view class="hotprod">
 						<view class="scroll_hotprods">
 							<!-- 第一行 -->
-							<view class="hotprods" v-for="(item, index) in hotprods" :key="index" :index="index"  @tap="toNew(index)">
+							<view class="hotprods" v-for="(item, index) in hotprods" :key="index" :index="index" @tap="toNew(index)">
 								<img :src="item.src" />
 								<view>{{ item.text }}</view>
 							</view>
@@ -39,7 +39,7 @@
 					</view>
 					<!-- 加载更多 -->
 					<view class="uni-product-list">
-						<view class="uni-product" v-for="(product, index) in productLists" :key="index" :index="index" @tap="goShow()">
+						<view class="uni-product" v-for="(product, index) in productLists" :key="index" :index="index" @tap="goShow">
 							<view class="image-view"><image class="uni-product-image" :src="product.cover"></image></view>
 							<view class="uni-product-title">{{ product.desc }}</view>
 							<view class="uni-product-price">
@@ -50,52 +50,53 @@
 						</view>
 					</view>
 					<!-- 加载更多 -->
-					<view class="load-more">{{loadtext}}</view>
+					<view class="load-more">{{ loadtext }}</view>
 				</scroll-view>
 			</swiper-item>
 		</swiper>
 	</view>
 </template>
 <script>
+// import main from '../../common/main.js';
 export default {
 	data() {
 		return {
 			num: 7,
 			//定义屏幕高度
-			swiperheight_all:700,
+			swiperheight_all: 700,
 			//定义滚动高度
-			swiperheight_s:700,
+			swiperheight_s: 700,
 			//导航栏下标
-			tabIndex: 0,
+			tabIndex:0,
 			//导航栏滚动
 			tabBars: [
 				{
-				id: 'index',
-				text: "推荐"
-				}
-				,{
-				id: 'index',
-				text: "手机"
-				},
-				 {
-				id: 'index',
-				text: "智能"
-				},
-				 {
-				id: 'index',
-				text: "电视"
+					id: 'index',
+					text: '推荐'
 				},
 				{
-				id: 'index',
-				text: "笔记本"
+					id: 'index',
+					text: '手机'
 				},
 				{
-				id: 'index',
-				text: "家电"
+					id: 'index',
+					text: '智能'
 				},
-				 {
-				id: 'index',
-				text: "生活周边"
+				{
+					id: 'index',
+					text: '电视'
+				},
+				{
+					id: 'index',
+					text: '笔记本'
+				},
+				{
+					id: 'index',
+					text: '家电'
+				},
+				{
+					id: 'index',
+					text: '生活周边'
 				}
 			],
 			//轮播
@@ -105,28 +106,28 @@ export default {
 			// 广告
 			advert: [],
 			// 加载更多
-			loadtext:"上拉加载更多",
+			loadtext: '上拉加载更多',
 			//数据
 			productList: [],
 			//循环遍历拿到的数组数据
 			productLists: [],
 			//设置导航栏左边距离
-			scrollLeft:0
+			scrollLeft: 0
 		};
 	},
 	onLoad() {
 		// 计算屏幕剩余高度  填补剩余高度
 		uni.getSystemInfo({
-			success: (res) => {
+			success: res => {
 				//屏幕总高度
-				this.swiperheight_all = res.windowHeight
+				this.swiperheight_all = res.windowHeight;
 				//console.log(this.swiperheight_all,11)
-				let info=uni.createSelectorQuery().select(".swiper-box")
-				info.boundingClientRect(data=>{
-				//显示高度
-				this.swiperheight_s = data.height
-				//console.log(this.swiperheight_s,12)
-				}).exec()
+				let info = uni.createSelectorQuery().select('.swiper-box');
+				info.boundingClientRect(data => {
+					//显示高度
+					this.swiperheight_s = data.height;
+					//console.log(this.swiperheight_s,12)
+				}).exec();
 			}
 		})
 	},
@@ -135,79 +136,38 @@ export default {
 		this.changShow();
 	},
 	methods: {
-		//加载更多
-		loadmore(index){
-			console.log(this.loadtext)
-			if(this.loadtext == "上拉加载更多"){
-				//修改状态
-				this.loadtext = "加载中..."
-				//获取数据
-				let that=this
-				setTimeout(() => {
-					 let obj =that.productLists;
-					 console.log(obj)
-					 //每次刷新加载数据，把新数据加进去
-					 that.productLists=that.productLists.concat(obj.slice(0,6))
-					 console.log(that.productLists)
-					that.loadtext = "上拉加载更多";
-				}, 1000)
-			}else{
-				return
-			}
+		//点击事件
+		tabtap(e){
+			//传参，this改变指向
+			this.$func.tabtap(e,this)
 		},
 		//滑动事件
-		async tabChange(e) {
-			 //取到下标
-			 let index = e.target.current;
-			 let tabBar =await this.getElSize('tab-bar'),
-			 	tabBarScrollLeft = tabBar.scrollLeft;
-			 //元素宽度
-			 let width = 0;
-			 
-			 for (let i = 0; i < index; i++) {
-			 	let result =await this.getElSize(this.tabBars[i].id);
-			 	width += result.width;
-			 }
-			 //宽度计算
-			 //屏幕总宽度
-			 let winWidth = uni.getSystemInfoSync().windowWidth,
-			 	nowElement =await this.getElSize(this.tabBars[index].id),
-			 	nowWidth = nowElement.width;
-			 if (width + nowWidth - tabBarScrollLeft > winWidth) {
-			 	this.scrollLeft = width + nowWidth - winWidth;
-			 }
-			 if (width < tabBarScrollLeft) {
-			 	this.scrollLeft = width;
-			 }
-			 //index赋值
-			 this.tabIndex = index;
+		tabChange(e){
+			this.$func.tabChange(e,this)
 		},
-		//得到元素的size
-		getElSize(id) {
-			return new Promise((res, rej) => {
-				//获取到绑定的id
-				uni.createSelectorQuery().select('#' + id).fields(
-						{
-							size: true,
-							scrollOffset: true
-						},
-						data => {
-							//拿到数据
-							res(data);
-							//console.log(data,13)
-						}
-					).exec();
-			});
+		//获取元素数据
+		getElSize(id){
+			this.$func.getElSize(id)
 		},
-		//点击事件
-		async tabtap(e) {
-			//绑定index
-			this.tabIndex = e.currentTarget.dataset.current;
-				let tabBar = await this.getElSize("tab-bar"),
-				//点击的时候记录并设置scrollLeft
-				tabBarScrollLeft = tabBar.scrollLeft; 
-				//console.log(tabBarScrollLeft)
-				this.scrollLeft = tabBarScrollLeft;
+		//加载更多
+		loadmore(index) {
+			console.log(this.loadtext);
+			if (this.loadtext == '上拉加载更多') {
+				//修改状态
+				this.loadtext = '加载中...';
+				//获取数据
+				let that = this;
+				setTimeout(() => {
+					let obj = that.productLists;
+					console.log(obj);
+					//每次刷新加载数据，把新数据加进去
+					that.productLists = that.productLists.concat(obj.slice(0, 6));
+					console.log(that.productLists);
+					that.loadtext = '上拉加载更多';
+				}, 1000);
+			} else {
+				return;
+			}
 		},
 		//拿到首页的数据，用data数据来接收
 		async changShow() {
@@ -223,25 +183,26 @@ export default {
 			//广告
 			this.advert = res.data.data.data[2].data;
 			// 加载更多
-			this.productList =res.data.data.data[4].data
+			this.productList = res.data.data.data[4].data;
 			//通过循环遍历
-			for(let i in this.productList){
-				this.productLists.push(this.productList[i])
+			for (let i in this.productList) {
+				this.productLists.push(this.productList[i]);
 			}
-			console.log(this.productLists)
+			console.log(this.productLists);
 		},
 		//调往最新页面
 		toNew(index) {
-			console.log(index)
+			console.log(index);
 			uni.navigateTo({
-				url: 'new/new?index='+index
+				url: 'new/new?index=' + index
 			});
 		},
 		//调往详情
-		goShow(e){
-			uni.navigateTo({
-				url:"../type/particulars/particulars?id="+e
-			})
+		goShow(e) {
+			console.log(e);
+			// uni.navigateTo({
+			// 	url:"../type/particulars/particulars?id="+e
+			// })
 		},
 		//搜索
 		onNavigationBarSearchInputClicked(e) {
@@ -265,9 +226,9 @@ export default {
 	flex-direction: column;
 }
 /* 导航栏 */
-.swiper-box{
+/* .swiper-box{
 	margin-bottom: 50rpx;
-}
+} */
 .scroll-h {
 	width: 750upx;
 	height: 80upx;
@@ -276,9 +237,9 @@ export default {
 	background-color: white;
 }
 /* 轮播 */
-.swiper-s{
+.swiper-s {
 	height: 400rpx;
-	}
+}
 .swiper-s img {
 	width: 100%;
 	height: 100%;
@@ -346,7 +307,7 @@ export default {
 	float: right;
 }
 /* 加载更多 */
-.uni-product{
+.uni-product {
 	padding: 23rpx;
 }
 .image-view {
@@ -359,7 +320,7 @@ export default {
 }
 .load-more {
 	text-align: center;
-	height: 60upx;
-	line-height: 60upx;
+	height: 80upx;
+	line-height: 80upx;
 }
 </style>
