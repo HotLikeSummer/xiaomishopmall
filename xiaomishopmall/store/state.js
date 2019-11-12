@@ -15,6 +15,7 @@ export default {
 	}],
 	total:0,//合计金额
 	logined:false,//登录状态
+    good:"",//详情页接口数据信息
 	picTextList: [{
 				pic: "/static/images/demo/list/1.jpg",
 				id: 25,
