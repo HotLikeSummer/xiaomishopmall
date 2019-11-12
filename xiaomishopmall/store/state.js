@@ -60,4 +60,5 @@ export default {
 				price: "2399",
 				review:"98"
 			}],
+			token:"",//登录令牌
 }

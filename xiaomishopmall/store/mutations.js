@@ -25,10 +25,13 @@ export default {
 			console.log("请先登录")
 		}
 	},
-	getinfo(state,e){
-		state.accountInfo.push(e)
-	},
 	getgood(state,good){
 		state.good=good;
+	},
+	gettoken(state,e){//改变登录令牌的值，允许登录
+		state.token=e
+	},
+	logout(state){//退出登录
+		state.token=""
 	}
 }
