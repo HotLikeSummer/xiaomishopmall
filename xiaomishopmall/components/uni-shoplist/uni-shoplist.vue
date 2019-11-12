@@ -112,7 +112,6 @@
 
 			// 跳转到详情页面
 			Particulars(e) {
-				console.log(e);
 				uni.navigateTo({
 					url: '/pages/type/particulars/particulars?id=' + e,
 				});
@@ -129,11 +128,9 @@
 					if (e == i) {//当前字体图标
 						if (_this.navtopList[i].num == 0) {
 							this.picTextList=this.picTextList.sort(this.ascending(this.rank[e]))//小到大
-							console.log(this.picTextList)
 							_this.navtopList[i].num = 1;//向上字体图标的颜色变色
 						} else {
 							this.picTextList=this.picTextList.sort(this.descendding(this.rank[e]))//大到小
-							console.log(this.picTextList)
 							_this.navtopList[i].num = 0;//向下字体图标的颜色变色
 						}
 					} else {//其他字体图标

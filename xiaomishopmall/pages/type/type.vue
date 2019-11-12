@@ -71,7 +71,6 @@
 			
 		},
 		onLoad: function () {
-			// this.getdata()
 			this.getCategory();
 			this.height = uni.getSystemInfoSync().windowHeight;
 		},

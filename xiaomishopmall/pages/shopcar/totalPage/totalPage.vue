@@ -18,7 +18,7 @@
 		<view class="goods-section">
 			<!-- 商品列表 -->
 			<view class="g-item" v-for="(item,index) in goodsinfo" :key="index">
-				<image :src="item.imgUrl"></image>
+				<image :src="item.cover"></image>
 				<view class="right">
 					<text class="title clamp">{{item.name}}</text>
 					<text class="spec"> {{item.kind.color}} {{item.kind.capacity}} {{item.kind.suit}}</text>

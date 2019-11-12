@@ -6,7 +6,7 @@
 			<view>
 				<!-- 图片部分 -->
 				<view class="top-imgs">
-					<image :src="getdata.cover"></image>
+					<image :src="good.cover"></image>
 					<view class="arrowicons">
 						<uni-icons type="arrowleft" size="22" class="iconsleft" color="white" @click="goBack"></uni-icons>
 						<uni-icons type="more-filled" size="22" class="iconsright" color="white"></uni-icons>
@@ -15,13 +15,13 @@
 				<!-- 标题详情等 -->
 				<view style="padding: 0rpx 20rpx;">
 					<view>
-						<text class="title">{{getdata.title}}</text>
+						<text class="title">{{good.title}}</text>
 					</view>
 					<view>
-						<text class="describe">{{getdata.desc}}</text>
+						<text class="describe">{{good.desc}}</text>
 					</view>
 					<view style="margin-top: 30upx;">
-						<text class="price">￥{{getdata.min_price}}</text>
+						<text class="price">￥{{good.min_price}}</text>
 					</view>
 				</view>
 			</view>
@@ -41,9 +41,9 @@
 			uniIcons,
 			UniParticulars,
 		},
-		// computed:{
-		// 	...mapState('getdatas')
-		// },
+		computed:{
+			...mapState(['good'])
+		},
 		data() {
 			return {
 				getdata: []
@@ -63,10 +63,7 @@
 			uni.request({
 				url: 'http://ceshi3.dishait.cn/api/goods/' + id + '',
 				success(res) {
-					that.getdata = res.data.data;
 					that.$store.commit("getgood",res.data.data);
-				 // console.log(that.$store.state.good);
-				
 				}
 			});
 		},

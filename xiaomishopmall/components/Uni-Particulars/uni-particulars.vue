@@ -3,7 +3,6 @@
 	<view id="particulars">
 		<!-- 商品文字详情 -->
 		<view class="bottom-text">
-
 			<!-- cpu横向滚动 @scroll="Scroll"-->
 			<view class="processor">
 				<scroll-view class="scroll-h" scroll-x="true">
@@ -36,7 +35,7 @@
 				</view>
 			</view>
 			<shopcart-card :arr="sends" class="shopcarts"></shopcart-card>
-			<!-- 更多评论  @scroll="ScrollDiscuss"-->
+			<!-- 更多评论-->
 			<scroll-view class="uni-discuss" scroll-x="true">
 				<view class="comment" v-for="(item,index) in discussa" :key="index">
 					<view class="comment-top">
@@ -220,6 +219,7 @@
 			shopCart(obj) {
 				this.togglepop = !this.togglepop
 				obj.name=obj.title;
+				obj.cover=obj.cover
 				obj.num=1;
 				obj.kind={
 					color:"火焰红",

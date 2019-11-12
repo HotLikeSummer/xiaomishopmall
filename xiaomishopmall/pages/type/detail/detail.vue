@@ -29,22 +29,14 @@
 				</view>
 				<view class="history-content">
 					<view class="history-item" v-for="(item, index) in historyList" :key="index">
-						{{item}}
+						<view>{{item}}</view> 
 					</view>
 				</view>
 			</view>
 			<!-- historyList为0则显示没有历史记录 -->
 			<view v-else class="no-data">您还没有历史记录</view>
 		</view>
-		<!-- isHistory为false显示 -->
-		<view v-else class="history-box">
-			<!-- historyList大于0将显示匹配的搜索到的关键字 -->
-			<view v-if="historyList.length > 0" class="history-list-box">
-				<view class="history-list-item" v-for="(item, index) in historyList" :key="index">
-				</view>
-			</view>
-		</view>
-		<view v-else class="no-data">没有搜索到相关内容</view>
+		
 	</view>
 </template>
 
@@ -79,8 +71,7 @@
 		 */
 		onNavigationBarSearchInputConfirmed(e) {
 			// 获取到输入框中的内容
-			this.historyList = e.text;
-			console.log(this.historyList)
+			this.historyList.push(e.text);
 		},
 	};
 </script>
