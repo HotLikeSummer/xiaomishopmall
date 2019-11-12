@@ -31,6 +31,7 @@
 
 <script>
 	import uniIcons from "@/components/Uni-Icons/uni-icons.vue"
+	import {mapState} from "vuex"
 	export default{
 		components:{uniIcons},
 		data(){
@@ -64,6 +65,9 @@
 					}
 				})
 			}
+		},
+		computed:{
+			...mapState(["token"])
 		}
 	}
 </script>

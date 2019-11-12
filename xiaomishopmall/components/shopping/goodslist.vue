@@ -1,6 +1,6 @@
 <template>
 	<view id="content">
-		<view v-if="logined">
+		<view v-if="token">
 			<view class='car-list'>
 				<!-- 购物车产品 -->
 				<view class='car-item'>
@@ -48,7 +48,7 @@
 				</view>
 			</view>
 		</view>
-		<view v-if='!logined' class="noGoods">
+		<view v-if='!token' class="noGoods">
 			<view class="noGoodscon">
 				<view class="iconfont shopcarIcon">&#xe64c;</view>
 				<view class="shopcarTxt">您还没有登录哦</view>
@@ -91,13 +91,11 @@
 				})
 			},
 			goLogin() {
-				uni.navigateTo({ //跳转登录页面
-					//url: '/pages/type/particulars/particulars?',
-				});
+				this.$store.dispatch('goLogin')
 			}
 		},
 		computed: { //展开state对象，获取相关属性
-			...mapState(['goodInfo', 'editing', 'allChecked', 'logined'])
+			...mapState(['goodInfo', 'editing', 'allChecked', 'token'])
 		},
 		watch: {
 			allChecked(newval) { //监听全选状态，使所有商品的选择状态与全选状态一致

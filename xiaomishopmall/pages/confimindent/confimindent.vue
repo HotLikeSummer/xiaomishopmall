@@ -20,11 +20,9 @@
 			<!-- 订单数量 -->
 			<view class="user">
 				<view class="user-pic">
-					<image src="/static/images/demo/demo6.jpg" class="mypic"></image>
-					<image src="/static/images/demo/demo6.jpg" class="mypic"></image>
-					<image src="/static/images/demo/demo6.jpg" class="mypic"></image>
+					<image :src="item.cover" class="mypic" v-for="(item,index) in goodInfo" :key="index"></image>
 				</view>
-				<view class="user-right">共三件 <text class="iconfont icon-you"></text>  </view>
+				<view class="user-right">共{{this.goodInfo.length}}件 <text class="iconfont icon-you"></text> </view>
 			</view>
 			<!-- 商品总价等 -->
 			<view v-for="(item,index) in listText" :key="index">
@@ -35,8 +33,8 @@
 			</view>
 			<!-- 小计 -->
 			<view class="list">
-				<text class="list-left" style="color: #FD6801;" >小计</text>
-				<text class="list-right" style="color: #FD6801;" >￥20.00</text>
+				<text class="list-left" style="color: #FD6801;">小计</text>
+				<text class="list-right" style="color: #FD6801;">￥{{total}}</text>
 			</view>
 			<!-- 发票 -->
 			<view class="invoice">
@@ -47,10 +45,9 @@
 			<view class="mytotal">
 				<view class="total">
 					<view class="total-right">
-						合计 :<text style="color: #FD6801;padding-left: 15rpx;">￥20.00</text> 
-						 <text class="btn">去付款</text>
+						合计 :<text style="color: #FD6801;padding-left: 15rpx;">￥{{total}}</text>
+						<text class="btn">去付款</text>
 					</view>
-					
 				</view>
 			</view>
 		</view>
@@ -58,67 +55,92 @@
 </template>
 
 <script>
-	export default{
+	import {
+		mapState
+	} from "vuex"
+	export default {
 		data() {
 			return {
-				listText: [{tesleft:"商品总价",price:"￥20.00"},{tesleft:"运费",price:"包邮"},{tesleft:"优惠券",price:"无可用"}]
+				listText: [{
+						tesleft: "商品总价",
+						price: "￥"+this.$store.state.total
+					},
+					{
+						tesleft: "运费",
+						price: "包邮"
+					},
+					{
+						tesleft: "优惠券",
+						price: "无可用"
+					}
+				]
 			}
 		},
-		methods:{
+		methods: {
 			// 返回上一级
-			fanhui(){
+			fanhui() {
 				uni.navigateBack({
 					delta: 1
 				});
 			}
+		},
+		computed: {
+			...mapState(["goodInfo", 'total'])
 		}
 	}
 </script>
 
 <style scoped>
-	
 	/* 确认订单 */
-	.confimindent-top{
+	.confimindent-top {
 		height: 400rpx;
 		width: 100%;
 		background-color: #FD6801;
 	}
+
 	/* 文字标题 */
-	.title{
+	.title {
 		height: 80rpx;
 		line-height: 80rpx;
 		color: white;
 		text-align: center;
 	}
+
 	/* icon返回 */
-	.icon-2fanhui{
+	.icon-2fanhui {
 		float: left;
 		padding-left: 15rpx;
 	}
-	.text{
+
+	.text {
 		font-size: 34rpx;
 	}
+
 	/* 地址部分 */
-	.site{
+	.site {
 		margin-top: 50rpx;
 		height: 200rpx;
 		line-height: 200rpx;
 		color: white;
 		padding: 30rpx;
-		
+
 	}
-	.Telephone{
+
+	.Telephone {
 		padding-left: 20rpx;
 	}
-	.siteleft{
+
+	.siteleft {
 		float: left;
 	}
-	.siteright{
+
+	.siteright {
 		float: right;
 		margin-top: 20rpx;
 	}
+
 	/* 底部部分 */
-	.confimindent-bottom{
+	.confimindent-bottom {
 		height: 500rpx;
 		width: 100%;
 		background-color: white;
@@ -128,60 +150,72 @@
 		top: 380rpx;
 		left: 0rpx;
 	}
-	.user{
+
+	.user {
 		height: 160rpx;
 		line-height: 160rpx;
 	}
-	.user-pic{
+
+	.user-pic {
 		float: left;
 		padding-left: 15rpx;
 		height: 160rpx;
 		line-height: 160rpx;
 	}
-	.mypic{
+
+	.mypic {
 		width: 80rpx;
 		height: 80rpx;
-		vertical-align:middle;
+		vertical-align: middle;
 	}
-	.user-right{
+
+	.user-right {
 		float: right;
 		padding-right: 15rpx;
 		height: 160rpx;
 		line-height: 160rpx;
 	}
-	.invoice{
+
+	.invoice {
 		height: 100rpx;
 		line-height: 100rpx;
 		margin-top: 20rpx;
 	}
-	.invoice-text{
+
+	.invoice-text {
 		float: left;
 		padding-left: 20rpx;
 	}
-	.invoice-right{
+
+	.invoice-right {
 		float: right;
 		padding-right: 15rpx;
 	}
-	.list{
+
+	.list {
 		height: 100rpx;
 		line-height: 100rpx;
-		
+
 	}
-	.list-left{
+
+	.list-left {
 		float: left;
 		padding-left: 20rpx;
 	}
-	.list-right{
+
+	.list-right {
 		float: right;
 		padding-right: 15rpx;
 	}
+
 	/* 去付款部分 */
-	.mytotal{
+	.mytotal {
 		width: 100%;
 		height: 80rpx;
 		line-height: 80rpx;
 	}
-	.total{
+
+	.total {
 		width: 100%;
 		height: 80rpx;
 		line-height: 80rpx;
@@ -189,10 +223,12 @@
 		position: fixed;
 		bottom: 0;
 	}
-	.total-right{
+
+	.total-right {
 		float: right;
 	}
-	.total .btn{
+
+	.total .btn {
 		padding: 10rpx 50rpx;
 		background-color: #FD6801;
 		border-radius: 40rpx;

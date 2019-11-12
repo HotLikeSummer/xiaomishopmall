@@ -4,6 +4,7 @@ export default {
 	goodInfo:[{ //商品信息
 		id:0,
 		title:"华为matax210",//商品名
+		cover:"/static/images/demo/list/1.jpg",
 		kind:{//商品配置
 			color:"火焰红",
 			capacity:"64GB",

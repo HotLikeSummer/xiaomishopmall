@@ -1,39 +1,41 @@
 <template>
 	<view class="content">
-		<!-- 底部占位 -->
-		<view class="uni-tab__cart-box flex" v-if="!editing">
-			<view class="flex uni-tab__cart-sub-box">
-				<!-- 全选图标 -->
-				<view class='icon'>
-					<view class="checkIcon" :class="allChecked?'':'nocheck'" @click="allCheck">
-						<text class="iconfont checked" v-if="allChecked">&#xe623;</text>
-					</view>
-				</view>
-				<view class="total">
-					<text>合计:</text>
-					<text class="cost">￥{{total}}</text>
-				</view>
-			</view>
-			<!-- 合计按钮 -->
-			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box ">
-				<view :style="{backgroundColor:buttonGroup.default().backgroundColor,color:buttonGroup.default().color}" class="flex uni-tab__cart-button-right">{{ buttonGroup.default().text }}</view>
-			</view>
-		</view>
-		<view class="uni-tab__cart-box flex" v-if="editing">
-			<view class="flex uni-tab__cart-sub-box">
-				<!-- 全选图标 -->
-				<view class='icon'>
-					<view class="checkIcon" :class="allChecked?'':'nocheck'" @click="allCheck">
-						<text class="iconfont checked" v-if="allChecked">&#xe623;</text>
+		<view v-if="token">
+			<!-- 底部占位 -->
+			<view class="uni-tab__cart-box flex" v-if="!editing">
+				<view class="flex uni-tab__cart-sub-box">
+					<!-- 全选图标 -->
+					<view class='icon'>
+						<view class="checkIcon" :class="allChecked?'':'nocheck'" @click="allCheck">
+							<text class="iconfont checked" v-if="allChecked">&#xe623;</text>
+						</view>
 					</view>
 					<view class="total">
-						<text>全选</text>
+						<text>合计:</text>
+						<text class="cost">￥{{total}}</text>
 					</view>
 				</view>
+				<!-- 合计按钮 -->
+				<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box" @click="goTotal">
+					<view :style="{backgroundColor:buttonGroup.default().backgroundColor,color:buttonGroup.default().color}" class="flex uni-tab__cart-button-right">{{ buttonGroup.default().text }}</view>
+				</view>
 			</view>
-			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box" @click="goTotal">
-				<view :style="{backgroundColor:editButtons.default().backgroundColor,color:editButtons.default().color}" class="flex uni-tab__cart-button-right"
-				 @click="delGoods">{{ editButtons.default().text }}</view>
+			<view class="uni-tab__cart-box flex" v-if="editing">
+				<view class="flex uni-tab__cart-sub-box">
+					<!-- 全选图标 -->
+					<view class='icon'>
+						<view class="checkIcon" :class="allChecked?'':'nocheck'" @click="allCheck">
+							<text class="iconfont checked" v-if="allChecked">&#xe623;</text>
+						</view>
+						<view class="total">
+							<text>全选</text>
+						</view>
+					</view>
+				</view>
+				<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box">
+					<view :style="{backgroundColor:editButtons.default().backgroundColor,color:editButtons.default().color}" class="flex uni-tab__cart-button-right"
+					 @click="delGoods">{{ editButtons.default().text }}</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -49,7 +51,7 @@
 	export default {
 		data() {
 			return {
-				buttonGroup: {//结算按钮信息
+				buttonGroup: { //结算按钮信息
 					type: Array,
 					default () {
 						return {
@@ -59,7 +61,7 @@
 						}
 					}
 				},
-				editButtons: {//删除按钮信息
+				editButtons: { //删除按钮信息
 					type: Array,
 					default () {
 						return {
@@ -82,28 +84,24 @@
 			delGoods() { //删除
 				this.$store.dispatch("delGoods")
 			},
-			goTotal(){
-				if (this.logined) {
-					let data=[]
-					this.goodInfo.forEach(item=>{
-						if (item.checked) {
-							data.push(item)
-						}
-					})
-					if (data.length) {
-						uni.navigateTo({
-							url:"/pages/shopcar/totalPage?data="+JSON.stringify(data)
-						})
-					} else{
-						console.log("您还没有选择任何商品")
+			goTotal() {
+				let data = []
+				this.goodInfo.forEach(item => {
+					if (item.checked) {
+						data.push(item)
 					}
-				} else{
-					console.log("请先登录")
+				})
+				if (data.length) {
+					uni.navigateTo({
+						url: "/pages/confimindent/confimindent?data=" + JSON.stringify(data)
+					})
+				} else {
+					console.log("您还没有选择任何商品")
 				}
 			}
 		},
-		computed: {//展开对象，获取相应的值
-			...mapState(['editing', 'allChecked','goodInfo','logined']),
+		computed: { //展开对象，获取相应的值
+			...mapState(['editing', 'allChecked', 'goodInfo', 'token']),
 			...mapGetters(["total"])
 		}
 	}
@@ -160,10 +158,11 @@
 		border-radius: 50%;
 		margin: auto;
 	}
-	
+
 	.nocheck {
 		border: 1rpx solid #CCCCCC;
 	}
+
 	/* 选中样式 */
 	.checked {
 		color: #FD6801;

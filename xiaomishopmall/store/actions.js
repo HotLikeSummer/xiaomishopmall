@@ -7,5 +7,8 @@ export default{
 	},
 	jointoCart(context,obj){//加入购物车方法
 		context.commit('jointoCart',obj)
+	},
+	goLogin(context){
+		context.commit('goLogin')
 	}
 }

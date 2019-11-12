@@ -11,7 +11,7 @@ export default {
 		}
 	},
 	jointoCart(state,obj){//加入购物车
-		if (state.logined) {//判断是否登录
+		if (state.token) {//判断是否登录
 			let goodsName=[];//定义数组接收商品名称信息
 			state.goodInfo.forEach(item=>goodsName.push(item.name));//添加商品名称
 			//判断商品名称是否已存在
@@ -33,5 +33,10 @@ export default {
 	},
 	logout(state){//退出登录
 		state.token=""
+	},
+	goLogin(state) {
+		uni.navigateTo({ //跳转登录页面
+			url: '/pages/userlogin/userlogin',
+		});
 	}
 }
