@@ -10,8 +10,8 @@
 						<view class='goods-info'>
 							<view class='goods-info-inner'>
 								<view class='checkbox'>
-									<view class="checkIcon" :class="item.checked?'':'nocheck'" @click="check(item)">
-										<text class="iconfont checked" v-if="item.checked">&#xe623;</text>
+									<view class="checkIcon" :class="item.ischeck?'':'nocheck'" @click="check(item)">
+										<text class="iconfont ischeck" v-if="item.ischeck">&#xe623;</text>
 									</view>
 								</view>
 								<view class='goods-image'>
@@ -83,7 +83,7 @@
 				obj.num = event;
 			},
 			check(obj) { //更改商品选中状态
-				obj.checked = !obj.checked;
+				obj.ischeck = !obj.ischeck;
 			},
 			goShopping() {
 				uni.switchTab({ //跳转到首页
@@ -95,11 +95,11 @@
 			}
 		},
 		computed: { //展开state对象，获取相关属性
-			...mapState(['goodInfo', 'editing', 'allChecked', 'token'])
+			...mapState(['goodInfo', 'editing', 'allischeck', 'token'])
 		},
 		watch: {
-			allChecked(newval) { //监听全选状态，使所有商品的选择状态与全选状态一致
-				this.goodInfo.forEach(i => i.checked = newval)
+			allischeck(newval) { //监听全选状态，使所有商品的选择状态与全选状态一致
+				this.goodInfo.forEach(i => i.ischeck = newval)
 			}
 		}
 	}
@@ -160,7 +160,7 @@
 		border: 1rpx solid #CCCCCC;
 	}
 
-	.checked {
+	.ischeck {
 		color: #FD6801;
 		font-size: 47rpx;
 	}

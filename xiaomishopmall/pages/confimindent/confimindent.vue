@@ -22,7 +22,7 @@
 				<view class="user-pic">
 					<image :src="item.cover" class="mypic" v-for="(item,index) in goodInfo" :key="index"></image>
 				</view>
-				<view class="user-right">共{{this.goodInfo.length}}件 <text class="iconfont icon-you"></text> </view>
+				<view class="user-right">共{{goodInfo.length}}件 <text class="iconfont icon-you"></text> </view>
 			</view>
 			<!-- 商品总价等 -->
 			<view v-for="(item,index) in listText" :key="index">

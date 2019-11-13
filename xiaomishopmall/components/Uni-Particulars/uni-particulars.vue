@@ -226,7 +226,7 @@
 					capacity:"64GB",
 					suit:"标配"
 				}
-				obj.checked=false
+				obj.ischeck=false
 				this.sends = [obj, this.togglepop];
 			},
 			// 服务说明显示

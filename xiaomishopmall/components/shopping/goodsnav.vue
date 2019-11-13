@@ -6,8 +6,8 @@
 				<view class="flex uni-tab__cart-sub-box">
 					<!-- 全选图标 -->
 					<view class='icon'>
-						<view class="checkIcon" :class="allChecked?'':'nocheck'" @click="allCheck">
-							<text class="iconfont checked" v-if="allChecked">&#xe623;</text>
+						<view class="checkIcon" :class="allischeck?'':'nocheck'" @click="allCheck">
+							<text class="iconfont ischeck" v-if="allischeck">&#xe623;</text>
 						</view>
 					</view>
 					<view class="total">
@@ -24,8 +24,8 @@
 				<view class="flex uni-tab__cart-sub-box">
 					<!-- 全选图标 -->
 					<view class='icon'>
-						<view class="checkIcon" :class="allChecked?'':'nocheck'" @click="allCheck">
-							<text class="iconfont checked" v-if="allChecked">&#xe623;</text>
+						<view class="checkIcon" :class="allischeck?'':'nocheck'" @click="allCheck">
+							<text class="iconfont ischeck" v-if="allischeck">&#xe623;</text>
 						</view>
 						<view class="total">
 							<text>全选</text>
@@ -87,7 +87,7 @@
 			goTotal() {
 				let data = []
 				this.goodInfo.forEach(item => {
-					if (item.checked) {
+					if (item.ischeck) {
 						data.push(item)
 					}
 				})
@@ -101,7 +101,7 @@
 			}
 		},
 		computed: { //展开对象，获取相应的值
-			...mapState(['editing', 'allChecked', 'goodInfo', 'token']),
+			...mapState(['editing', 'allischeck', 'goodInfo', 'token']),
 			...mapGetters(["total"])
 		}
 	}
@@ -164,7 +164,7 @@
 	}
 
 	/* 选中样式 */
-	.checked {
+	.ischeck {
 		color: #FD6801;
 		font-size: 47rpx;
 	}

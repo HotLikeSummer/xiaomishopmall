@@ -1,11 +1,11 @@
 export default {
 	allCheck(state){//全选
-		state.allChecked=!state.allChecked
+		state.allischeck=!state.allischeck
 	},
 	delGoods(state){//删除
 		for (let i=state.goodInfo.length;i>0;i--) {//倒序循环
 			let item=state.goodInfo[i-1];
-			if(item.checked){//删除选中的商品
+			if(item.ischeck){//删除选中的商品
 				state.goodInfo.splice(item,1)
 			}
 		}
@@ -38,5 +38,14 @@ export default {
 		uni.navigateTo({ //跳转登录页面
 			url: '/pages/userlogin/userlogin',
 		});
+	},
+	getProduct(state,data){
+		let names=[]
+		state.productsList.forEach(item=>{
+			names.push(item.title)
+		})
+		if(names.indexOf(data.title)==-1){
+			state.productsList.push(data)
+		}
 	}
 }
