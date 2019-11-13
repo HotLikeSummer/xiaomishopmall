@@ -1,5 +1,5 @@
 <template>
-	<view id="evaluate">
+	<view id="evaluate" v-if="datas.length==0">
 		<view class="main" style="display:flex" v-show="datas.length==0">
 			<view class="nothing">
 				<image :src="img" mode=""></image>

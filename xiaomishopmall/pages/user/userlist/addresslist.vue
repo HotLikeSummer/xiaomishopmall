@@ -2,7 +2,7 @@
 	<!-- 地址列表页 -->
 	<view id="addresslist">
 		<ul class="ui-list" v-if="Info.length>0">
-			<li class="ui-list-item" v-for="(item,index) in Info">
+			<li class="ui-list-item" v-for="(item,index) in Info" :key="index">
 				<view class="identity">
 					<view class="username">{{item.name}}</view>
 					<view class="phone">{{item.phone}}<text v-if="item.change==true">[默认]</text></view>
@@ -22,9 +22,6 @@
 <script>
 	import addlist from '../data/address.js';
 	export default {
-		components: {
-			addlist
-		},
 		data() {
 			return {
 				Info: addlist.list,
@@ -37,7 +34,7 @@
 			})
 		},
 		onLoad(e) {
-			// 			let _userInfo=uni.getStorageSync("info");
+			let _userInfo = uni.getStorageSync("info");
 			let userInfo = JSON.parse(e.msg);
 			for (let i = 0; i < this.Info.length; i++) {
 				if (userInfo.change == true) {
@@ -57,7 +54,7 @@
 			},
 			update(index) {
 				uni.navigateTo({
-					url: "edit-address?newmsg=" + JSON.stringify(this.Info[index]) +""
+					url: "edit-address?newmsg=" + JSON.stringify(this.Info[index]) + ""
 				})
 			}
 		},

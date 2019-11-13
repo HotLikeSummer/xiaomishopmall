@@ -12,7 +12,7 @@
 		<view class="area">
 			<text>所在地区：</text>
 			<input type="text" v-model="info.area" class="input" />
-			<text class="iconfont icon-dingwei"></text>
+			<text class="iconfont icon-dingwei" @click="chooseLocation"></text>
 		</view>
 		<view class="address">
 			<text>详细地址：</text>
@@ -29,6 +29,7 @@
 	</view>
 </template>
 <script>
+	import addlist from '../data/address.js';
 	export default {
 		data() {
 			return {
@@ -39,32 +40,31 @@
 					address: "",
 					change: false
 				},
-// 				latitude: 39.909,
-// 				longitude: 116.39742,
-// 				covers: [{
-// 					latitude: 39.909,
-// 					longitude: 116.39742,
-// 					iconPath: '../../../static/location.png'
-// 				}, {
-// 					latitude: 39.90,
-// 					longitude: 116.39,
-// 					iconPath: '../../../static/location.png'
-// 				}]
+				datalist:addlist.list
 			}
 		},
-	methods: {
+		methods: {
+			chooseLocation() {
+				let _this=this
+				uni.chooseLocation({
+					success: function(res) {
+						_this.info.area=res.name
+					}
+				});
+			},
 			save() {
 				// uni.setStorageSync('info', JSON.stringify(this.info));
 				uni.navigateTo({
-					url: "addresslist?msg=" + JSON.stringify(this.info) + ""
+					 url: "addresslist?msg=" + JSON.stringify(this.info) + ""
+					// addlist.list.push(this.info)
 				})
 			},
 			check(e) {
 				this.info.change = e.detail.value
-			}
+			},
 		},
 		onLoad(e) {
-			console.log(e)
+			console.log(this.datalist)
 			// console.log(this.addresslist)
 			this.info = JSON.parse(e.newmsg)
 			// console.log(this.info)
@@ -140,10 +140,12 @@
 	.consignee .input {
 		width: 77%;
 	}
-	.area{
+
+	.area {
 		position: relative;
 	}
-	.icon-dingwei{
+
+	.icon-dingwei {
 		position: absolute;
 		top: 0upx;
 		right: 70upx;

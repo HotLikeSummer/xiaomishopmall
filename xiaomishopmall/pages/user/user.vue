@@ -24,7 +24,7 @@
 			<!-- 我的订单部分导航 -->
 			<view class="operate">
 				<ul class="waite">
-					<li v-for="(item,index) in orders" class="waite-list" @tap="topage(item.url,index)">
+					<li v-for="(item,index) in orders" class="waite-list" @tap="topage(item.url,index)" :key="index">
 						<text :class="item.icons"></text>
 						<view class="">{{item.txt}}</view>
 					</li>
@@ -39,7 +39,7 @@
 		<!-- 服务功能 -->
 		<view class="service">
 			<ul class="serviItem">
-				<li class="servilist" v-for="(item,index) in list" @tap="topage(item.url,index)">
+				<li class="servilist" v-for="(item,index) in list" @tap="topage(item.url,index)" :key="index">
 					<text :class="item.img"></text>
 					<text class="content">{{item.content}}</text>
 					<text class="iconfont icon-you rightTo"></text>

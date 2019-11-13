@@ -67,11 +67,11 @@
 		data() {
 			return {
 				database:["asd"],
-				paydata:[],
+				paydata:["sds"],
 				goodsdata:[],
 				evldata:[],
 				tabIndex: 0, //导航订单列表下标
-				swiperheight: 800, //高度
+				swiperheight: 1000, //高度
 				tabBars: [{ //导航信息
 					name: '全部',
 					id: 'all'
@@ -144,12 +144,6 @@
 				this.tabIndex =parseInt(e.index)+ 1;
 				console.log(this.tabIndex)
 			}			
-			uni.getSystemInfo({
-				success: (res) => {
-					let height = res.windowHeight - uni.upx2px(100)
-					this.swiperheight = height;
-				}
-			})
 		},
 	}
 </script>
@@ -164,6 +158,9 @@
 	}
 
 	/* 顶部导航 */
+	.swiper{
+		height:600upx;
+	}
 	.uni-swiper-tab {
 		border: none;
 		/* height: 84upx; */
@@ -269,7 +266,7 @@
 		height: 800upx;
 	} */
 
-	.main {
+	/* .main {
 		width: 100%;
 		height: 600upx;
 		background-color: #F5F5F5;
@@ -287,5 +284,5 @@
 
 	.txt {
 		color: #D6D6D6;
-	}
+	} */
 </style>
