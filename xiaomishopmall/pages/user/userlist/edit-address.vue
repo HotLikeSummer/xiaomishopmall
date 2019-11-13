@@ -40,7 +40,8 @@
 					address: "",
 					change: false
 				},
-				datalist:addlist.list
+				datalist:addlist.list,
+				index:""
 			}
 		},
 		methods: {
@@ -54,9 +55,14 @@
 			},
 			save() {
 				// uni.setStorageSync('info', JSON.stringify(this.info));
+				if (this.index!="") {
+					this.datalist[this.index]=this.info
+				}else{
+					this.datalist.push(this.info)
+				}				
+				console.log(addlist.list)
 				uni.navigateTo({
-					 url: "addresslist?msg=" + JSON.stringify(this.info) + ""
-					// addlist.list.push(this.info)
+					 url: "addresslist"
 				})
 			},
 			check(e) {
@@ -64,10 +70,10 @@
 			},
 		},
 		onLoad(e) {
-			console.log(this.datalist)
-			// console.log(this.addresslist)
-			this.info = JSON.parse(e.newmsg)
-			// console.log(this.info)
+			if (e.newmsg) {
+				this.index=e.newmsg
+				this.info=this.datalist[e.newmsg]
+			}			
 		}
 	}
 </script>

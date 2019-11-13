@@ -8,7 +8,7 @@
 					<view class="phone">{{item.phone}}<text v-if="item.change==true">[默认]</text></view>
 					<view class="btn-delete" @tap="del(index)">删除</view>
 				</view>
-				<view class="edit" @tap="update(index)">
+				<view class="edit" @tap.stop="update(index)">
 					<view class="address">
 						<view class="area">{{item.area}}</view>
 						<view class="detail">{{item.address}}</view>
@@ -24,7 +24,7 @@
 	export default {
 		data() {
 			return {
-				Info: addlist.list,
+				Info:""
 			}
 		},
 		onNavigationBarButtonTap() {
@@ -34,18 +34,19 @@
 			})
 		},
 		onLoad(e) {
-			let _userInfo = uni.getStorageSync("info");
-			let userInfo = JSON.parse(e.msg);
-			for (let i = 0; i < this.Info.length; i++) {
-				if (userInfo.change == true) {
-					this.Info[i].change = false;
-				}
-			}
+			this.Info=addlist.list
+			// let _userInfo = uni.getStorageSync("info");
+			// let userInfo = JSON.parse(e.msg);
+// 			for (let i = 0; i < this.Info.length; i++) {
+// 				if (userInfo.change == true) {
+// 					this.Info[i].change = false;
+// 				}
+// 			}
 
-			if (this.Info.indexOf(userInfo) == -1) {
-				this.Info.push(userInfo)
-			}
-			console.log(this.Info)
+// 			if (this.Info.indexOf(userInfo) == -1) {
+// 				this.Info.push(userInfo)
+// 			}
+// 			console.log(this.Info)
 		},
 		methods: {
 			del(index) {
@@ -54,7 +55,7 @@
 			},
 			update(index) {
 				uni.navigateTo({
-					url: "edit-address?newmsg=" + JSON.stringify(this.Info[index]) + ""
+					url: "edit-address?newmsg="+index+""
 				})
 			}
 		},
