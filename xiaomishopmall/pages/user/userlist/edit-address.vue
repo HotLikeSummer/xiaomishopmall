@@ -58,7 +58,9 @@
 				if (this.index!="") {
 					this.datalist[this.index]=this.info
 				}else{
-					this.datalist.push(this.info)
+					if (this.datalist.indexOf(this.info)==-1) {
+						this.datalist.push(this.info)
+					}					
 				}				
 				console.log(addlist.list)
 				uni.navigateTo({
