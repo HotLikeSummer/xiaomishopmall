@@ -10,7 +10,7 @@ App.mpType = 'app'
 
 // 封装js方法,切记this指向问题
 //滑动事件
-async function tabChange(e,that) {
+async function tabChange(e, that) {
 	//console.log(e, 1)
 	//取到下标
 	let index = e.target.current;
@@ -26,7 +26,7 @@ async function tabChange(e,that) {
 	//屏幕总宽度
 	let winWidth = uni.getSystemInfoSync().windowWidth,
 		nowElement = await this.getElSize(that.tabBars[index].id),
-		 nowWidth = nowElement.width;
+		nowWidth = nowElement.width;
 	if (width + nowWidth - tabBarScrollLeft > winWidth) {
 		that.scrollLeft = width + nowWidth - winWidth;
 	}
@@ -54,7 +54,7 @@ function getElSize(id) {
 }
 
 //点击事件
-async function tabtap(e,that) {
+async function tabtap(e, that) {
 	//console.log(e, 2)
 	//绑定index
 	that.tabIndex = e.currentTarget.dataset.current;
@@ -69,7 +69,7 @@ Vue.prototype.$store = store
 // 挂载 Vue.prototype
 Vue.prototype.$func = {
 	tabChange,
- getElSize,
+	getElSize,
 	tabtap
 }
 const app = new Vue({

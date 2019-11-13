@@ -39,7 +39,7 @@
 					</view>
 					<!-- 加载更多 -->
 					<view class="uni-product-list">
-						<view class="uni-product" v-for="(product, index) in productLists" :key="index" :index="index" @tap="goShow">
+						<view class="uni-product" v-for="(product, index) in productLists" :key="index" :index="index" @tap="goShow(product,index)">
 							<view class="image-view"><image class="uni-product-image" :src="product.cover"></image></view>
 							<view class="uni-product-title">{{ product.desc }}</view>
 							<view class="uni-product-price">
@@ -57,10 +57,10 @@
 	</view>
 </template>
 <script>
-// import main from '../../common/main.js';
 export default {
 	data() {
 		return {
+			//板块数量
 			num: 7,
 			//定义屏幕高度
 			swiperheight_all: 700,
@@ -198,11 +198,12 @@ export default {
 			});
 		},
 		//调往详情
-		goShow(e) {
-			console.log(e);
-			// uni.navigateTo({
-			// 	url:"../type/particulars/particulars?id="+e
-			// })
+		goShow(product,index) {
+			console.log(product);
+			let id=product.id+index
+			uni.navigateTo({
+				url:"../type/particulars/particulars?id="+id
+			})
 		},
 		//搜索
 		onNavigationBarSearchInputClicked(e) {

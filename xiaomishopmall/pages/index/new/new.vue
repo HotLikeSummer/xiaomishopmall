@@ -11,14 +11,14 @@
 		<!-- 对应内容栏 -->
 		<swiper class="swiper-box" :style="{ height: swiperheight_s + 'px' }" :current="tabIndex" @change="tabChange">
 			<swiper-item v-for="(items, index) in num" :key="index">
-				<scroll-view class="scroll-y" scroll-y :show-scrollbar="false" :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore()">
+				<scroll-view class="scroll-y" scroll-y :show-scrollbar="false" :style="{ height: swiperheight_s + 'px' }" @scrolltolower="loadmore(index)">
 					<!-- 内容板块 -->
 					<view class="box" v-for="(item, index) in productLists" :key="index" :index="index">
 						<!-- 背景图 -->
 						<view class="box-bg"><image :src="item.cover"></image></view>
 						<!-- 去购买 -->
 						<view class="uni-media-list uni-pull-right">
-							<view class="uni-media-list-logo" @tap="goShop()">去购买</view>
+							<view class="uni-media-list-logo" @tap="goShop(item,index)">详情</view>
 							<view class="uni-media-list-body">
 								<view class="uni-media-list-text-top">{{ item.desc }}</view>
 								<view class="uni-media-list-text-bottom uni-ellipsis">{{ item.title }}</view>
@@ -167,10 +167,12 @@ export default {
 			}
 		},
 		//去购物车
-		goShop(e) {
+		goShop(item,index) {
+			console.log(item);
+			let id=item.id+index
 			uni.navigateTo({
-				url: '/components/Uni-Particulars/uni-particulars?id='+e
-			});
+				url:"/pages/type/particulars/particulars?id="+id
+			})
 		},
 		//拿数据
 		async changShow() {
@@ -262,6 +264,7 @@ export default {
 	padding: 15rpx;
 	border-radius: 10rpx;
 	color: white;
+	text-align: center;
 }
 .uni-media-more {
 	height: 80rpx;
