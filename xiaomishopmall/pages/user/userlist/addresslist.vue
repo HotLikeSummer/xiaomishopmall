@@ -35,22 +35,9 @@
 		},
 		onLoad(e) {
 			this.Info=addlist.list
-			// let _userInfo = uni.getStorageSync("info");
-			// let userInfo = JSON.parse(e.msg);
-// 			for (let i = 0; i < this.Info.length; i++) {
-// 				if (userInfo.change == true) {
-// 					this.Info[i].change = false;
-// 				}
-// 			}
-
-// 			if (this.Info.indexOf(userInfo) == -1) {
-// 				this.Info.push(userInfo)
-// 			}
-// 			console.log(this.Info)
 		},
 		methods: {
 			del(index) {
-				//uni.removeStorageSync("info");
 				this.Info.splice(index, 1)
 			},
 			update(index) {
