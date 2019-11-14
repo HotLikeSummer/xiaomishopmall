@@ -17,7 +17,7 @@
 			</swiper-item>
 			<swiper-item>
 				<payment :datas="paydata"></payment>
-			</swiper-item>			
+			</swiper-item>
 			<swiper-item>
 				<takeGoods :datas="goodsdata"></takeGoods>
 			</swiper-item>
@@ -66,10 +66,10 @@
 		},
 		data() {
 			return {
-				database:["asd"],
-				paydata:["sds"],
-				goodsdata:[],
-				evldata:[],
+				database: [],
+				paydata: [],
+				goodsdata: [],
+				evldata: [],
 				tabIndex: 0, //导航订单列表下标
 				swiperheight: 1000, //高度
 				tabBars: [{ //导航信息
@@ -84,19 +84,6 @@
 				}, {
 					name: '待评价',
 					id: 'pingjia'
-				}],
-				orderitems: [{
-					img: "/static/images/nothing/no_comment.png",
-					txt: "您还没有任何订单"
-				}, {
-					img: "/static/images/nothing/no_pay.png",
-					txt: "您还没有待付款订单"
-				}, {
-					img: "/static/images/nothing/no_receiving.png",
-					txt: "您还没有待收货订单"
-				}, {
-					img: "/static/images/nothing/no_comment.png",
-					txt: "您还没有待评价订单"
 				}],
 				likeList: [{ //推荐信息
 					image: "/static/images/demo/list/3.jpg",
@@ -136,15 +123,15 @@
 				this.tabIndex = index;
 			}
 		},
-		// 页面加载时改变下标切换到对应列表
 		onLoad(e) {
+			// 页面加载时改变下标切换到对应列表
 			if (e.current) {
 				this.tabIndex = e.current;
-			}else{
-				this.tabIndex =parseInt(e.index)+ 1;
+			} else {
+				this.tabIndex = parseInt(e.index) + 1;
 				console.log(this.tabIndex)
-			}			
-		},
+			}
+		}
 	}
 </script>
 <style>
@@ -158,9 +145,10 @@
 	}
 
 	/* 顶部导航 */
-	.swiper{
-		height:600upx;
+	.swiper {
+		height: 600upx;
 	}
+
 	.uni-swiper-tab {
 		border: none;
 		/* height: 84upx; */

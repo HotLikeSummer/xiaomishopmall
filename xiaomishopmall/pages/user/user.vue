@@ -106,33 +106,27 @@
 		methods: {
 			//跳转到我的订单页
 			topage(url, index) {
-				if (this.token == "") {
-					uni.navigateTo({
-						url: "../userlogin/userlogin"
-					})
-				} else {
-					uni.navigateTo({
-						url: url + "?index=" + index + ""
-					})
-				}
+				uni.navigateTo({
+					url: url + "?index=" + index + ""
+				})
 			},
 			toOrder() {
-				if (this.token == "") {
-					uni.navigateTo({
-						url: "../userlogin/userlogin"
-					})
-				}else{
-					uni.navigateTo({
-						url: "userlist/myOrder?current=0"
-					})
-				}				
-			},
-			tologin() {
 				uni.navigateTo({
-					url: "../userlogin/userlogin"
+					url: "userlist/myOrder?current=0"
 				})
 			}
-		}
+		},
+		// onShow() {
+		// 	// if (this.token == "") {
+		// 	// 	uni.navigateTo({
+		// 	// 		url: "../userlogin/userlogin"
+		// 	// 	})
+		// 	// } else {
+		// 		uni.navigateBack({
+		// 			delta: 1
+		// 		})
+		// 	// }
+		// }
 	}
 </script>
 
