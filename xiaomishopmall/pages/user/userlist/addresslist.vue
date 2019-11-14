@@ -2,29 +2,37 @@
 	<!-- 地址列表页 -->
 	<view id="addresslist">
 		<ul class="ui-list" v-if="Info.length>0">
-			<li class="ui-list-item" v-for="(item,index) in Info" :key="index">
+			<li class="ui-list-item" v-for="(item,index) in Info" :key="index" @tap="selectSite" :data-index="index">
 				<view class="identity">
 					<view class="username">{{item.name}}</view>
-					<view class="phone">{{item.phone}}<text v-if="item.change==true">[默认]</text></view>
-					<view class="btn-delete" @tap="del(index)">删除</view>
+					<!-- 当item.change==true则将他设为默认 -->
+					<view class="phone">{{item.phone}}<text v-if="item.change==true"> [默认]</text></view>
+					<view class="btn-delete" @tap.stop="del(index)">删除</view>
 				</view>
-				<view class="edit" @tap.stop="update(index)">
+				<!-- @tap.stop="update(index)" -->
+				<view class="edit">
 					<view class="address">
 						<view class="area">{{item.area}}</view>
 						<view class="detail">{{item.address}}</view>
 					</view>
-					<view class="icon"><text class="iconfont icon-you"></text></view>
+					<!-- <text class="iconfont icon-you"></text> -->
+					<view class="icon" @tap.stop="update" :data-index="index">编辑</view>
 				</view>
 			</li>
 		</ul>
 	</view>
 </template>
 <script>
-	import addlist from '../data/address.js';
+	
+	// import addlist from '../data/address.js';
+	import {
+		mapState
+	} from 'vuex'
 	export default {
 		data() {
 			return {
-				Info:""
+				Info: [], //存放所有地址
+				id: 0,
 			}
 		},
 		onNavigationBarButtonTap() {
@@ -33,17 +41,65 @@
 				url: "edit-address"
 			})
 		},
-		onLoad(e) {
-			this.Info=addlist.list
+		onLoad(options) {
+			this.Info = this.list
+			this.id = parseInt(options.id);
+		},
+		computed: {
+			...mapState(["list"])
 		},
 		methods: {
+			//删除
 			del(index) {
-				this.Info.splice(index, 1)
+				let datas = this.Info;
+				uni.showModal({
+					title: '提示',
+					content: '确定要删除吗？',
+					success: function(res) {
+						if (res.confirm) {
+							datas.splice(index, 1);
+							setTimeout(() => {
+								uni.navigateTo({
+									url: "/pages/user/userlist/addresslist"
+								})
+							}, 1000)
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
+
+
 			},
-			update(index) {
-				uni.navigateTo({
-					url: "edit-address?newmsg="+index+""
-				})
+			// 编辑
+			update(e) {
+				//获取到当前行点击的下标
+				let index = e.currentTarget.dataset.index;
+				// this.index= index;
+				//判断当前点击下标是否等于NAN,等于则表示新增,否则则是从编辑页进去的
+				if (index == null) {
+					uni.navigateTo({
+						url: "/pages/user/userlist/edit-address"
+					})
+				} else {
+					uni.navigateTo({
+						url: "/pages/user/userlist/edit-address?index=" + index + ""
+					})
+				}
+			},
+			// 选择地址
+			selectSite(e) {
+				let index = e.currentTarget.dataset.index;
+				for (let i in this.Info) {
+					if (i == index) {
+						this.Info[i].chek = true
+					} else {
+						this.Info[i].chek = false
+					}
+				}
+				uni.navigateBack({
+					delta: 1,
+				});
 			}
 		},
 	}
@@ -71,8 +127,8 @@
 	.identity {
 		display: flex;
 		justify-content: space-between;
-		height: 70upx;
-		line-height: 70upx;
+		height: 40upx;
+		line-height: 40upx;
 		border-bottom: 1upx solid #FAFAFA;
 		padding: 0upx 20upx;
 	}
@@ -100,13 +156,6 @@
 	.detail {
 		height: 46upx;
 		line-height: 46upx;
-	}
-
-	.username,
-	.phone,
-	.btn-delete {
-		height: 70upx;
-		line-height: 70upx;
 	}
 
 	.username {

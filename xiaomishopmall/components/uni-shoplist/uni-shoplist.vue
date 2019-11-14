@@ -14,7 +14,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="nav-top-text" @click="show('right',index)">筛选</view>
+			<view class="nav-top-text" @click="show('right')">筛选</view>
 		</view>
 		<!-- 商品图文列表 -->
 		<view class="shop-list-box">
@@ -63,7 +63,7 @@
 			UniDrawer
 		},
 		 computed:{
-			...mapState(['picTextList'])
+			...mapState(['picTextList','good'])
 		 },
 		name: 'UniShopList',
 		data() {
@@ -116,10 +116,11 @@
 					url: '/pages/type/particulars/particulars?id=' + e,
 				});
 			},
-			show(e, index) {
+			show(e) {
 				if (e === "right") {
 					this.showRigth = true;
 				}
+				// console.log(this.good,111);
 			},
 			sort(e){
 				let _this = this;
@@ -157,7 +158,6 @@
 				}
 			}
 		},
-		
 	}
 </script>
 <style scoped>

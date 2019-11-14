@@ -16,5 +16,15 @@ export default {
 			}
 		})
 		return state.payingPrice = payMoney.toFixed(2) //返回总价并赋值
-	}
+	},
+	// 选择新的地址
+	ckAddress(state){
+			let newadd={}
+			state.list.forEach(i=>{
+				if(i.chek){
+					newadd=i
+				}
+			})
+			return state.ckAddress=newadd
+		}
 }

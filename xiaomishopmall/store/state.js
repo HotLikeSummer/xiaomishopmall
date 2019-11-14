@@ -67,5 +67,23 @@ export default {
 	token: "", //登录令牌
 	productsList:[],
 	payingList:[],
-	payingPrice:0
+	payingPrice:0,
+	//地址列表数据
+		list:[{
+			name: "李先生",
+			phone: '13538888888',
+			area: "广东省深圳市龙岗区",
+			address: "日月时创科技有限科技园",
+			change: true,//默认
+			chek:false
+		}],
+		//默认地址
+		ckAddress:{
+			name: "李先生",
+			phone: '13538888888',
+			area: "广东省深圳市龙岗区",
+			address: "日月时创科技有限科技园",
+			change: true,//默认
+			chek:true
+		},
 }

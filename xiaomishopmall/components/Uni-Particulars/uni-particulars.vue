@@ -46,7 +46,7 @@
 								<view class="commentdata">{{item.date}}</view>
 							</view>
 						</view>
-						<view class="comment-right" @click="fabulous(index)" :class="item.index==index && increasenum?'actions':''">
+						<view class="comment-right">
 							<text class="iconfont icon-dianzan"></text>
 							<text>{{item.num}}</text>
 						</view>
@@ -105,7 +105,7 @@
 			<view class="gouwuche" @click="shopCart(good)">加入购物车</view>
 		</view>
 		<!-- 详服务说明详情页固定定位 -->
-		<view v-show="showLeft" class="animat">
+		<view v-show="showLeft">
 			<!-- 遮罩层 -->
 			<view class="shadow" @click="confim"></view>
 			<view class="fiexbox">
@@ -127,9 +127,11 @@
 			<view class="fiexbox">
 				<view class="details-box">
 					<view class="details-box-top">收货地址</view>
-					<text class="iconfont icon-dingwei" style="padding-left: 10upx;"></text>
+					<text class="iconfont icon-dingwei" style="padding: 0upx 10upx;"></text>
+					<text>{{ckAddress.name}} {{ckAddress.phone}}</text>
+					<view>{{ckAddress.area}}{{ckAddress.address}}</view>
 				</view>
-				<view class="qued" @click="fresh">选择新的地址</view>
+				<view class="qued" @click="fresh" data-id="1">选择新的地址</view>
 			</view>
 			<!-- 遮罩层 -->
 			<view class="shadow" @click="site"></view>
@@ -140,7 +142,8 @@
 <script>
 	import UniIcons from "@/components/Uni-Icons/uni-icons.vue"
 	import shopcartCard from "@/components/shopcartCard/shopcartCard.vue"
-	import {mapState} from "vuex"
+	import {mapState,mapGetters} from "vuex"
+	import addlist from "@/pages/user/data/address.js"
 	export default {
 		name: 'UniParticulars',
 		components: {
@@ -218,15 +221,13 @@
 		methods: {
 			shopCart(obj) {
 				this.togglepop = !this.togglepop
-				obj.name=obj.title;
-				obj.cover=obj.cover
 				obj.num=1;
 				obj.kind={
 					color:"火焰红",
 					capacity:"64GB",
 					suit:"标配"
 				}
-				obj.ischeck=false
+				obj.ischeck=1
 				this.sends = [obj, this.togglepop];
 			},
 			// 服务说明显示
@@ -250,9 +251,10 @@
 				}
 			},
 			// 去地址页
-			fresh() {
+			fresh(e) {
+				let id =e.currentTarget.dataset.id;
 				uni.navigateTo({
-					url: '/pages/user/userlist/addresslist',
+					url: '/pages/user/userlist/addresslist?id='+id+'',
 				});
 			},
 			//去购物车
@@ -275,24 +277,11 @@
 					this.collecteds = "收藏"
 				}
 			},
-			// 点赞
-			fabulous(index) {
-				if (index == 0) {
-					if (this.increasenum == false) {
-						this.increasenum = true;
-						this.discussa[index].num++;
-						this.discussa.index=0;
-					} else {
-						this.increasenum = false;
-						this.discussa[index].num--;
-					}
-				}else{
-					this.discussa.index=1;
-				}
-			}
+			
 		},
 		computed:{
-			...mapState(["good"])
+			...mapState(["good","list"]),
+			...mapGetters(["ckAddress"])
 		}
 	}
 </script>
