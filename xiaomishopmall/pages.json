@@ -322,6 +322,10 @@
             "path" : "pages/pay/paySuccess/paySuccess",
             "style" : {}
         }
+        ,{
+            "path" : "pages/shoplist/shoplist",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
