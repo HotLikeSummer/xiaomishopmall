@@ -21,13 +21,13 @@
 					<text>标配</text>
 					<uni-icons type="arrowright" size="22" class="listright"></uni-icons>
 				</view>
-				<view class="delivery list" @click="DeliveryShow">配送
-					<text>北京</text>
-					<text>东城区</text>
+				<view class="delivery list" @click="deliveryShow">配送
+					<text>广东省</text>
+					<text>深圳市</text>
 					<text style="color: #FD6801;">有现货</text>
 					<uni-icons type="arrowright" size="22" class="listright"></uni-icons>
 				</view>
-				<view class="service list" @click="ServiceShow">
+				<view class="service list" @click="serviceShow">
 					<text class="iconfont icon-iconfontxuanzhong4"></text>小米自营
 					<text class="iconfont icon-iconfontxuanzhong4"></text>小米发货
 					<text class="iconfont icon-iconfontxuanzhong4"></text>七天无理由退换
@@ -104,7 +104,7 @@
 			</view>
 			<view class="gouwuche" @click="shopCart(good)">加入购物车</view>
 		</view>
-		<!-- 详服务说明详情页固定定位 -->
+		<!-- 服务说明 -->
 		<view v-show="showLeft">
 			<!-- 遮罩层 -->
 			<view class="shadow" @click="confim"></view>
@@ -122,14 +122,14 @@
 			</view>
 
 		</view>
-		<!-- 配送详情页 -->
+		<!-- 地址配送详情页 -->
 		<view v-show="showRigth">
 			<view class="fiexbox">
 				<view class="details-box">
 					<view class="details-box-top">收货地址</view>
 					<text class="iconfont icon-dingwei" style="padding: 0upx 10upx;"></text>
 					<text>{{ckAddress.name}} {{ckAddress.phone}}</text>
-					<view>{{ckAddress.area}}{{ckAddress.address}}</view>
+					<view style="padding: 0upx 20upx;">{{ckAddress.area}}{{ckAddress.address}}</view>
 				</view>
 				<view class="qued" @click="fresh" data-id="1">选择新的地址</view>
 			</view>
@@ -143,7 +143,7 @@
 	import UniIcons from "@/components/Uni-Icons/uni-icons.vue"
 	import shopcartCard from "@/components/shopcartCard/shopcartCard.vue"
 	import {mapState,mapGetters} from "vuex"
-	import addlist from "@/pages/user/data/address.js"
+	// import addlist from "@/pages/user/data/address.js"
 	export default {
 		name: 'UniParticulars',
 		components: {
@@ -152,7 +152,6 @@
 		},
 		data() {
 			return {
-				shopdata:[],
 				sends: [], //接收子组件数据
 				scrollTop: 0, //窗口顶部距离
 				discussa: [
@@ -231,7 +230,7 @@
 				this.sends = [obj, this.togglepop];
 			},
 			// 服务说明显示
-			ServiceShow() {
+			serviceShow() {
 				if (this.showLeft == false) {
 					this.showLeft = true;
 				} else {
@@ -243,7 +242,7 @@
 				this.showLeft = false;
 			},
 			// 收货地址显示
-			DeliveryShow() {
+			deliveryShow() {
 				if (this.showRigth == false) {
 					this.showRigth = true;
 				} else {
@@ -252,10 +251,17 @@
 			},
 			// 去地址页
 			fresh(e) {
-				let id =e.currentTarget.dataset.id;
-				uni.navigateTo({
-					url: '/pages/user/userlist/addresslist?id='+id+'',
-				});
+				if(this.token != ""){
+					let id =e.currentTarget.dataset.id;
+					uni.navigateTo({
+						url: '/pages/user/userlist/addresslist?id='+id+'',
+					});
+				}else{
+					uni.showModal({
+						content: '您还没有登录，请先登录'
+					});
+				}
+				
 			},
 			//去购物车
 			toShop() {
@@ -280,9 +286,9 @@
 			
 		},
 		computed:{
-			...mapState(["good","list"]),
+			...mapState(["good","list","token"]),
 			...mapGetters(["ckAddress"])
-		}
+		},
 	}
 </script>
 

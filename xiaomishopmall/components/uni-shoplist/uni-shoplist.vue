@@ -3,6 +3,7 @@
 	<view id="shoplist">
 		<!-- 顶部导航 -->
 		<view class="nav">
+			<!-- 点击排序 -->
 			<view class="nav-top" v-for="(item,index) in navtopList" :key="index" @click="sort(index)">
 				<!-- 判断textColor是否等于当前点击下标，等于则文字高亮 -->
 				<text class="nav-top-text" :class="textColor==index?'iconcolor':''">{{item.text}}</text>
@@ -14,20 +15,23 @@
 					</view>
 				</view>
 			</view>
+			<!-- 点击筛选 -->
 			<view class="nav-top-text" @click="show('right')">筛选</view>
 		</view>
 		<!-- 商品图文列表 -->
 		<view class="shop-list-box">
 			<view v-for="(item,index) in picTextList" class="picTextLists" :key="index" @click="Particulars(item.id)">
+				<!-- 图片 -->
 				<view class="shop-list-box-pic">
-					<image :src="item.pic"></image>
+					<image :src="item.cover"></image>
 				</view>
+				<!-- 文字 -->
 				<view class="shopping-bottom">
 					<view class="shop-list-box-title">{{item.title}}</view>
-					<view class="classify-text">{{item.text}}</view>
-					<view class="sales">销量:{{item.sales}}</view>
-					<view class="shop-list-box-price">￥{{item.price}}</view>
-					<view>共1599条评论 满意度{{item.review}}%</view>
+					<view class="classify-text">{{item.desc}}</view>
+					<view class="sales">销量:{{item.min_price}}</view>
+					<view class="shop-list-box-price">￥{{item.min_price}}</view>
+					<view>共1599条评论 满意度{{item.id}}%</view>
 				</view>
 			</view>
 			<!-- 引入抽屉组件 -->
@@ -35,16 +39,20 @@
 				<!-- 固定定位 -->
 				<view class="screen">
 					<view class="screen-serve">服务</view>
+					<!-- 服务按钮 -->
 					<view>
 						<button size="mini" v-for="(item,index) in Btnone" :key="index" class="hot-search-btn" :class="Num==index?'acvtions':''"
 						 @click="BtnReset(index)">{{item}}</button>
 					</view>
 					<view class="screen-serve">分类</view>
+					<!-- 分类按钮 -->
 					<view>
 						<button size="mini" v-for="(item,index) in Btntow" :key="index" class="hot-search-btn" :class="Confirm==index?'acvtions':''"
 						 @click="BtnConfirm(index)">{{item}}</button>
 					</view>
+					<!-- 重置及确定按钮 -->
 					<view class="hot-search-reset">
+						<!-- 给当前点击按钮添加背景颜色 -->
 						<button size="default" v-for="(item,index) in SearchReset" :key="index" class="feature" :class="Reset==index?'acvtion':''"
 						 @click="SearchResets(index)">{{item}}</button>
 					</view>
@@ -56,16 +64,20 @@
 </template>
 
 <script>
+	// 引入抽屉组件
 	import UniDrawer from "@/components/uni-drawer/uni-drawer.vue"
+	//引入状态管理
 	import {mapState} from 'vuex'
 	export default {
+		name: 'UniShopList',
+		//注册组件
 		components: {
 			UniDrawer
 		},
+		//展开对象
 		 computed:{
-			...mapState(['picTextList','good'])
+			...mapState(['good','productsList'])
 		 },
-		name: 'UniShopList',
 		data() {
 			return {
 				SearchReset: ["重置", "确定"],
@@ -77,8 +89,16 @@
 				Reset: 0, // 重置及确定按钮
 			    textColor:0,//字体颜色
 				showRigth: false, //抽屉显示隐藏
-				rank:["review","sales","price"],//排序
+				picTextList: [],//数据列表
+				rank:["id","min_price","min_price"],//排序
 			}
+		},
+		//钩子函数
+		created() {
+			for (let i=0;i<5;i++) {
+				this.$store.dispatch("getProduct",i)
+			}
+			this.picTextList = this.productsList
 		},
 		methods: {
 			// 重置及确定按钮功能
@@ -113,20 +133,24 @@
 			// 跳转到详情页面
 			Particulars(e) {
 				uni.navigateTo({
-					url: '/pages/type/particulars/particulars?id=' + e,
+					url: '/pages/type/particulars/particulars?id=' +e,
 				});
 			},
+			//点击筛选
 			show(e) {
 				if (e === "right") {
 					this.showRigth = true;
 				}
-				// console.log(this.good,111);
 			},
+			//排序
 			sort(e){
 				let _this = this;
+				//字体颜色等于当前点击下标
 				_this.textColor = e;
+				//循环要排序的数组
 				for (let i = 0; i < _this.navtopList.length; i++) {
-					if (e == i) {//当前字体图标
+					//当前字体图标
+					if (e == i) {
 						if (_this.navtopList[i].num == 0) {
 							this.picTextList=this.picTextList.sort(this.ascending(this.rank[e]))//小到大
 							_this.navtopList[i].num = 1;//向上字体图标的颜色变色
@@ -134,7 +158,7 @@
 							this.picTextList=this.picTextList.sort(this.descendding(this.rank[e]))//大到小
 							_this.navtopList[i].num = 0;//向下字体图标的颜色变色
 						}
-					} else {//其他字体图标
+					} else {//默认图标向上
 						_this.navtopList[i].num = 1;
 					}
 				}

@@ -11,7 +11,8 @@
 				</scroll-view>
 				<!-- 右侧商品分类 -->
 				<scroll-view class="nav-right" scroll-y :scroll-top="scrollTop" @scroll="scroll" :style="'height:'+height+'px'" scroll-with-animation>
-					<view :id="index===0?'first':''" class="nav-right-item" v-for="(item,index) in subCategoryList" :key="index" @click="shoppingList(item,index)">
+					<!-- :id="index===0?'first':''" -->
+					<view  class="nav-right-item" v-for="(item,index) in subCategoryList" :key="index" @click="shoppingList(item,index)">
 						<image :src="item.LOGO" />
 						<view>{{item.NAME}}</view>
 					</view>
@@ -32,8 +33,10 @@
 				categoryActive: 0,//字体颜色
 				scrollTop: 0,//当前点击行距离窗口顶部的距离
 				scrollHeight: 0,//获取屏幕可视高度
+				
 			}
 		},
+		
 		methods: {
 			//获取屏幕可视高度
 			scroll(e) {
@@ -65,7 +68,7 @@
 			//跳转到商品列表页面
 			shoppingList(item,index){
 				uni.navigateTo({
-					url: '../shoplist/shoplist'
+					url: 'shoplist/shoplist'
 				});
 			},
 			
@@ -74,6 +77,7 @@
 			this.getCategory();
 			this.height = uni.getSystemInfoSync().windowHeight;
 		},
+		//跳转搜索
 		onNavigationBarSearchInputClicked(e) {
 			uni.navigateTo({
 				url: '/pages/type/detail/detail'
