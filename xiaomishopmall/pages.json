@@ -83,7 +83,7 @@
             	"navigationStyle": "custom"
             }
         },{
-            "path" : "pages/type/shoplist/shoplist",
+            "path" : "pages/shoplist/shoplist",
             "style": {
             	"navigationBarTitleText": "列表页",
 				"app-plus":{

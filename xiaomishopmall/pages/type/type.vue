@@ -68,7 +68,7 @@
 			//跳转到商品列表页面
 			shoppingList(item,index){
 				uni.navigateTo({
-					url: 'shoplist/shoplist'
+					url: '/pages/shoplist/shoplist'
 				});
 			},
 			

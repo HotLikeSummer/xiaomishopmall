@@ -57,6 +57,7 @@
 
 		},
 		onLoad(options) {
+			
 			// 获取接口数据
 			let id = parseInt(options.id)
 			let that =this;
@@ -66,6 +67,7 @@
 					that.$store.commit("getgood",res.data.data);
 				}
 			});
+			console.log(this.good)
 		},
 
 	}

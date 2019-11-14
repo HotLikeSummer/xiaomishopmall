@@ -65,6 +65,7 @@ export default {
 		}
 	],
 	token: "", //登录令牌
+	nickname: "游客",
 	productsList:[],
 	payingList:[],
 	payingPrice:0,
