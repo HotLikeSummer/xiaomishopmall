@@ -20,9 +20,9 @@
 			<!-- 订单数量 -->
 			<view class="user">
 				<view class="user-pic">
-					<image :src="item.cover" class="mypic" v-for="(item,index) in goodInfo" :key="index"></image>
+					<image :src="item.cover" class="mypic" v-for="(item,index) in payingList" :key="index"></image>
 				</view>
-				<view class="user-right">共{{goodInfo.length}}件 <text class="iconfont icon-you"></text> </view>
+				<view class="user-right">共{{payingList.length}}件 <text class="iconfont icon-you"></text> </view>
 			</view>
 			<!-- 商品总价等 -->
 			<view v-for="(item,index) in listText" :key="index">
@@ -34,7 +34,7 @@
 			<!-- 小计 -->
 			<view class="list">
 				<text class="list-left" style="color: #FD6801;">小计</text>
-				<text class="list-right" style="color: #FD6801;">￥{{total}}</text>
+				<text class="list-right" style="color: #FD6801;">￥{{payingPrice}}</text>
 			</view>
 			<!-- 发票 -->
 			<view class="invoice">
@@ -45,8 +45,8 @@
 			<view class="mytotal">
 				<view class="total">
 					<view class="total-right">
-						合计 :<text style="color: #FD6801;padding-left: 15rpx;">￥{{total}}</text>
-						<text class="btn">去付款</text>
+						合计 :<text style="color: #FD6801;padding-left: 15rpx;">￥{{payingPrice}}</text>
+						<text class="btn" @click="toPay">去付款</text>
 					</view>
 				</view>
 			</view>
@@ -56,14 +56,15 @@
 
 <script>
 	import {
-		mapState
+		mapState,
+		mapGetters
 	} from "vuex"
 	export default {
 		data() {
 			return {
 				listText: [{
 						tesleft: "商品总价",
-						price: "￥"+this.$store.state.total
+						price: "￥"+this.$store.state.payingPrice
 					},
 					{
 						tesleft: "运费",
@@ -82,10 +83,16 @@
 				uni.navigateBack({
 					delta: 1
 				});
+			},
+			toPay(){
+				uni.redirectTo({
+					url:"/pages/pay/pay"
+				})
 			}
 		},
 		computed: {
-			...mapState(["goodInfo", 'total'])
+			...mapState(["payingList"]),
+			...mapGetters(["payingPrice"])
 		}
 	}
 </script>

@@ -12,7 +12,8 @@ export default {
 		},
 		min_price: 3541, //价格
 		num: 1, //数量
-		ischeck: 1 //选中状态
+		ischeck: 1, //选中状态
+		status:1
 	}],
 	total: 0, //合计金额
 	logined: false, //登录状态
@@ -64,5 +65,7 @@ export default {
 		}
 	],
 	token: "", //登录令牌
-	productsList:[]
+	productsList:[],
+	payingList:[],
+	payingPrice:0
 }

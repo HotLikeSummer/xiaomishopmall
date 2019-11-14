@@ -64,7 +64,6 @@
 				this.$store.dispatch("getProduct",i)
 			}
 			this.productList=this.$store.state.productsList
-			console.log(this.$store.state.productsList)
 		},
 		onNavigationBarButtonTap(e) { //点击编辑触发方法
 			this.$store.state.editing = !this.$store.state.editing //改变编辑状态
@@ -85,8 +84,8 @@
 	.goods-carts {
 		position: fixed;
 		width: 100%;
-		bottom: 0px;
-		/* bottom: 49px; */
+		/* bottom: 0px; */
+		bottom: 49px;
 		background-color: #FFFFFF;
 		border-bottom: #CCCCCC;
 		z-index: 99;

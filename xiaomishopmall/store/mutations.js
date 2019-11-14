@@ -47,5 +47,9 @@ export default {
 		if(names.indexOf(data.title)==-1){
 			state.productsList.push(data)
 		}
+	},
+	statusUp(state){
+		state.payingList.forEach(i=>i.status++)
+		console.log(state.payingList[0].status)
 	}
 }

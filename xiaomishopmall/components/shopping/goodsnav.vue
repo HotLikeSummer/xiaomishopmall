@@ -85,23 +85,27 @@
 				this.$store.dispatch("delGoods")
 			},
 			goTotal() {
-				let data = []
 				this.goodInfo.forEach(item => {
 					if (item.ischeck) {
-						data.push(item)
+						this.payingList.push(item)
 					}
 				})
-				if (data.length) {
+				if (this.payingList.length>0) {
+					this.$store.dispatch("statusUp")
+					this.$store.dispatch("delGoods")
 					uni.navigateTo({
-						url: "/pages/confimindent/confimindent?data=" + JSON.stringify(data)
+						url: "/pages/confimindent/confimindent"
 					})
 				} else {
-					console.log("您还没有选择任何商品")
+					uni.showModal({
+					    title: '提示',
+					    content: '您还没有选择任何商品'
+					});
 				}
 			}
 		},
 		computed: { //展开对象，获取相应的值
-			...mapState(['editing', 'allischeck', 'goodInfo', 'token']),
+			...mapState(['editing', 'allischeck', 'goodInfo', 'token', 'payingList']),
 			...mapGetters(["total"])
 		}
 	}

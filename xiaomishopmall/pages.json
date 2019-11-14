@@ -314,6 +314,14 @@
 				"navigationStyle":"custom"
 			}
 		}
+        ,{
+            "path" : "pages/pay/pay",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/pay/paySuccess/paySuccess",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

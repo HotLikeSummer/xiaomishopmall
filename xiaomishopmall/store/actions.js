@@ -19,5 +19,8 @@ export default {
 				var [error, res] = data;
 				context.commit('getProduct',res.data.data)
 			})
+	},
+	statusUp(context,arr){
+		context.commit('statusUp',arr)
 	}
 }
