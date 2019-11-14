@@ -20,9 +20,9 @@
 			<!-- 订单数量 -->
 			<view class="user">
 				<view class="user-pic">
-					<image :src="item.cover" class="mypic" v-for="(item,index) in payingList" :key="index"></image>
+					<image :src="item.cover" class="mypic" v-for="(item,index) in goodsList" :key="index"></image>
 				</view>
-				<view class="user-right">共{{payingList.length}}件 <text class="iconfont icon-you"></text> </view>
+				<view class="user-right">共{{goodsList.length}}件 <text class="iconfont icon-you"></text> </view>
 			</view>
 			<!-- 商品总价等 -->
 			<view v-for="(item,index) in listText" :key="index">
@@ -64,7 +64,7 @@
 			return {
 				listText: [{
 						tesleft: "商品总价",
-						price: "￥"+this.$store.state.payingPrice
+						price: "￥" + 0
 					},
 					{
 						tesleft: "运费",
@@ -74,7 +74,8 @@
 						tesleft: "优惠券",
 						price: "无可用"
 					}
-				]
+				],
+				goodsList:[]
 			}
 		},
 		methods: {
@@ -93,6 +94,14 @@
 		computed: {
 			...mapState(["payingList"]),
 			...mapGetters(["payingPrice"])
+		},
+		created() {
+			this.payingList.forEach(item=>{
+				if (item.status===2) {
+					this.goodsList.push(item)
+				}
+			})
+			this.listText[0].price="￥"+this.payingPrice
 		}
 	}
 </script>

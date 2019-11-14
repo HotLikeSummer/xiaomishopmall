@@ -49,7 +49,7 @@
 			},
 			//确认支付
 			confirm() {
-				this.$store.dispatch("statusUp")
+				this.$store.dispatch("statusUp",2)
 				uni.redirectTo({
 					url: '/pages/pay/paySuccess/paySuccess'
 				})

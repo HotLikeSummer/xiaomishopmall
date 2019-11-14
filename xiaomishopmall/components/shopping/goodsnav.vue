@@ -91,7 +91,7 @@
 					}
 				})
 				if (this.payingList.length>0) {
-					this.$store.dispatch("statusUp")
+					this.$store.dispatch("statusUp",1)
 					this.$store.dispatch("delGoods")
 					uni.navigateTo({
 						url: "/pages/confimindent/confimindent"

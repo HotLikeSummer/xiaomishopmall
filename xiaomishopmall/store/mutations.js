@@ -48,8 +48,11 @@ export default {
 			state.productsList.push(data)
 		}
 	},
-	statusUp(state){
-		state.payingList.forEach(i=>i.status++)
-		console.log(state.payingList[0].status)
+	statusUp(state,i){
+		state.payingList.forEach(item=>{
+			if (item.status===i) {
+				item.status++
+			}
+		})
 	}
 }
