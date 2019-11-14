@@ -77,7 +77,8 @@
 		methods: {
 			toggleCard(i) { //传输商品信息
 				this.togglepop = !this.togglepop //更改模态框弹出状态
-				this.sendData = [i, this.togglepop] //传输商品信息和弹出状态
+				this.sendData = [this.togglepop] //传输商品信息和弹出状态
+				this.$store.state.good=i
 			},
 			change(event, obj) { //改变商品数量
 				obj.num = event;
@@ -95,7 +96,7 @@
 			}
 		},
 		computed: { //展开state对象，获取相关属性
-			...mapState(['goodInfo', 'editing', 'allischeck', 'token'])
+			...mapState(['goodInfo', 'editing',"good",'allischeck', 'token'])
 		},
 		watch: {
 			allischeck(newval) { //监听全选状态，使所有商品的选择状态与全选状态一致

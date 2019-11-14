@@ -78,7 +78,8 @@
 		props:["arr"],//接收商品信息
 		watch:{
 			arr(newarr){//监听商品信息变化，改变模态框弹出状态
-				this.goodinfo=this.arr[0]
+				this.goodinfo=this.good
+				console.log(this.goodinfo.ischeck)
 				this.showUp();
 			}
 		},
@@ -88,22 +89,22 @@
 				this.$refs['popup'].open();
 			},
 			changed(val){
-				this.goodinfo.num=val;
+				this.good.num=val;
 			},
 			colorChange(i){
 				this.colorIndex=i;
-				this.goodinfo.kind.color=this.goodsColor[i]
+				this.good.kind.color=this.goodsColor[i]
 			},
 			containChange(i){
 				this.containIndex=i;
-				this.goodinfo.kind.capacity=this.goodsContain[i]
+				this.good.kind.capacity=this.goodsContain[i]
 			},
 			suitChange(i){
 				this.suitIndex=i;
-				this.goodinfo.kind.suit=this.goodsSuit[i]
+				this.good.kind.suit=this.goodsSuit[i]
 			},
 			addshopCard(){
-				this.$store.dispatch("jointoCart",this.goodinfo)
+				this.$store.dispatch("jointoCart",this.good)
 				this.type = 'bottom'
 				this.$refs['popup'].close();
 			}
@@ -115,13 +116,14 @@
 <style>
 	.modaiBox {
 		width: 100%;
-		bottom: 90rpx;
+		bottom: 100rpx;
 	}
 
 	.modaiCon {
 		width: 100%;
 		/* height:50%; */
 		padding: 30rpx;
+		padding-bottom: 0;
 		border-top-left-radius: 15rpx;
 		border-top-right-radius: 15rpx;
 		background-color: #FFFFFF;
@@ -130,7 +132,7 @@
 
 	.goods {
 		width: 100%;
-		height: 850rpx;
+		height: 880rpx;
 		box-sizing: border-box;
 	}
 
@@ -206,10 +208,10 @@
 		border: 1rpx solid #FD6801;
 	}
 	.buyNumber{
-		height: 100rpx;
+		height: 80rpx;
 		margin: 15rpx;
 		box-sizing: border-box;
-		line-height: 100rpx;
+		line-height: 80rpx;
 	}
 	.choseNum{
 		float: right;

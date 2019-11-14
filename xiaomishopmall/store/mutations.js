@@ -9,6 +9,10 @@ export default {
 				state.goodInfo.splice(item,1)
 			}
 		}
+		uni.showToast({
+		    title: '删除成功',
+		    duration: 1000
+		});
 	},
 	jointoCart(state,obj){//加入购物车
 		if (state.token) {//判断是否登录
@@ -21,8 +25,16 @@ export default {
 			} else{//否则新添加一条商品数据
 				state.goodInfo.push(obj)
 			}
+			uni.showToast({
+			    title: '添加成功',
+			    duration: 1000
+			});
 		}else{//否则请先登录
-			console.log("请先登录")
+			uni.showToast({
+			    title: '请先登录',
+			    duration: 1000,
+				icon:"none"
+			});
 		}
 	},
 	getgood(state,good){
@@ -45,6 +57,12 @@ export default {
 			names.push(item.title)
 		})
 		if(names.indexOf(data.title)==-1){
+			data.kind={
+				color: "火焰红",
+				capacity: "64GB",
+				suit: "标配"
+			}
+			data.num=1
 			state.productsList.push(data)
 		}
 	},

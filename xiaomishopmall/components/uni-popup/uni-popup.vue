@@ -21,7 +21,7 @@
 			// 弹出层类型，可选值，top: 顶部弹出层；bottom：底部弹出层；center：全屏弹出层
 			type: {
 				type: String,
-				default: 'center'
+				default: 'bottom'
 			},
 			// 是否开启自定义
 			custom: {
