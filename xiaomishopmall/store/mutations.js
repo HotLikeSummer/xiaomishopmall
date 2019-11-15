@@ -50,7 +50,7 @@ export default {
 	gettoken(state, e) { //改变登录令牌的值，允许登录
 		state.token = e
 	},
-	altoken(state, e) {
+	altoken(state, e) {//全部数据
 		state.alltoken = e
 	},
 	logout(state) { //退出登录

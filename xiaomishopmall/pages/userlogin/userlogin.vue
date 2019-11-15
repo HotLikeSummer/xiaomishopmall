@@ -85,6 +85,8 @@
 							//将登录令牌存到状态管理中
 							let token = res.data.data
 							_this.$store.commit("gettoken", token)
+							let alltoken=res.data.data//全部的数据
+							_this.$store.commit("altoken", alltoken)
 							//登录成功跳转到个人页面
 							setTimeout(() => {
 								uni.navigateBack();
