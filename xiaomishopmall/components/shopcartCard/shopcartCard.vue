@@ -102,7 +102,7 @@
 				this.suitIndex=i;
 				this.good.kind.suit=this.goodsSuit[i]
 			},
-			addshopCard(){
+			addshopCard(){//加入购物车
 				this.$store.dispatch("jointoCart",this.good)
 				this.type = 'bottom'
 				this.$refs['popup'].close();

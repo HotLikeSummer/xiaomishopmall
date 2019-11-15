@@ -86,7 +86,7 @@
 				});
 			},
 			toPay(){
-				uni.redirectTo({
+				uni.redirectTo({//页面跳转
 					url:"/pages/pay/pay"
 				})
 			}
@@ -96,7 +96,7 @@
 			...mapGetters(["payingPrice"])
 		},
 		created() {
-			this.payingList.forEach(item=>{
+			this.payingList.forEach(item=>{//渲染数据
 				if (item.status===2) {
 					this.goodsList.push(item)
 				}

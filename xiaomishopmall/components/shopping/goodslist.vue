@@ -91,7 +91,7 @@
 					url: '/pages/index/index'
 				})
 			},
-			goLogin() {
+			goLogin() {//跳转登录界面
 				this.$store.dispatch('goLogin')
 			}
 		},
