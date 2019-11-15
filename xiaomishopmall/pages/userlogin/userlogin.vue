@@ -89,7 +89,9 @@
 							_this.$store.commit("altoken", alltoken)
 							//登录成功跳转到个人页面
 							setTimeout(() => {
-								uni.navigateBack();
+								uni.switchTab({
+									url:"../user/user"
+								});
 							}, 1000)
 						}
 					})
