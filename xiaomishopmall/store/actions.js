@@ -5,6 +5,9 @@ export default {
 	delGoods(context) { //删除方法
 		context.commit('delGoods')
 	},
+	numChange(context,arr){
+		context.commit('numChange',arr)
+	},
 	jointoCart(context, obj) { //加入购物车方法
 		context.commit('jointoCart', obj)
 	},

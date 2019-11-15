@@ -79,7 +79,6 @@
 		watch:{
 			arr(newarr){//监听商品信息变化，改变模态框弹出状态
 				this.goodinfo=this.good
-				console.log(this.goodinfo.ischeck)
 				this.showUp();
 			}
 		},

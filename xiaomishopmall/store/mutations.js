@@ -15,30 +15,38 @@ export default {
 		});
 	},
 	jointoCart(state,obj){//加入购物车
-		if (state.token) {//判断是否登录
-			let goodsName=[];//定义数组接收商品名称信息
-			state.goodInfo.forEach(item=>goodsName.push(item.name));//添加商品名称
-			//判断商品名称是否已存在
-			if(goodsName.indexOf(obj.name)!=-1&&obj.kind==state.goodInfo[goodsName.indexOf(obj.name)].kind){
-				//如果已存在，并且配置一致的话，只改变其数量
-				state.goodInfo[goodsName.indexOf(obj.name)].num=obj.num
-			} else{//否则新添加一条商品数据
-				state.goodInfo.push(obj)
-			}
+		// if (state.token) {//判断是否登录
+			 let idindex=state.goodInfo.map(item=>item.id).indexOf(obj.id)
+			 if(idindex==-1){
+				 state.goodInfo.push(obj)
+			 }
+			 else{
+				 let colors=state.goodInfo[idindex].kind.color==obj.kind.color
+				 let cintains=state.goodInfo[idindex].kind.cintain==obj.kind.cintain
+				 let suits=state.goodInfo[idindex].kind.suit==obj.kind.suit
+				 if(colors && cintains && suits){
+					 state.goodInfo[idindex].num=obj.num
+				 }else{
+					 state.goodInfo.push(obj)
+				 }
+			 }
 			uni.showToast({
 			    title: '添加成功',
 			    duration: 1000
 			});
-		}else{//否则请先登录
-			uni.showToast({
-			    title: '请先登录',
-			    duration: 1000,
-				icon:"none"
-			});
-		}
+		// }else{//否则请先登录
+		// 	uni.showToast({
+		// 	    title: '请先登录',
+		// 	    duration: 1000,
+		// 		icon:"none"
+		// 	});
+		// }
 	},
 	getgood(state,good){
 		state.good=good;
+	},
+	numChange(state,arr){
+		state.goodInfo[arr[1]].num=arr[0]
 	},
 	gettoken(state,e){//改变登录令牌的值，允许登录
 		state.token=e
