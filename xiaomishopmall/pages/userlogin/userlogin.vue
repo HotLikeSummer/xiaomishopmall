@@ -104,11 +104,8 @@
 		},
 		// 展开数据
 		computed: {
-			...mapState(["token", "nickname"])
+			...mapState(["token"])
 		},
-		created() {
-			// console.log(this.nickname,111)
-		}
 	}
 </script>
 
