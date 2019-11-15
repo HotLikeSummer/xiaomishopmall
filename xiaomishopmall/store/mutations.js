@@ -44,9 +44,6 @@ export default {
 	getgood(state, good) {
 		state.good = good;
 	},
-	numChange(state, arr) {
-		state.goodInfo[arr[1]].num = arr[0]
-	},
 	gettoken(state, e) { //改变登录令牌的值，允许登录
 		state.token = e
 	},

@@ -81,7 +81,7 @@
 				this.$store.state.good=i
 			},
 			changed(event, index) { //改变商品数量
-				this.$store.commit("numChange",[event, index])
+				this.goodInfo[index].num=event
 			},
 			check(obj) { //更改商品选中状态
 				obj.ischeck = !obj.ischeck;
