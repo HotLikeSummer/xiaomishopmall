@@ -49,6 +49,7 @@
 			},
 			//确认支付
 			confirm() {
+				this.$store.commit("getnowpay")//状态管理
 				this.$store.dispatch("statusUp",2)
 				uni.redirectTo({
 					url: '/pages/pay/paySuccess/paySuccess'
@@ -56,7 +57,7 @@
 			},
 		},
 		computed:{
-			...mapState(["payingPrice"])
+			...mapState(["payingPrice","nowlist"])
 		}
 	}
 </script>

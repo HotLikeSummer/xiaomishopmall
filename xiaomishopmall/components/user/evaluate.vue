@@ -1,13 +1,13 @@
 <template>
 	<view id="evaluate">
-		<view v-if="evldata.length>0">
+		<view v-if="evldata.length>0" v-for="(items,indexs) in evldata">
 			<view class="line"></view>
 			<view class="time">
 				<view class="date">2019-06-07 10:20</view>
 				<view class="shipped">已发货</view>
 			</view>
 			<view class="uni-list">
-				<view class="uni-list-cell" v-for="(item,index) in evldata" :key="index">
+				<view class="uni-list-cell" v-for="(item,index) in items.payingList" :key="index">
 					<view class="uni-list-cell-navigate">
 						<view class="uni-list-left">
 							<image :src="item.cover"></image>
@@ -25,15 +25,15 @@
 			</view>
 			<view class="total">
 				<view style="float: right;">
-					<view class="total-price">共{{evldata.length}}件商品,合计: ￥{{sums}}</view>
+					<view class="total-price">共{{items.count}}件商品,合计: ￥{{items.sum}}</view>
 					<view class="logistics">
 						<text>查看物流</text>
-						<text>去付款</text>
+						<text>去评价</text>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="main" style="display:flex" v-else>
+		<view class="main" style="display:flex" v-if="evldata.length==0">
 			<view class="nothing">
 				<image :src="img" mode=""></image>
 				<view class="txt">您还没有待评价订单</view>
@@ -49,19 +49,16 @@
 		data() {
 			return {
 				img: "/static/images/nothing/no_comment.png",
-				evldata: []
 			}
 		},
-		props: ["datas"],
 		computed: { //展开对象，获取相应的值
-			...mapState(['payingList']),
-		},
+			...mapState(['evldata']),
+		 },
 		created() {
-			for (let i = 0; i < this.payingList.length; i++) {
-				if (this.payingList[i].status == 4) {
-					this.evldata.push(this.payingList[i])
-				}
-			}
+			this.$store.commit("gettypelist")
+		},
+		methods:{
+			
 		}
 	}
 </script>

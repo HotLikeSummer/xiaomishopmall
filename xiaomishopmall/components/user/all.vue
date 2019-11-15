@@ -1,13 +1,13 @@
 <template>
 	<view>
-		<view v-if="database.length>0">
-			<view class="line"></view>
+		<view v-if="alllist.length>0" v-for="(items,indexs) in alllist">
+		<view class="line"></view>
 			<view class="time">
 				<view class="date">2019-06-07 10:20</view>
-				<view class="shipped">未发货</view>
+				<view class="shipped"></view>
 			</view>
 			<view class="uni-list">
-				<view class="uni-list-cell" v-for="(item,index) in database" :key="index">
+				<view class="uni-list-cell" v-for="(item,index) in items.payingList" :key="index">
 					<view class="uni-list-cell-navigate">
 						<view class="uni-list-left">
 							<image :src="item.cover"></image>
@@ -25,48 +25,23 @@
 			</view>
 			<view class="total">
 				<view style="float: right;">
-					<view class="total-price">共{{database.length}}件商品,合计: ￥{{sums}}</view>
-					<view class="logistics">
+					<view class="total-price">共{{items.count}}件商品,合计: ￥{{items.sum}}</view>
+					<view class="logistics" v-if="!items.pay && !items.takegoods && !items.evalute">
 						<text>取消订单</text>
-						<text @click="topay">去付款</text>
+						<text @click="topay(indexs)">去付款</text>
 					</view>
-				</view>
-			</view>
-		</view>
-		<view v-if="weidata.length>0">
-			<view class="line"></view>
-			<view class="time">
-				<view class="date">2019-06-07 10:20</view>
-				<view class="shipped">已发货</view>
-			</view>
-			<view class="uni-list">
-				<view class="uni-list-cell" v-for="(item,index) in weidata" :key="index">
-					<view class="uni-list-cell-navigate">
-						<view class="uni-list-left">
-							<image :src="item.cover"></image>
-							<view class="uni-list-tit">
-								<view class="uni-list-text">{{item.title}}</view>
-								<view style="color:#A09D97">{{item.kind.color}}</view>
-							</view>
-						</view>
-						<view style="color:#A09D97">
-							<view>￥{{item.min_price}}</view>
-							<view class="uni-list-num">X{{item.num}}</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="total">
-				<view style="float: right;">
-					<view class="total-price">共{{weidata.length}}件商品,合计: ￥{{sums}}</view>
-					<view class="logistics">
+					<view class="logistics" v-if="items.pay && !items.takegoods && !items.evalute">
 						<text>查看物流</text>
-						<text @click="tochange">{{tits}}</text>
+						<text @click="togoods(indexs)" >确认收货</text>
+					</view>
+					<view class="logistics" v-if="items.pay && items.takegoods && !items.evalute">
+						<text>查看物流</text>
+						<text @click="toevalete(indexs)">待评价</text>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="main" style="display:flex" v-if="payingList.length==0">
+		<view class="main" style="display:flex" v-if="alllist.length==0">
 			<view class="nothing">
 				<image :src="img"></image>
 				<view class="txt">您还没有任何订单</view>
@@ -81,53 +56,33 @@
 	export default {
 		data() {
 			return {
-				database: [],
-				weidata:[],
 				img: "/static/images/nothing/no_comment.png",
-				sums:0,
-				tits:"确认收货"
+				sums: 0,
+				tits: "确认收货"
 			}
 		},
 		props: ["datas"],
-		created(){
-			for (let i=0;i<this.payingList.length;i++) {
-				if(this.payingList[i].status==2){
-					this.database.push(this.payingList[i])					
-				}else if(this.payingList[i].status==3){
-					this.weidata.push(this.payingList[i])
-				}else{
-					console.log("待评价")
-				}
-			}
-			console.log(this.database)
-			console.log(this.payingList)
+		created() {
+			
 		},
 		computed: { //展开对象，获取相应的值
-			...mapState(['payingList']),
+			...mapState(['alllist']),
 		},
 		methods: {
-			topay() {
+			topay(indexs) {//去支付
+				this.$store.commit("topays",indexs)
 				uni.navigateTo({
-					url:"../../pay/pay"
+					url: "../../pay/pay"
 				})
 			},
-			tochange(){
-				let _this=this
-				uni.showToast({
-					icon:"none",
-					title:"收货成功",
-					success() {						
-						if (_this.tits=="确认收货") {
-							_this.tits="待评价"
-							// for(let i=0;i<_this.weidata.length;i++) {
-							// 	if(_this.payingList[i].status==3){
-							// 		_this.payingList[i].status=_this.payingList[i].status+1
-							// 	}						
-							// }
-						}
-					}
-				})
-			}
+			togoods(indexs) {//确认收货
+				this.$store.commit("togoods",indexs)
+				this.$store.commit("gettypelist")
+			},
+			toevalete(indexs) {//去评论
+				this.$store.commit("toevalete",indexs)
+				this.$store.commit("gettypelist")
+			},
 		},
 	}
 </script>
@@ -208,6 +163,7 @@
 		line-height: 80upx;
 		margin-right: 40upx;
 	}
+
 	/* 没有订单时 */
 	.main {
 		width: 100%;

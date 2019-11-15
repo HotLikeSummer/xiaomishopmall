@@ -13,7 +13,7 @@ export default {
 		min_price: 3541, //价格
 		num: 1, //数量
 		ischeck: 1, //选中状态
-		status:1
+		status: 1
 	}],
 	total: 0, //合计金额
 	logined: false, //登录状态
@@ -66,18 +66,23 @@ export default {
 	],
 	token: "", //登录令牌
 	nickname: "游客",
-	productsList:[],
-	payingList:[],
-	payingPrice:0,
+	productsList: [],
+	payingList: [],
+	alllist: [], //全部订单
+	evldata: [], //评价
+	paydata: [], //支付
+	takedata: [], //收货
+	nowlist: "", //当前订单对象
+	payingPrice: 0,
 	//地址列表数据
-		list:[{
-			name: "李先生",
-			phone: '13538888888',
-			area: "广东省深圳市龙岗区",
-			address: "日月时创科技有限科技园",
-			change: true,//默认
-			chek:true
-		}],
-		//默认地址
-		ckAddress:{},
+	list: [{
+		name: "李先生",
+		phone: '13538888888',
+		area: "广东省深圳市龙岗区",
+		address: "日月时创科技有限科技园",
+		change: true, //默认
+		chek: true
+	}],
+	//默认地址
+	ckAddress: {},
 }

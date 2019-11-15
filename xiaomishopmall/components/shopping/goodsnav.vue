@@ -51,6 +51,7 @@
 	export default {
 		data() {
 			return {
+				id:1,
 				buttonGroup: { //结算按钮信息
 					type: Array,
 					default () {
@@ -85,12 +86,34 @@
 				this.$store.dispatch("delGoods")
 			},
 			goTotal() {
+				let arr=[]//本次购物商品数据
 				this.goodInfo.forEach(item => {
 					if (item.ischeck) {
-						this.payingList.push(item)
+						arr.push(item)
 					}
 				})
+				this.$store.commit("paying",arr)//状态管理
+				//this.payingList=arr; 
 				if (this.payingList.length>0) {
+					let count=this.payingList.reduce((nums,item)=>{
+						return nums+item.num
+					},0)
+					let sum=this.payingList.reduce((sums,item)=>{
+						return sums+item.num*item.min_price
+					},0)
+ 					let obj={//当前订单的对象
+						id:this.id++,
+						payingList:this.payingList,//本单的购物商品
+						pay:false,//支付状态
+						// date:new Data(),//订单日期
+						takegoods:false,//收货
+						evalute:false,//评价
+						sum,//合计
+						count,//数量
+					}
+					this.$store.commit("getnowlist",obj)//状态管理
+					this.alllist.push(obj)
+					console.log(this.alllist)
 					this.$store.dispatch("statusUp",1)
 					this.$store.dispatch("delGoods")
 					uni.navigateTo({
@@ -105,7 +128,7 @@
 			}
 		},
 		computed: { //展开对象，获取相应的值
-			...mapState(['editing', 'allischeck', 'goodInfo', 'token', 'payingList']),
+			...mapState(['editing', 'allischeck', 'goodInfo', 'token', 'payingList','alllist']),
 			...mapGetters(["total"])
 		}
 	}

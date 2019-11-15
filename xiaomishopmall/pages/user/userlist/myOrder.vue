@@ -12,17 +12,17 @@
 		<swiper :duration="1000" class="swiper" :current="tabIndex" @change="changeTab" :style="{height:swiperheight+'upx'}">
 			<swiper-item>
 				<scroll-view scroll-y :style="{height:swiperheight+'upx'}">
-					<all :datas="database"></all>
+					<all></all>
 				</scroll-view>
 			</swiper-item>
 			<swiper-item>
-				<payment :datas="paydata"></payment>
+				<payment></payment>
 			</swiper-item>
 			<swiper-item>
-				<takeGoods :datas="goodsdata"></takeGoods>
+				<takeGoods></takeGoods>
 			</swiper-item>
 			<swiper-item>
-				<evaluate :datas="evldata"></evaluate>
+				<evaluate></evaluate>
 			</swiper-item>
 		</swiper>
 		<!-- 猜你喜欢 -->
@@ -57,6 +57,9 @@
 	import evaluate from '@/components/user/evaluate.vue';
 	import payment from '@/components/user/payment.vue';
 	import takeGoods from '@/components/user/take-goods.vue';
+	import {
+		mapState
+	} from 'vuex'
 	export default {
 		components: {
 			all,
@@ -131,7 +134,10 @@
 				this.tabIndex = parseInt(e.index) + 1;
 				console.log(this.tabIndex)
 			}
-		}
+		},
+		computed: { //展开对象，获取相应的值
+			...mapState(['alllist']),
+		},
 	}
 </script>
 <style>
@@ -248,29 +254,4 @@
 		justify-content: space-between;
 		flex-wrap: wrap;
 	}
-
-	/* 列表切换 */
-	/* .swiper {
-		height: 800upx;
-	} */
-
-	/* .main {
-		width: 100%;
-		height: 600upx;
-		background-color: #F5F5F5;
-	}
-
-	.nothing {
-		margin: auto;
-		text-align: center;
-	}
-
-	.nothing image {
-		width: 240upx;
-		height: 200upx;
-	}
-
-	.txt {
-		color: #D6D6D6;
-	} */
 </style>

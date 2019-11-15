@@ -6,7 +6,7 @@
 			<view><text class="iconfont icon-xiaoxi"></text></view>
 			<!-- 昵称 -->
 			<view @tap="tologin">
-				<image :src="nameImg" mode=""></image>
+				<image :src="this.token.avatar" mode=""></image>
 			</view>
 			<view class="member">
 				<text class="iconfont icon-huangguan"></text>会员积分 1.99
@@ -116,17 +116,15 @@
 				})
 			}
 		},
-		// onShow() {
-		// 	// if (this.token == "") {
-		// 	// 	uni.navigateTo({
-		// 	// 		url: "../userlogin/userlogin"
-		// 	// 	})
-		// 	// } else {
-		// 		uni.navigateBack({
-		// 			delta: 1
-		// 		})
-		// 	// }
-		// }
+		onLoad() {
+			if (this.token == "") {
+				uni.navigateTo({
+					url: "../userlogin/userlogin"
+				})
+			} else {
+				console.log("已登录")
+			}
+		}
 	}
 </script>
 

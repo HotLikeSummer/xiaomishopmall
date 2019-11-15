@@ -1,13 +1,13 @@
 <template>
 	<view id="payment">
-		<view v-if="paydata.length>0">
+		<view v-if="paydata.length>0" v-for="(items,indexs) in paydata">
 			<view class="line"></view>
 			<view class="time">
 				<view class="date">2019-06-07 10:20</view>
 				<view class="shipped">未发货</view>
 			</view>
 			<view class="uni-list">
-				<view class="uni-list-cell" v-for="(item,index) in paydata" :key="index">
+				<view class="uni-list-cell" v-for="(item,index) in items.payingList" :key="index">
 					<view class="uni-list-cell-navigate">
 						<view class="uni-list-left">
 							<image :src="item.cover"></image>
@@ -21,19 +21,19 @@
 							<view class="uni-list-num">X{{item.num}}</view>
 						</view>
 					</view>
-				</view>
+				</view>				
 			</view>
 			<view class="total">
 				<view style="float: right;">
-					<view class="total-price">共{{paydata.length}}件商品,合计: ￥{{sums}}</view>
+					<view class="total-price">共{{items.count}}件商品,合计: ￥{{items.sum}}</view>
 					<view class="logistics">
 						<text>查看物流</text>
-						<text>去付款</text>
+						<text @click="topay(indexs)">去付款</text>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="main" style="display:flex" v-else>
+		<view class="main" style="display:flex" v-if="paydata.length==0">
 			<view class="nothing">
 				<image :src="img" mode=""></image>
 				<view class="txt">您还没有待付款订单</view>
@@ -49,20 +49,22 @@
 		data() {
 			return {
 				img: "/static/images/nothing/no_pay.png",
-				paydata:[],
 				sums:0
 			}
 		},
-		props: ["datas"],
 		computed: { //展开对象，获取相应的值
-			...mapState(['payingList']),
+			...mapState(['paydata']),
 		},
 		created() {
-			for (let i=0;i<this.payingList.length;i++) {
-				if(this.payingList[i].status==2){
-					this.paydata.push(this.payingList[i])					
-				}
-			}
+			this.$store.commit("gettypelist")
+		},
+		methods:{
+			topay(indexs) {//去支付
+				this.$store.commit("topays",indexs)
+				uni.navigateTo({
+					url: "../../pay/pay"
+				})
+			},
 		}
 	}
 </script>
