@@ -83,8 +83,11 @@
 								title: '登录成功！'
 							})
 							//将登录令牌存到状态管理中
-							let token = res.data.data
+							let token = res.data.data.token
+							let alltoken=res.data.data
+							console.log(res)
 							_this.$store.commit("gettoken", token)
+							_this.$store.commit("altoken", alltoken)
 							//登录成功跳转到个人页面
 							setTimeout(() => {
 								uni.switchTab({

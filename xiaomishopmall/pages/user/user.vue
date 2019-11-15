@@ -6,7 +6,7 @@
 			<view><text class="iconfont icon-xiaoxi"></text></view>
 			<!-- 昵称 -->
 			<view @tap="tologin">
-				<image :src="this.token.avatar" mode=""></image>
+				<image :src="this.alltoken.avatar" mode=""></image>
 			</view>
 			<view class="member">
 				<text class="iconfont icon-huangguan"></text>会员积分 1.99
@@ -101,7 +101,7 @@
 			}
 		},
 		computed: {
-			...mapState(['token'])
+			...mapState(['token',"alltoken"])
 		},
 		methods: {
 			//跳转到我的订单页
