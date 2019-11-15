@@ -219,15 +219,21 @@
 		},
 		methods: {
 			shopCart(obj) {
-				this.togglepop = !this.togglepop
-				obj.num=1;
-				obj.kind={
-					color:"火焰红",
-					capacity:"64GB",
-					suit:"标配"
+				if (this.token == "") {
+					uni.navigateTo({
+						url: "../../userlogin/userlogin"
+					})
+				} else {
+					this.togglepop = !this.togglepop
+					obj.num=1;
+					obj.kind={
+						color:"火焰红",
+						capacity:"64GB",
+						suit:"标配"
+					}
+					obj.ischeck=1
+					this.sends = [obj, this.togglepop];
 				}
-				obj.ischeck=1
-				this.sends = [obj, this.togglepop];
 			},
 			// 服务说明显示
 			serviceShow() {

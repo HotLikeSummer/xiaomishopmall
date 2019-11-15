@@ -64,6 +64,13 @@
 				this.$store.dispatch("getProduct",i)
 			}
 			this.productList=this.$store.state.productsList
+			if (this.token == "") {
+				uni.navigateTo({
+					url: "../userlogin/userlogin"
+				})
+			} else {
+				console.log("已登录")
+			}
 		},
 		onNavigationBarButtonTap(e) { //点击编辑触发方法
 			this.$store.state.editing = !this.$store.state.editing //改变编辑状态
@@ -73,7 +80,7 @@
 			webView.setTitleNViewButtonStyle(0,{text: this.editing?'完成':'编辑'})
 		},
 		computed:{//展开对象
-			...mapState(['editing','allischeck','productsList'])
+			...mapState(['editing','allischeck','productsList',"token"])
 		}
 	}
 </script>
