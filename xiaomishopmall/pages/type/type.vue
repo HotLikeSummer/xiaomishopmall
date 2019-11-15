@@ -27,8 +27,8 @@
 	export default {
 		data() {
 			return {
-				categoryList: [],//父列表
-				subCategoryList: [],//子列表
+				categoryList: [],//左侧分类导航
+				subCategoryList: [],//右侧商品分类
 				height: 0,//页面高度
 				categoryActive: 0,//字体颜色
 				scrollTop: 0,//当前点击行距离窗口顶部的距离
@@ -42,27 +42,33 @@
 			scroll(e) {
 				this.scrollHeight = e.detail.scrollHeight;
 			},
-			//分类码
+			//分类点击事件
 			categoryClickMain(categroy, index) {
+				// 将字体等于当前下标
 				this.categoryActive = index;
 				this.subCategoryList = categroy.subCategoryList;
 				this.scrollTop = -this.scrollHeight * index;
+				// console.log(categroy)
 			},
 			//获取类别
 			getCategory() {
+				//循环分类
 				for (var i = 1; i < 11; i++) {
-					var subList = [];//定义一个数组用来接收子列表的数据
+					var subList = [];//先定义一个数组用来接收商品列表的数据
+					//循环商品
 					for (var j = 1; j < 31; j++) {
 						subList.push({
 							"NAME": "分类" + i + ":商品" + j,
 							"LOGO": "/static/images/demo/list/1.jpg"
 						})
 					}
+					//将数据push到分类数组中
 					this.categoryList.push({
 						"NAME": "分类" + i,
 						"subCategoryList": subList
 					})
 				}
+				//页面默认值
 				this.subCategoryList = this.categoryList[0].subCategoryList;
 			},
 			//跳转到商品列表页面

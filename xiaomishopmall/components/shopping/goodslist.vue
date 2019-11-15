@@ -1,6 +1,6 @@
 <template>
 	<view id="content">
-		<!-- <view v-if="token"> -->
+		<view v-if="token">
 			<view class='car-list'>
 				<!-- 购物车产品 -->
 				<view class='car-item'>
@@ -29,7 +29,7 @@
 									</view>
 									<view class="infobox">
 										<view class='price'>￥{{item.min_price}}</view>
-										<amount class="numbers" @change="change($event,index)" :value="item.num"></amount>
+										<amount class="numbers" @change="changed($event,index)" :value="item.num"></amount>
 									</view>
 								</view>
 							</view>
@@ -47,14 +47,14 @@
 					<view class="toShopping" @click="goShopping">去逛逛</view>
 				</view>
 			</view>
-		<!-- </view>
+		</view>
 		<view v-if='!token' class="noGoods">
 			<view class="noGoodscon">
 				<view class="iconfont shopcarIcon">&#xe64c;</view>
 				<view class="shopcarTxt">您还没有登录哦</view>
 				<view class="toShopping" @click="goLogin">去登录</view>
 			</view>
-		</view> -->
+		</view>
 	</view>
 </template>
 
@@ -80,8 +80,8 @@
 				this.sendData = [this.togglepop] //传输商品信息和弹出状态
 				this.$store.state.good=i
 			},
-			change(event, index) { //改变商品数量
-				this.$store.dispatch("numChange",[event, index])
+			changed(event, index) { //改变商品数量
+				this.$store.commit("numChange",[event, index])
 			},
 			check(obj) { //更改商品选中状态
 				obj.ischeck = !obj.ischeck;

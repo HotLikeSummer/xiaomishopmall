@@ -15,7 +15,7 @@ export default {
 		});
 	},
 	jointoCart(state, obj) { //加入购物车
-		// if (state.token) {//判断是否登录
+		if (state.token) {//判断是否登录
 		let idindex = state.goodInfo.map(item => item.id).indexOf(obj.id)
 		if (idindex == -1) {
 			state.goodInfo.push(obj)
@@ -33,13 +33,13 @@ export default {
 			title: '添加成功',
 			duration: 1000
 		});
-		// }else{//否则请先登录
-		// 	uni.showToast({
-		// 	    title: '请先登录',
-		// 	    duration: 1000,
-		// 		icon:"none"
-		// 	});
-		// }
+		}else{//否则请先登录
+			uni.showToast({
+			    title: '请先登录',
+			    duration: 1000,
+				icon:"none"
+			});
+		}
 	},
 	getgood(state, good) {
 		state.good = good;
