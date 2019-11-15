@@ -15,40 +15,43 @@ export default {
 		});
 	},
 	jointoCart(state, obj) { //加入购物车
-		if (state.token) {//判断是否登录
-		let idindex = state.goodInfo.map(item => item.id).indexOf(obj.id)//映射ID数组
-		if (idindex == -1) {//判断ID是否已存在
-			state.goodInfo.push(obj)//如果没有则在商品数组中新增一条
-		} else {//如果有则判断配置
-			let colors = state.goodInfo[idindex].kind.color == obj.kind.color
-			let cintains = state.goodInfo[idindex].kind.cintain == obj.kind.cintain
-			let suits = state.goodInfo[idindex].kind.suit == obj.kind.suit
-			if (colors && cintains && suits) {//配置一致时改变数量
-				state.goodInfo[idindex].num = obj.num
-			} else {//不一致则新增一条
+		if (state.token) { //判断是否登录
+			let idindex = state.goodInfo.map(item => item.id).indexOf(obj.id)
+			if (idindex == -1) {
 				state.goodInfo.push(obj)
+			} else {
+				let colors = state.goodInfo[idindex].kind.color == obj.kind.color
+				let cintains = state.goodInfo[idindex].kind.cintain == obj.kind.cintain
+				let suits = state.goodInfo[idindex].kind.suit == obj.kind.suit
+				if (colors && cintains && suits) {
+					state.goodInfo[idindex].num = obj.num
+				} else {
+					state.goodInfo.push(obj)
+				}
 			}
-		}
-		uni.showToast({
-			title: '添加成功',
-			duration: 1000
-		});
-		}else{//否则请先登录
 			uni.showToast({
-			    title: '请先登录',
-			    duration: 1000,
-				icon:"none"
+				title: '添加成功',
+				duration: 1000
+			});
+		} else { //否则请先登录
+			uni.showToast({
+				title: '请先登录',
+				duration: 1000,
+				icon: "none"
 			});
 		}
 	},
-	getgood(state, good) {//传输点击商品信息
+	getgood(state, good) {
 		state.good = good;
 	},
-	numChange(state, arr) {//改变商品数量
+	numChange(state, arr) {
 		state.goodInfo[arr[1]].num = arr[0]
 	},
 	gettoken(state, e) { //改变登录令牌的值，允许登录
 		state.token = e
+	},
+	altoken(state, e) {
+		state.alltoken = e
 	},
 	logout(state) { //退出登录
 		state.token = ""
@@ -58,20 +61,23 @@ export default {
 			url: '/pages/userlogin/userlogin',
 		});
 	},
-	getProduct(state, data) {//获取端口商品信息
-		let idInd = state.productsList.map(item => item.id).indexOf(data.id)
-		if (idInd == -1) {
+	getProduct(state, data) {
+		let names = []
+		state.productsList.forEach(item => {
+			names.push(item.title)
+		})
+		if (names.indexOf(data.title) == -1) {
 			data.kind = {
 				color: "火焰红",
 				capacity: "64GB",
 				suit: "标配"
 			}
 			data.num = 1
-			state.productsList.push(data)//添加数据
+			state.productsList.push(data)
 		}
 	},
 	statusUp(state, i) {
-		state.payingList.forEach(item => {//状态切换
+		state.payingList.forEach(item => {
 			if (item.status === i) {
 				item.status++
 			}
