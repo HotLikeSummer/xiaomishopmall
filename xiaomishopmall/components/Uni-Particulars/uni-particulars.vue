@@ -212,12 +212,12 @@
 				Servicenote: ["小米自营", "小米发货", "七天无理由退换", "运费说明"], //服务说明数据
 				showRigth: false, //配送显示隐藏
 				showLeft: false, //服务说明显示隐藏
-				fiexcolor: false,
+				fiexcolor: false,//改变收藏文字
 				collecteds: "收藏",
-				increasenum: false,
 			}
 		},
 		methods: {
+			// 点击加入购物车
 			shopCart(obj) {
 				if (this.token == "") {
 					uni.navigateTo({
@@ -231,7 +231,7 @@
 						capacity:"64GB",
 						suit:"标配"
 					}
-					obj.ischeck=1
+					obj.ischeck=1//全选状态
 					this.sends = [obj, this.togglepop];
 				}
 			},
@@ -257,17 +257,10 @@
 			},
 			// 去地址页
 			fresh(e) {
-				if(this.token != ""){
 					let id =e.currentTarget.dataset.id;
 					uni.navigateTo({
 						url: '/pages/user/userlist/addresslist?id='+id+'',
 					});
-				}else{
-					uni.showModal({
-						content: '您还没有登录，请先登录'
-					});
-				}
-				
 			},
 			//去购物车
 			toShop() {

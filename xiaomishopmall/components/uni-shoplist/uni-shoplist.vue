@@ -262,8 +262,11 @@
 		padding: 0;
 		margin: 0;
 		color: #8C949B;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		display:-webkit-box;
+		-webkit-line-clamp:2;
+		-webkit-box-orient:vertical;
 		font-size: 26rpx;
 	}
 

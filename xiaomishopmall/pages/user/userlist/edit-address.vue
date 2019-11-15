@@ -88,7 +88,7 @@
 						}else{
 							this.datalist[this.index]= datas;
 						}
-						uni.navigateTo({
+						uni.redirectTo({
 							url: "addresslist"
 						})
 						return true;
